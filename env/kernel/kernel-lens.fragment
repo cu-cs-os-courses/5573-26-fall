@@ -1,0 +1,72 @@
+# KernelLens config fragment, merged on top of x86_64 defconfig.
+# This is the course's observability contract: every lab and question bank
+# assumes these capabilities exist. Do not trim without checking questions/.
+
+# --- Debug info & BTF (bpftrace, drgn, gdb all depend on this) ---
+CONFIG_DEBUG_INFO_DWARF_TOOLCHAIN_DEFAULT=y
+CONFIG_DEBUG_INFO_BTF=y
+CONFIG_DEBUG_INFO_REDUCED=n
+CONFIG_GDB_SCRIPTS=y
+CONFIG_KALLSYMS_ALL=y
+CONFIG_IKCONFIG=y
+CONFIG_IKCONFIG_PROC=y
+
+# --- ftrace ---
+CONFIG_FTRACE=y
+CONFIG_FUNCTION_TRACER=y
+CONFIG_FUNCTION_GRAPH_TRACER=y
+CONFIG_DYNAMIC_FTRACE=y
+CONFIG_FTRACE_SYSCALLS=y
+CONFIG_STACK_TRACER=y
+CONFIG_SCHED_TRACER=y
+CONFIG_HIST_TRIGGERS=y
+CONFIG_FUNCTION_PROFILER=y
+
+# --- kprobes / uprobes ---
+CONFIG_KPROBES=y
+CONFIG_KPROBE_EVENTS=y
+CONFIG_UPROBES=y
+CONFIG_UPROBE_EVENTS=y
+
+# --- eBPF ---
+CONFIG_BPF_SYSCALL=y
+CONFIG_BPF_JIT=y
+CONFIG_BPF_JIT_ALWAYS_ON=y
+CONFIG_BPF_EVENTS=y
+CONFIG_DEBUG_FS=y
+
+# --- memory-subsystem observability (Module 1 depends on these) ---
+CONFIG_PROC_PAGE_MONITOR=y
+CONFIG_MEMCG=y
+CONFIG_TRANSPARENT_HUGEPAGE=y
+CONFIG_KSM=y
+CONFIG_SWAP=y
+
+# --- scheduler observability (Module 2) ---
+CONFIG_SCHED_DEBUG=y
+CONFIG_SCHEDSTATS=y
+CONFIG_TASKSTATS=y
+CONFIG_TASK_DELAY_ACCT=y
+
+# --- virtio guest support (QEMU) ---
+CONFIG_VIRTIO_PCI=y
+CONFIG_VIRTIO_BLK=y
+CONFIG_VIRTIO_NET=y
+CONFIG_VIRTIO_CONSOLE=y
+CONFIG_HW_RANDOM_VIRTIO=y
+
+# --- 9p shared directory (host<->guest file exchange, autorun channel) ---
+CONFIG_NET_9P=y
+CONFIG_NET_9P_VIRTIO=y
+CONFIG_9P_FS=y
+CONFIG_9P_FS_POSIX_ACL=y
+
+# --- filesystems ---
+CONFIG_EXT4_FS=y
+CONFIG_TMPFS=y
+CONFIG_TMPFS_POSIX_ACL=y
+
+# --- quality of life ---
+CONFIG_MAGIC_SYSRQ=y
+CONFIG_DEVTMPFS=y
+CONFIG_DEVTMPFS_MOUNT=y

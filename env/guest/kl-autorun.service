@@ -1,0 +1,11 @@
+[Unit]
+Description=KernelLens autorun (runs /share/autorun.sh if present)
+Wants=share.mount
+After=share.mount
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/kl-autorun
+
+[Install]
+WantedBy=multi-user.target

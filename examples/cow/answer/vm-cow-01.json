@@ -1,0 +1,64 @@
+{
+  "question_id": "vm-cow-01",
+  "claim": "fork() write-protects the PTEs of private writable mappings in both parent and child (copy_present_pte); the first write then takes a write-protect fault handled by do_wp_page -> wp_page_copy (inlined in this build), which gives the writer a fresh physical page while the other process keeps the original. Shared mappings are never write-protected — fork does not even copy their PTEs — so no copy ever occurs there.",
+  "confidence": "high",
+  "evidence": [
+    {
+      "kind": "trace",
+      "tool": "bpftrace",
+      "command": "bpftrace guest/probe-do-wp-page.bt -c '/tmp/cow-trigger private /share/evidence/trigger-private.txt'",
+      "output_excerpt": "do_wp_page fired: pid=184 addr=0x100000000000\n\n        do_wp_page+1\n        __handle_mm_fault+2133\n        handle_mm_fault+323\n        do_user_addr_fault+352\n        exc_page_fault+103\n        asm_exc_page_fault+38",
+      "interpretation": "The write-protect fault handler fires exactly once, in the child (pid 184), at the mapped page, reached from the page-fault entry path. wp_page_copy has no kallsyms entry in this build (inlined into do_wp_page, its only caller), so the copy itself is proven by the pagemap evidence below, not by this probe."
+    },
+    {
+      "kind": "state",
+      "tool": "pagemap",
+      "command": "/tmp/cow-trigger private (reads /proc/self/pagemap in parent and child before/after the child's single write; see guest/cow-trigger.c)",
+      "output_excerpt": "parent_pfn_before=0x10afc\nchild_pfn_before=0x10afc\nchild_minflt_delta=1\nchild_pfn_after=0x1c86d\nparent_pfn_after=0x10afc\nparent_reads=0xa5",
+      "interpretation": "One physical page (PFN 0x10afc) is shared by both processes after fork; after the child's write the child maps a new page (0x1c86d) while the parent keeps the original. The write cost exactly one minor fault, and the parent's sentinel (0xa5) is untouched — memory isolation held."
+    },
+    {
+      "kind": "state",
+      "tool": "pagemap",
+      "command": "/tmp/cow-trigger shared /share/evidence/trigger-shared.txt (negative control, MAP_SHARED)",
+      "output_excerpt": "parent_pfn_before=0x12321\nchild_pfn_before=0x0\nchild_present_before=0\nchild_minflt_delta=1\nchild_pfn_after=0x12321\nparent_reads=0x5a",
+      "interpretation": "For a shared mapping fork copies no PTEs at all (child PTE non-present); the child's write takes one minor fault that maps the parent's page — same PFN, do_wp_page silent, write visible to the parent. This distinguishes COW from both fault noise and ordinary lazy population."
+    },
+    {
+      "kind": "source",
+      "ref": "mm/memory.c:961-963",
+      "symbol": "copy_present_pte",
+      "interpretation": "Fork side: for COW-eligible mappings (is_cow_mapping && pte_write), ptep_set_wrprotect() on the parent and pte_wrprotect() on the child's copy — the arming of COW."
+    },
+    {
+      "kind": "source",
+      "ref": "mm/memory.c:3354",
+      "symbol": "do_wp_page",
+      "interpretation": "Fault side: handles the write to a write-protected PTE; for a page still shared with the other process it falls through to wp_page_copy."
+    },
+    {
+      "kind": "source",
+      "ref": "mm/memory.c:3069",
+      "symbol": "wp_page_copy",
+      "interpretation": "Allocates the new page, copies contents, and re-maps the faulting PTE writable. Inlined into do_wp_page in this build (no kallsyms entry)."
+    },
+    {
+      "kind": "source",
+      "ref": "mm/memory.c:1241",
+      "symbol": "vma_needs_copy",
+      "interpretation": "Why the shared-mapping control behaves as observed: fork skips PTE copying entirely for VMAs with no anon_vma, so shared mappings are lazily re-faulted, never write-protected."
+    }
+  ],
+  "repro": {
+    "script": "run.sh",
+    "expected": [
+      "probe do_wp_page fires exactly once, under the child PID, at address 0x100000000000, via handle_mm_fault (private)",
+      "parent and child PFNs equal before the write; child PFN changes across the write; parent PFN does not (private)",
+      "child minor-fault delta across the single write == 1 (private)",
+      "parent sentinel reads 0xa5 after the child's write (private; isolation)",
+      "probe silent; child PTE non-present at fork; child faults in the parent's PFN; parent reads 0x5a (shared control)"
+    ],
+    "tolerance": "exact (PFN values vary per boot; assertions compare equality/inequality between readings, never absolute values)"
+  },
+  "limitations": "THP is not exercised (single 4 KiB page; the huge-page path do_huge_pmd_wp_page differs). wp_page_copy is claimed via caller probe + PFN divergence because it is inlined in this build. Minor-fault exactness relies on the trigger's warmed measurement window; see guest/cow-trigger.c."
+}

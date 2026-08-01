@@ -1,0 +1,47 @@
+#!/bin/bash
+# ksrc — search and read the pinned kernel source tree (the exact tree the
+# reference kernel was built from; it lives in the env's docker volume).
+#
+#   tools/ksrc grep REGEX [DIR...]   search *.c/*.h (default: whole tree)
+#   tools/ksrc def SYMBOL            find likely definition sites of a function
+#   tools/ksrc view FILE [START [END]]   print file with line numbers
+#
+# Cite evidence as file:line from this tree — it matches dist/vmlinux and
+# the running kernel exactly (KASLR is off).
+set -euo pipefail
+TOOLS_DIR="$(cd "$(dirname "$0")" && pwd)"
+WS_DIR="$(cd "$TOOLS_DIR/.." && pwd)"
+find_env() {
+    [ -n "${KL_ENV:-}" ] && { echo "$KL_ENV"; return; }
+    local d="$WS_DIR"
+    for _ in 1 2 3 4; do
+        d="$(dirname "$d")"
+        [ -f "$d/env/config.sh" ] && { echo "$d/env"; return; }
+    done
+    echo "ksrc: cannot find env/ (set KL_ENV=/path/to/env)" >&2; exit 1
+}
+ENV_DIR="$(find_env)"
+source "$ENV_DIR/config.sh"
+
+K() { docker run --rm --platform linux/amd64 \
+        -v kernel-lens-cache:/work/cache \
+        -w "/work/cache/linux-${KERNEL_VERSION}" \
+        "$DOCKER_IMAGE" "$@"; }
+
+case "${1:-}" in
+grep)
+    shift; pat="${1:?usage: ksrc grep REGEX [DIR...]}"; shift
+    K grep -rnHE --include='*.c' --include='*.h' -- "$pat" "${@:-.}" || { echo "(no matches)"; exit 1; }
+    ;;
+def)
+    sym="${2:?usage: ksrc def SYMBOL}"
+    K sh -c "grep -rnE --include='*.c' -- '^[a-zA-Z_][a-zA-Z0-9_ *]*[ *]${sym}\(' . ; \
+             grep -rnE --include='*.c' -- 'SYSCALL_DEFINE[0-6]\(${sym#sys_}[,)]' . ; true" \
+        | sort -u;
+    ;;
+view)
+    f="${2:?usage: ksrc view FILE [START [END]]}"; s="${3:-1}"; e="${4:-$(( ${3:-1} + 80 ))}"
+    K awk -v s="$s" -v e="$e" 'NR>=s && NR<=e {printf "%d\t%s\n", NR, $0} NR>e {exit}' "$f"
+    ;;
+*)  sed -n '2,11p' "$0"; exit 1 ;;
+esac

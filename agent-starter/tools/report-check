@@ -1,0 +1,63 @@
+#!/usr/bin/env python3
+"""report-check — validate a report JSON against the course evidence contract
+(course-design.md §7).
+
+Usage: tools/report-check REPORT.json
+
+Checks structure, not truth: required fields present, every evidence entry
+re-runnable (command or source ref) and interpreted, repro assertions
+listed, and the repro script present next to the report. Truth is what the
+defense and re-runs are for.
+"""
+import json, sys, pathlib
+
+def fail(msgs):
+    for m in msgs: print(f"FAIL  {m}")
+    sys.exit(1)
+
+def main():
+    if len(sys.argv) != 2:
+        print(__doc__); sys.exit(2)
+    p = pathlib.Path(sys.argv[1])
+    problems, warnings = [], []
+    try:
+        r = json.loads(p.read_text())
+    except Exception as e:
+        fail([f"not valid JSON: {e}"])
+
+    for k in ("question_id", "claim", "confidence", "evidence", "repro"):
+        if k not in r: problems.append(f"missing top-level field: {k}")
+    if r.get("confidence") not in ("high", "medium", "low", None):
+        warnings.append(f"unusual confidence value: {r.get('confidence')!r}")
+
+    ev = r.get("evidence", [])
+    if not isinstance(ev, list) or not ev:
+        problems.append("evidence: must be a non-empty list")
+    for i, e in enumerate(ev if isinstance(ev, list) else []):
+        tag = f"evidence[{i}]"
+        if "kind" not in e: problems.append(f"{tag}: missing kind")
+        if "interpretation" not in e: problems.append(f"{tag}: missing interpretation")
+        if not (e.get("command") or e.get("ref")):
+            problems.append(f"{tag}: needs a command (re-runnable) or a source ref")
+        if e.get("kind") in ("trace", "state") and "output_excerpt" not in e:
+            warnings.append(f"{tag}: {e.get('kind')} evidence without a raw output_excerpt")
+
+    repro = r.get("repro", {})
+    if not repro.get("expected"):
+        problems.append("repro.expected: must list machine-checkable assertions")
+    script = repro.get("script")
+    if not script:
+        problems.append("repro.script: missing")
+    elif not (p.parent / script).exists():
+        warnings.append(f"repro.script '{script}' not found next to the report")
+
+    if "limitations" not in r:
+        warnings.append("no limitations field — no investigation has none")
+
+    for w in warnings: print(f"WARN  {w}")
+    if problems: fail(problems)
+    print(f"OK    {r.get('question_id','?')}: {len(ev)} evidence entries, "
+          f"{len(repro.get('expected', []))} repro assertions")
+
+if __name__ == "__main__":
+    main()

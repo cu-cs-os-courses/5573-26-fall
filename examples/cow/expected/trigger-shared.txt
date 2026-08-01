@@ -1,0 +1,13 @@
+mode=shared
+map_addr=0x100000000000
+parent_pid=195
+child_pid=196
+child_pfn_before=0x0
+child_present_before=0
+parent_pfn_before=0x855d
+parent_present_before=1
+child_minflt_delta=1
+child_pfn_after=0x855d
+parent_pfn_after=0x855d
+parent_reads=0x5a
+child_exit=0

@@ -1,0 +1,13 @@
+mode=private
+map_addr=0x100000000000
+parent_pid=183
+child_pid=184
+child_pfn_before=0x1323a
+child_present_before=1
+parent_pfn_before=0x1323a
+parent_present_before=1
+child_minflt_delta=1
+child_pfn_after=0x143ad
+parent_pfn_after=0x1323a
+parent_reads=0xa5
+child_exit=0

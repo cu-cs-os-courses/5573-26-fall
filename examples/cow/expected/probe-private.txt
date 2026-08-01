@@ -1,0 +1,12 @@
+Attaching 1 probe...
+do_wp_page fired: pid=184 addr=0x100000000000
+
+        do_wp_page+1
+        __handle_mm_fault+2133
+        handle_mm_fault+323
+        do_user_addr_fault+352
+        exc_page_fault+103
+        asm_exc_page_fault+38
+
+
+

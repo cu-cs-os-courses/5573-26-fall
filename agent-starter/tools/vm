@@ -1,0 +1,80 @@
+#!/bin/bash
+# vm — drive the reference VM from this workspace.
+#
+#   tools/vm up            boot headless in the background; returns when ssh is ready
+#   tools/vm sh CMD...     run a command in the guest (root); no args = interactive shell
+#   tools/vm push SRC DST  copy file/dir into the guest
+#   tools/vm pull SRC DST  copy file/dir out of the guest
+#   tools/vm status        is it running?
+#   tools/vm log [N]       tail the guest serial console (default 30 lines)
+#   tools/vm down          clean shutdown (poweroff, then kill as fallback)
+#
+# State lives in .vm/ (gitignored): qemu pid, console log, ssh keypair.
+# Auth: an ssh key generated on first `up` and installed into the guest via
+# the autorun channel — no passwords, no host prompts.
+set -euo pipefail
+TOOLS_DIR="$(cd "$(dirname "$0")" && pwd)"
+WS_DIR="$(cd "$TOOLS_DIR/.." && pwd)"
+# Locate the course environment: $KL_ENV override, else walk up from the
+# workspace looking for env/config.sh (works from kernel-lens, from an
+# offering repo, and from a student repo one level deeper).
+find_env() {
+    [ -n "${KL_ENV:-}" ] && { echo "$KL_ENV"; return; }
+    local d="$WS_DIR"
+    for _ in 1 2 3 4; do
+        d="$(dirname "$d")"
+        [ -f "$d/env/config.sh" ] && { echo "$d/env"; return; }
+    done
+    echo "vm: cannot find env/ (set KL_ENV=/path/to/env)" >&2; exit 1
+}
+ENV_DIR="$(find_env)"
+source "$ENV_DIR/config.sh"
+STATE="$WS_DIR/.vm"
+
+SSH_BASE=(-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
+          -o BatchMode=yes -o ConnectTimeout=3 -o LogLevel=ERROR -i "$STATE/id")
+
+alive() { [ -f "$STATE/qemu.pid" ] && kill -0 "$(cat "$STATE/qemu.pid")" 2>/dev/null; }
+need_up() { alive || { echo "vm: not running (tools/vm up first)" >&2; exit 1; }; }
+gsh() { ssh "${SSH_BASE[@]}" -p "$SSH_FWD_PORT" root@localhost "$@"; }
+
+case "${1:-}" in
+up)
+    if alive; then echo "vm: already running (pid $(cat "$STATE/qemu.pid"))"; exit 0; fi
+    mkdir -p "$STATE/share"
+    [ -f "$STATE/id" ] || ssh-keygen -q -t ed25519 -N '' -f "$STATE/id"
+    cp "$STATE/id.pub" "$STATE/share/id.pub"
+    cat > "$STATE/share/autorun.sh" <<'EOF'
+#!/bin/bash
+mkdir -p /root/.ssh && chmod 700 /root/.ssh
+cp /share/id.pub /root/.ssh/authorized_keys
+chmod 600 /root/.ssh/authorized_keys
+EOF
+    chmod +x "$STATE/share/autorun.sh"
+    SHARE="$STATE/share" HEADLESS=1 CONSOLE_LOG="$STATE/console.log" \
+        "$ENV_DIR/run.sh" >/dev/null 2>&1 &
+    echo $! > "$STATE/qemu.pid"
+    timeout="${VM_UP_TIMEOUT:-300}" waited=0
+    printf "vm: booting"
+    until gsh true 2>/dev/null; do
+        alive || { echo; echo "vm: qemu exited during boot; tail of console:" >&2
+                   tail -15 "$STATE/console.log" >&2; exit 1; }
+        sleep 2; waited=$((waited+2)); printf "."
+        [ "$waited" -ge "$timeout" ] && { echo; echo "vm: boot timed out after ${timeout}s" >&2; exit 1; }
+    done
+    echo " ready ($(gsh uname -r), ${waited}s)"
+    ;;
+sh)     need_up; shift; if [ $# -gt 0 ]; then gsh "$@"; else ssh "${SSH_BASE[@]/-o BatchMode=yes/}" -p "$SSH_FWD_PORT" root@localhost; fi ;;
+push)   need_up; scp -r -q "${SSH_BASE[@]}" -P "$SSH_FWD_PORT" "${@:2:$(($#-2))}" "root@localhost:${!#}" ;;
+pull)   need_up; scp -r -q "${SSH_BASE[@]}" -P "$SSH_FWD_PORT" "root@localhost:$2" "$3" ;;
+status) if alive; then echo "vm: running (pid $(cat "$STATE/qemu.pid"), guest $(gsh uptime -p 2>/dev/null || echo 'ssh unreachable'))"; else echo "vm: not running"; fi ;;
+log)    tail -n "${2:-30}" "$STATE/console.log" ;;
+down)
+    need_up
+    gsh poweroff 2>/dev/null || true
+    for _ in $(seq 1 15); do alive || { echo "vm: down"; rm -f "$STATE/qemu.pid"; exit 0; }; sleep 2; done
+    kill "$(cat "$STATE/qemu.pid")" 2>/dev/null || true
+    rm -f "$STATE/qemu.pid"; echo "vm: killed"
+    ;;
+*)  sed -n '2,13p' "$0"; exit 1 ;;
+esac

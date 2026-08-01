@@ -1,0 +1,8 @@
+#!/bin/bash
+# Boot-time hook: if the 9p share contains autorun.sh, run it and report
+# its output and exit code back through the share. The deterministic
+# host->guest execution channel (smoke test, evaluator replay gate).
+if [ -x /share/autorun.sh ]; then
+    /share/autorun.sh > /share/autorun.log 2>&1
+    echo $? > /share/autorun.exit
+fi

@@ -1,0 +1,21 @@
+// Probe the write-protect fault handler do_wp_page (mm/memory.c:3354 in
+// the pinned 6.6.87 tree).
+//
+// Why not kprobe:wp_page_copy, the function that actually performs the
+// copy? Because in THIS kernel build the compiler inlined it into its
+// only caller — `nm dist/vmlinux` shows do_wp_page but no wp_page_copy
+// symbol, so there is nothing to attach to. Probing the non-inlined
+// caller proves "a write-protect fault at our address was handled"; the
+// pagemap PFN evidence (from cow-trigger) proves the copy itself.
+//
+// Filters: our workload's binary name, faulting at its fixed map address
+// (0x100000000000) — this excludes the workload's own stack COW faults.
+kprobe:do_wp_page
+/comm == "cow-trigger"/
+{
+    $vmf = (struct vm_fault *)arg0;
+    if ($vmf->address == 0x100000000000) {
+        printf("do_wp_page fired: pid=%d addr=0x%lx\n", pid, $vmf->address);
+        printf("%s\n", kstack);
+    }
+}
