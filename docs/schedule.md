@@ -66,6 +66,9 @@ defended that week** — defenses are the bulk of class time — while the
 Monday anchor always belongs to the batch released the same day, one
 subsystem ahead.
 
+*Batch links below go live in this repo on their release Mondays — a 404
+just means that week hasn't arrived yet.*
+
 | Wk | Theme | Monday | Wednesday | Released / due |
 |---|---|---|---|---|
 | 1 | The course & the environment | • Course pitch — open by asking an LLM a conceptual question live ("so we never grade that")<br>• The weekly cycle, grading, cost disclosure<br>• **Full-loop demo** on a toy question (reference agent, live, with a scripted probe-failure the evidence catches) | • Studio: env bring-up — goal: everyone boots the VM and commits a first ftrace capture before leaving | **[Batch 1](../questions/batches/batch-01.md) released in the last ~15 min of Monday's class**, together with the per-student assignments, one question walked through as a worked "what counts as evidence" example. Manual observability; doubles as env acceptance; defended W2 (Mon 2 + Wed 2). Realistic working window opens after Wednesday's env studio — students who arrive with the env preinstalled (pre-semester email) can start Monday night |
