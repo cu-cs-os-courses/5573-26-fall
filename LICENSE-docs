@@ -1,0 +1,18 @@
+Course materials license
+========================
+
+The course materials in this repository — the documents under docs/, the
+question batches under questions/, and the methodology text in
+agent-starter/CLAUDE.md — are licensed under the Creative Commons
+Attribution 4.0 International License (CC BY 4.0):
+
+    https://creativecommons.org/licenses/by/4.0/
+
+You are free to share and adapt these materials for any purpose, including
+commercially, provided you give appropriate credit.
+
+Everything else in this repository (scripts, tools, example programs, the
+environment build system) is software, licensed under the Apache License
+2.0 — see the LICENSE file.
+
+Copyright 2026 Yueqi Chen

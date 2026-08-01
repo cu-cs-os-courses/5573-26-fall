@@ -41,3 +41,7 @@ nothing happens in finals week.
 
 LLM help is unrestricted, always. What is graded is whether *you* can stand
 behind every command and every claim, on stage.
+
+## License
+
+Code: [Apache-2.0](LICENSE). Course materials (docs, questions, methodology text): [CC BY 4.0](LICENSE-docs).
