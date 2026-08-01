@@ -33,8 +33,8 @@ students. There are no lectures and no exams — the loop is the course.
 - **Capacity:** 4 rounds/week over the ~12 presenting weeks (W2–W13) ≈ 46
   defense slots; at ~10 students (the course is solo, no teams) each
   question has a ~5-person draw pool and every student lands **4–5
-  defenses** — this is what fixes the enrollment cap (design-doc §11.1).
-  The final interview adds one more high-weight individual sample.
+  defenses** — a deliberate course-size decision. The final interview adds
+  one more high-weight individual sample.
 - **Duty student:** rotates weekly; fields other students'
   environment/tooling problems in studio (defense questioning is opened by
   same-question peers, not the duty student).
@@ -118,54 +118,3 @@ dropped), design reviews 10 %, participation 10 %, final interview 20 %.
   correction goes into the *next* batch; defended questions are graded on the
   rubric, not on a curve.
 
-## 4. Instructor-side preparation track
-
-What must be ready when — the schedule's real constraint is instructor-side
-(design-doc §11.1: everything classroom-facing is prebuilt and rehearsable by
-script; mutations are specified conceptually by the instructor, implemented
-and validated by tooling plus the reference agent):
-
-| Ready by | Item |
-|---|---|
-| Roster settles (~2 wks out) | **Pre-semester email sent** ([draft](pre-semester-email.md)): macOS/Linux-only requirement, env setup instructions, subscription cost disclosure |
-| Before W1 | `env/` images boot on all supported hosts; **thick starter** (tool layer) packaged with docs; **`reference-agent/` answers the COW question end-to-end**; **W1 demo scripted and rehearsed — including the deliberate probe-failure-and-recovery beat**; **batches 1–3 written and rehearsed**; syllabus states the self-funded model policy, expected cost, and the macOS/Linux-only platform requirement (design-doc §4, §6.5) |
-| Rolling, from W2 | **Batch N+1 validated during week N** (floor + ceiling calibration, design-doc §6.5) — one week ahead of release, two ahead of defense |
-| Week before each mutation batch | Mutation images built, tested, and successfully characterized by the reference agent — a mutation the reference agent cannot catch with the course toolchain is unfair and goes back to the shop |
-| W12 | Final-interview format doc + per-student slot schedule ready (published W13 Wed) |
-| By the end of W13 (before the break) | **All final mutations (one per student + spares) built, validated by the reference agent, sealed** — the first issuances (the Saturday inside the break) precede any class session |
-
-## 5. Known scheduling risks
-
-- **Workload calibration:** two questions per student per week ≈ 6–8 h
-  outside class (investigate + internalize + report) — a normal 3-credit
-  graduate load. If early weeks run heavier, the lever is question scope,
-  not count: shrink each question's evidence ask, keep the cadence.
-- **The question pipeline is the standing load:** four validated questions
-  every week for 12 weeks, plus the final's per-student mutations. Mitigations: per-subsystem claim banks drafted before
-  the semester (reference agent from the pinned tree + the design-doc §8
-  subsystem tour, instructor-curated); questions designed as template + parameters so
-  one design yields several variants; validation automated through the
-  reference agent. If a week still comes up short, a 4-question batch with
-  one mutation question is a full week.
-- **W3 has one session** (the Monday holiday): batch 2 is scoped to 2 questions
-  (every student does both) and its docket is Wednesday-only; batch 3
-  releases Wednesday.
-- **One week per subsystem** — coverage beats depth by design (nine
-  subsystems, four questions each). Scope anchors and claim banks
-  accordingly; if a subsystem truly needs a second week mid-flight, the
-  lever is trading a week away from another subsystem, not extending the
-  calendar.
-- **The break is pure slack** between the last defenses (W13) and the
-  interviews — except that the W15-Monday interviewees' mutations go out on
-  the Saturday inside the break, so everything final-related must be sealed
-  before the break starts.
-- **A student freezes on stage:** the draw is per question among submitters;
-  a frozen student still has their reports, 3–4 other defenses plus the
-  final interview, and their lowest defense dropped (design-doc §6.6).
-- **Enrollment pressure:** the hard constraint is defense slots. Above ~10
-  students: add a third round per session, pair two students per defense
-  (presenter + designated challenger), or shift weight toward reports — but
-  the honest lever is capping enrollment (design-doc §11.1).
-- **Final-interview capacity:** 10 interviews × ~20 min across three
-  75-minute sessions (a 3/3/4 split) is tight but fits; publish the slot
-  schedule in W13 and hold one office-hours slot in reserve for a sick day.

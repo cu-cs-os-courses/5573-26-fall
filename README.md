@@ -25,6 +25,7 @@ make smoke    # must end all-green
 | `env/` | the reference environment: QEMU + pinned kernel 6.6.87 + tracing rootfs |
 | `agent-starter/` | your workspace template — tools, methodology, empty instrument libraries ([README](agent-starter/README.md)) |
 | `examples/cow/` | a complete worked investigation (copy-on-write), the model of full credit |
+| `docs/course-design.md` | why the course is built this way: motivation, learning objectives, assessment design, the evidence contract |
 | `docs/schedule.md` | the week-by-week structure: batches, defenses, design reviews, the final |
 | `questions/batches/` | question batches appear here every Monday |
 | `students/` | your private repos, registered as submodules once the roster settles |
