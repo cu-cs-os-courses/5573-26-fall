@@ -176,7 +176,7 @@ The course infrastructure:
    VM-facing tools plus a report formatter — thick enough that a student is
    productive on day one with whatever agent product they bring (§5.4).
 5. **Offering repos** (`students/<offering>/`, git submodules — e.g.
-   `students/5573-fall-26`): one per semester, the student-facing
+   `students/5573-26-fall`): one per semester, the student-facing
    distribution plus the roster; each student's private repo is a submodule
    *inside* the offering repo (§5.4).
 
@@ -309,7 +309,7 @@ which is also what makes on-demand re-runs and spot replay possible.
   keys), the question pipeline including private mutations, and these
   design docs. Students never get access to it wholesale.
 - **The offering repo — one per semester** (registered here as
-  `students/<offering>`, e.g. `5573-fall-26`): what students actually see
+  `students/<offering>`, e.g. `5573-26-fall`): what students actually see
   and clone. Student-safe material is **copied** into it from kernel-lens
   on the course's own cadence — env, thick starter, the worked example,
   the schedule and syllabus before week 1; each batch file on its Monday

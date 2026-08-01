@@ -11,8 +11,8 @@ setup; short version below.
 ## Get running
 
 ```sh
-git clone https://github.com/cu-cs-os-courses/5573-fall-26
-cd 5573-fall-26/env
+git clone https://github.com/cu-cs-os-courses/5573-26-fall
+cd 5573-26-fall/env
 make setup    # one-time host setup (macOS or Linux; Windows unsupported)
 make images   # build the kernel + rootfs (first run: ~30-60 min)
 make smoke    # must end all-green
