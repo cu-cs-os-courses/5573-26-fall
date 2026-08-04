@@ -5,9 +5,9 @@ you direct an LLM agent that triggers, traces, and modifies a real Linux
 kernel (pinned 6.6 LTS in QEMU), and you defend the evidence it produces —
 live, in class, with re-runs on demand.
 
-Start with the [schedule](docs/schedule.md). Course policies (grading,
-model-subscription cost, platform requirements) are in the syllabus; the
-pre-semester email covers setup, and the short version is below.
+Start with the [syllabus](docs/syllabus.md) — grading, the AI-use line,
+what the model subscription costs — then the
+[schedule](docs/schedule.md). Setup is below.
 
 ## Get running
 
@@ -32,6 +32,7 @@ of this course is that "my tool doesn't work" is itself an investigation.
 | `agent-starter/` | your workspace template — tools, methodology, empty instrument libraries ([README](agent-starter/README.md)) |
 | `examples/cow/` | a complete worked investigation (copy-on-write), the model of full credit |
 | `docs/course-design.md` | why the course is built this way: motivation, learning objectives, assessment design, the evidence contract |
+| `docs/syllabus.md` | grading, late policy, AI use, required setup, university policies |
 | `docs/schedule.md` | the week-by-week structure: batches, defenses, design reviews, the final |
 | `questions/batches/` | question batches appear here every Monday |
 | `students/` | your private repos, registered as submodules once the roster settles |
