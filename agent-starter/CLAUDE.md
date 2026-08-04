@@ -22,16 +22,26 @@ exists only if a command produced it and can produce it again.
 
 ## Tools
 
-- `tools/vm up | sh | push | pull | status | log | down` — the reference VM.
-  `vm sh` runs commands as root in the guest (bpftrace, trace-cmd, gcc,
-  python3, tracefs at /sys/kernel/tracing are all there). If the tools
-  cannot find the course `env/` directory, set `KL_ENV=/path/to/env`.
+- `tools/vm up | sh | push | pull | status | log | down | kill` — the
+  reference VM. `vm sh` runs commands as root in the guest (bpftrace,
+  trace-cmd, gcc, python3, tracefs at /sys/kernel/tracing are all there).
+  `vm kill` is SIGKILL with no sync — the *crash* verb, for experiments
+  where the machine must die mid-flight. If the tools cannot find the
+  course `env/` directory, set `KL_ENV=/path/to/env`.
+- Boot options worth knowing (they pass through `run.sh`, and `vm up`
+  forwards them): `KERNEL=/path/bzImage` boots a different kernel image —
+  **this is how a mutation image is booted**; `SCRATCH=/path/img` attaches a
+  second disk as `/dev/vdb` (crash experiments belong there, never on the
+  rootfs); `SCRATCH_BPS=`/`SCRATCH_IOPS=`/`SCRATCH_QSIZE=` throttle it, so
+  a queue can actually form. See `env/README.md` for the full table.
 - `tools/ksrc grep | def | view` — search/read the pinned source tree.
   Cite `file:line` from it; it matches the running kernel exactly.
 - `tools/report-check REPORT.json` — validate a report against the evidence
   contract before calling an investigation done.
-- Kernel debugging: `env/run.sh -g` + `env/scripts/gdb.sh` (containerized
-  gdb; breakpoints freeze the guest **and its clock**).
+- Kernel debugging: `"$KL_ENV"/run.sh -g` then `"$KL_ENV"/scripts/gdb.sh`
+  in another terminal (containerized gdb — no host gdb needed; breakpoints
+  freeze the guest **and its clock**). `KL_ENV` defaults to the `env/` the
+  tools find by walking up from this workspace.
 
 ## Method (the loop)
 

@@ -1,0 +1,11 @@
+# Published as the offering repo's .gitignore (scripts/publish.sh).
+# Build output: several GB, all regenerable by `make -C env images`.
+env/dist/
+env/cache/
+env/src/
+*.log
+.DS_Store
+# Per-workspace VM state (qemu pid, console log, ssh keypair)
+.vm/
+# Mutation kernel images arrive as release assets, not as repo content
+bzImage-*

@@ -31,7 +31,7 @@ K() { docker run --rm --platform linux/amd64 \
 case "${1:-}" in
 grep)
     shift; pat="${1:?usage: ksrc grep REGEX [DIR...]}"; shift
-    K grep -rnHE --include='*.c' --include='*.h' -- "$pat" "${@:-.}" || { echo "(no matches)"; exit 1; }
+    K grep -rnHE --include='*.c' --include='*.h' --include='*.S' -- "$pat" "${@:-.}" || { echo "(no matches)"; exit 1; }
     ;;
 def)
     sym="${2:?usage: ksrc def SYMBOL}"

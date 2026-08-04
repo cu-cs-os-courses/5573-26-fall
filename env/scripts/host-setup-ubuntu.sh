@@ -3,9 +3,9 @@
 # adds the user to the docker and kvm groups. Needs sudo; safe to re-run.
 set -euo pipefail
 
-echo "==> Installing qemu and docker"
+echo "==> Installing qemu, docker and the build tools the next step needs"
 sudo apt-get update
-sudo apt-get install -y qemu-system-x86 docker.io
+sudo apt-get install -y qemu-system-x86 docker.io make git rsync
 
 echo "==> Adding $USER to the docker group"
 sudo usermod -aG docker "$USER"

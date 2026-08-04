@@ -8,6 +8,9 @@
 #   tools/vm status        is it running?
 #   tools/vm log [N]       tail the guest serial console (default 30 lines)
 #   tools/vm down          clean shutdown (poweroff, then kill as fallback)
+#   tools/vm kill          SIGKILL qemu mid-flight — the CRASH verb: no
+#                          poweroff, no sync, disk state frozen as-is.
+#                          Pair with SCRATCH=img vm up for crash experiments.
 #
 # State lives in .vm/ (gitignored): qemu pid, console log, ssh keypair.
 # Auth: an ssh key generated on first `up` and installed into the guest via
@@ -64,7 +67,7 @@ EOF
     done
     echo " ready ($(gsh uname -r), ${waited}s)"
     ;;
-sh)     need_up; shift; if [ $# -gt 0 ]; then gsh "$@"; else ssh "${SSH_BASE[@]/-o BatchMode=yes/}" -p "$SSH_FWD_PORT" root@localhost; fi ;;
+sh)     need_up; shift; if [ $# -gt 0 ]; then gsh "$@"; else ssh "${SSH_BASE[@]/BatchMode=yes/BatchMode=no}" -p "$SSH_FWD_PORT" root@localhost; fi ;;
 push)   need_up; scp -r -q "${SSH_BASE[@]}" -P "$SSH_FWD_PORT" "${@:2:$(($#-2))}" "root@localhost:${!#}" ;;
 pull)   need_up; scp -r -q "${SSH_BASE[@]}" -P "$SSH_FWD_PORT" "root@localhost:$2" "$3" ;;
 status) if alive; then echo "vm: running (pid $(cat "$STATE/qemu.pid"), guest $(gsh uptime -p 2>/dev/null || echo 'ssh unreachable'))"; else echo "vm: not running"; fi ;;
@@ -75,6 +78,11 @@ down)
     for _ in $(seq 1 15); do alive || { echo "vm: down"; rm -f "$STATE/qemu.pid"; exit 0; }; sleep 2; done
     kill "$(cat "$STATE/qemu.pid")" 2>/dev/null || true
     rm -f "$STATE/qemu.pid"; echo "vm: killed"
+    ;;
+kill)
+    need_up
+    kill -9 "$(cat "$STATE/qemu.pid")" 2>/dev/null || true
+    rm -f "$STATE/qemu.pid"; echo "vm: crashed (SIGKILL, no sync)"
     ;;
 *)  sed -n '2,13p' "$0"; exit 1 ;;
 esac

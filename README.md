@@ -5,18 +5,24 @@ you direct an LLM agent that triggers, traces, and modifies a real Linux
 kernel (pinned 6.6 LTS in QEMU), and you defend the evidence it produces —
 live, in class, with re-runs on demand.
 
-Start with the [schedule](docs/schedule.md). The pre-semester email covers
-setup; short version below.
+Start with the [schedule](docs/schedule.md). Course policies (grading,
+model-subscription cost, platform requirements) are in the syllabus; the
+pre-semester email covers setup, and the short version is below.
 
 ## Get running
 
 ```sh
 git clone https://github.com/cu-cs-os-courses/5573-26-fall
 cd 5573-26-fall/env
-make setup    # one-time host setup (macOS or Linux; Windows unsupported)
-make images   # build the kernel + rootfs (first run: ~30-60 min)
+
+make setup    # one-time host setup; detects macOS vs Linux
+              # (Windows is not supported, including WSL)
+make images   # build the kernel + rootfs (first run: ~30-60 min, one time)
 make smoke    # must end all-green
 ```
+
+Stuck? `env/README.md` has a troubleshooting section, and the whole point
+of this course is that "my tool doesn't work" is itself an investigation.
 
 ## Layout
 
@@ -32,7 +38,8 @@ make smoke    # must end all-green
 
 ## The rhythm (one paragraph)
 
-Four questions publish every Monday; you are assigned two; you investigate
+Four questions publish most Mondays (week 3 differs — see the schedule);
+you are assigned two; you investigate
 them with your agent and commit evidence-backed reports to your repo before
 the session where each is scheduled; in class, one student per question is
 drawn from those who reported to present and defend — any evidence may be

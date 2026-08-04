@@ -14,7 +14,10 @@ source "$ENV_DIR/config.sh"
 
 # host.docker.internal is built in on macOS (colima/Docker Desktop); the
 # add-host flag provides it on native-Linux docker engines too.
-exec docker run --rm -it \
+# Allocate a TTY only when we have one — batch/scripted use (gdb -batch,
+# repro scripts) runs without a terminal and docker -t would fail.
+TTY_FLAGS=(-i); [ -t 0 ] && TTY_FLAGS=(-it)
+exec docker run --rm "${TTY_FLAGS[@]}" \
     --add-host host.docker.internal:host-gateway \
     -v "$ENV_DIR/dist:/dist:ro" \
     "$DOCKER_IMAGE" \

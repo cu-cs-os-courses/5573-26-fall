@@ -25,7 +25,7 @@ structured answer built from them is [`answer/vm-cow-01.json`](answer/vm-cow-01.
 ## The investigation, step by step
 
 Mirrors §9 of the design doc. All file:line references are into the pinned
-6.6.87 tree (browse via `env/src/`, refresh with `make -C ../../env src-export`).
+6.6.87 tree (browse via `../../env/src/` — create or refresh it with `make -C ../../env src-export`).
 
 **1. Source localization.** Fork side: `copy_page_range`
 (`mm/memory.c:1268`) → `copy_present_pte` (`mm/memory.c:923`), which

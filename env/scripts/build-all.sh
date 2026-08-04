@@ -7,7 +7,7 @@ ENV_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 REPO_DIR="$(dirname "$ENV_DIR")"
 source "$ENV_DIR/config.sh"
 
-command -v docker >/dev/null || { echo "ERROR: docker not found. Run env/scripts/host-setup-macos.sh (or install docker) first."; exit 1; }
+command -v docker >/dev/null || { echo "ERROR: docker not found. Run make -C env setup first (macOS or Linux), or install docker."; exit 1; }
 
 echo "==> Building container image ($DOCKER_IMAGE)"
 docker build --platform linux/amd64 -t "$DOCKER_IMAGE" "$ENV_DIR/docker"

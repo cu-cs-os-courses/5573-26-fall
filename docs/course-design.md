@@ -110,8 +110,8 @@ By the end of the course, students can:
   core Linux subsystems: virtual memory, process lifecycle and scheduling, system
   call and interrupt paths, filesystems and block I/O, and synchronization.
 - **LO2 — Instrumentation.** Use the Linux observability stack (ftrace/trace-cmd,
-  eBPF/bpftrace, kprobes/tracepoints, perf, /proc and /sys interfaces, QEMU
-  gdbstub, drgn) to capture kernel behavior with precision.
+  eBPF/bpftrace, kprobes/kretprobes/tracepoints, `/proc` and `/sys`
+  interfaces, the QEMU gdbstub) to capture kernel behavior with precision.
 - **LO3 — Workload design.** Construct minimal userspace programs that reliably and
   reproducibly trigger specific kernel code paths.
 - **LO4 — Kernel modification.** Patch, rebuild, and boot a modified kernel; reason
@@ -163,22 +163,21 @@ The course infrastructure:
 1. **Reference environment** (`env/`): QEMU + pinned Linux kernel (6.6 LTS) +
    Debian-based rootfs containing the tracing toolchain. Fully scripted and
    reproducible — students and instructor run the same image.
-2. **Reference agent** (`reference-agent/`): not a custom program — an
-   off-the-shelf agent product driving the course toolkit workspace (tool
-   layer + context + the course's own trigger/probe libraries, seeded from
-   `examples/cow/`). The instructor's classroom demo vehicle, the
-   mutation validator, and the calibration instrument for every question
-   batch (§6.5).
-3. **Question pipeline** (`questions/`: per-subsystem claim banks → weekly
-   batches; instructor-private mutations): the course's principal recurring
-   workload — four validated questions per week (§6.1).
+2. **Reference agent** — not a custom program, but the same workspace shape
+   students get (tool layer + context + trigger/probe libraries), driven by
+   an off-the-shelf agent product. Instructor-side only: it is the
+   classroom demo vehicle, the mutation validator, and the instrument that
+   calibrates every question batch (§6.5). Its stripped public form is the
+   `agent-starter/` you clone.
+3. **Question pipeline** — per-subsystem claim banks distilled into weekly
+   batches, plus the private mutation images: the course's principal
+   recurring workload, four validated questions per week (§6.1).
 4. **Tool layer / starter** (`agent-starter/`): a model-agnostic library of
    VM-facing tools plus a report formatter — thick enough that a student is
    productive on day one with whatever agent product they bring (§5.4).
-5. **Offering repos** (`students/<offering>/`, git submodules — e.g.
-   `students/5573-26-fall`): one per semester, the student-facing
-   distribution plus the roster; each student's private repo is a submodule
-   *inside* the offering repo (§5.4).
+5. **Offering repos** — one per semester (e.g. `5573-26-fall`): the
+   student-facing distribution plus the roster; each student's private repo
+   is registered as a submodule *inside* the offering repo (§5.4).
 
 ## 4. The reference environment
 
@@ -188,23 +187,31 @@ The course infrastructure:
   LTS gets fixes without churn; 6.6 has mature BTF/eBPF support).
 - **Virtualization:** QEMU system emulation, x86_64 primary (works on every
   student laptop incl. Apple Silicon via TCG; provides gdbstub for kernel
-  debugging; snapshot/restore for fast experiment iteration). KVM/HVF acceleration
+  debugging; a throttleable scratch disk for crash and queueing experiments).
+  KVM/HVF acceleration
   used when host arch matches; correctness of the labs must not depend on it.
-- **Rootfs:** Debian (bookworm) image built with debootstrap, containing
-  bpftrace, trace-cmd, gcc (for in-VM workload compilation), python3, sshd,
-  and the autorun/9p channel that the RPC shim (§5.3) and the spot-replay
-  tooling (§6.4) build on. *(Changed from Buildroot: bpftrace under Buildroot
-  means a multi-hour, fragile LLVM source build; Debian ships everything as
-  binary packages — the robust choice: binary packages, never source builds.)* Prebuilt images
-  distributed; build scripts in `env/` run inside a Docker container so they
-  work identically on macOS and Linux hosts. **These are the only supported
+- **Rootfs:** Debian (bookworm), assembled inside a Docker container and
+  packed into an ext4 image, containing bpftrace, trace-cmd, gcc (for in-VM
+  workload compilation), python3, e2fsprogs, sshd, and the autorun/9p
+  channel that `tools/vm` (§5.3) and the spot-replay tooling (§6.4) build
+  on. *(Changed from Buildroot: bpftrace under Buildroot means a
+  multi-hour, fragile LLVM source build; Debian ships everything as binary
+  packages — the robust choice: binary packages, never source builds.)* The
+  kernel and rootfs are **built on the student's own machine** by the
+  scripts in `env/` (a one-time ~30–60 min cost, paid before week 1); they
+  run inside a Docker container so they work identically on macOS and Linux
+  hosts. Mutation kernels are the exception — those ship prebuilt, since
+  students must never see their source. **These are the only supported
   host platforms — the syllabus states macOS/Linux only; Windows, including
   WSL, is unsupported** (stated in the pre-semester email so students can
   raise it before the semester).
 - **Kernel config:** `CONFIG_DEBUG_INFO_BTF=y`, ftrace, kprobes, tracepoints,
-  eBPF JIT, `/proc/kpageflags` + pagemap enabled, KASAN available in a debug
-  variant. Config fragment version-controlled in `env/`.
-- **Build caching:** ccache + documented incremental-build flow, so a one-line
+  eBPF JIT, `/proc/kpageflags` + pagemap enabled. Lock debugging (lockdep,
+  LOCK_STAT) and the sanitizers (KASAN, KCSAN) are **off** — they change the
+  timing the course measures, and their absence is itself a teaching point
+  (§8, batch 12). Config fragment version-controlled in `env/`.
+- **Build caching:** the kernel tree and its objects live in a persistent
+  Docker volume, so an incremental rebuild after a one-line
   kernel patch rebuilds in minutes, not an hour. First full build is a Week-1
   lab exercise.
 
@@ -281,12 +288,12 @@ The required capability surface the toolkit must cover:
 
 | Category | Capability | Example implementations |
 |---|---|---|
-| Trigger | compile & run workloads in the VM, with PID/timing coordination | in-VM gcc + RPC shim |
+| Trigger | compile & run workloads in the VM, with PID/timing coordination | in-VM gcc + `tools/vm push`/`sh` |
 | Trace | dynamic probes, static tracepoints, function graphs | bpftrace, trace-cmd, ftrace |
-| Inspect | task/memory state of live system | /proc/[pid]/pagemap, /proc/vmstat, drgn |
+| Inspect | task/memory state of live system | /proc/[pid]/{pagemap,smaps,status}, /proc/vmstat, /sys |
 | Debug | breakpoints, memory/register reads on the stopped kernel | QEMU gdbstub + gdb scripts |
 | Source | search & read pinned kernel source; map symbol → file:line | local source tree + ctags/grep |
-| Modify | apply patch, rebuild, reboot VM, A/B compare behavior | patch + ccache build + snapshot |
+| Modify | apply patch, rebuild, reboot VM, A/B compare behavior | `make src` + incremental build + `KERNEL=` boot |
 
 Students choose their own agent harness — a commercial agentic product (e.g.
 Claude Code under a personal subscription), an agent SDK, or a raw API loop;
@@ -296,28 +303,26 @@ the tool design is.
 
 ### 5.3 Agent–VM boundary
 
-The agent process runs on the host; the kernel under study runs in the VM. A
-small RPC shim inside the guest (serial-console or virtio-vsock based, provided
-as starter code) executes commands and returns output. This keeps the boundary
+The agent process runs on the host; the kernel under study runs in the VM. The
+starter's `tools/vm` owns that boundary: it boots the guest headless, installs
+its own ssh key through a 9p share on first boot, and runs every guest command
+over ssh on a forwarded port. This keeps the boundary
 honest: every observation the agent makes must flow through a loggable channel,
 which is also what makes on-demand re-runs and spot replay possible.
 
 ### 5.4 Repository architecture: three layers
 
-- **`kernel-lens` (this repo) — cross-offering, instructor-side.** The
-  environment, the reference agent (context, libraries, calibration answer
-  keys), the question pipeline including private mutations, and these
-  design docs. Students never get access to it wholesale.
-- **The offering repo — one per semester** (registered here as
-  `students/<offering>`, e.g. `5573-26-fall`): what students actually see
-  and clone. Student-safe material is **copied** into it from kernel-lens
-  on the course's own cadence — env, thick starter, the worked example,
-  the schedule and syllabus before week 1; each batch file on its Monday
-  release. Copies, not nested submodules: publication is an explicit act,
-  and students need no access to the superproject. **Never copied:**
-  mutation patches and generator notes, per-batch calibration reports (the
-  answer keys), and the reference agent's full context and libraries (the
-  starter is their public, stripped form).
+- **The instructor's working repository — private.** It holds the material
+  this course cannot show you and stay honest: the mutation patches, the
+  answer keys behind every question batch, and the instructor's own
+  investigation workspace. You never need it.
+- **The offering repo — this one, rebuilt each semester.** Student-safe
+  material is copied in on the course's cadence: the environment, the
+  starter workspace, the worked example and the schedule before week 1;
+  each batch file on its release Monday; mutation kernel images as release
+  assets when a batch calls for one. Copies rather than nested submodules,
+  so publication is always a deliberate act.
+
 - **Per-student private repos**, registered as submodules *of the offering
   repo*: each student's toolkit and reports. Repos are private — students
   cannot see each other's (the offering repo records only pointers); the
@@ -343,8 +348,9 @@ course invokes a student's agent programmatically. Students drive their own
 agents — in studio, at home, and on stage.
 
 The **thick starter** (`agent-starter/`) is what makes this workable from week
-one: it ships the entire plumbing layer — VM control, RPC shim, trace capture,
-source search, report formatting — as model-agnostic tools (CLI + MCP) that
+one: it ships the entire plumbing layer — VM control (boot, run, copy in and
+out, crash), pinned-source search, and report validation — as model-agnostic
+command-line tools that
 any harness can drive. Effectively the reference agent minus its trigger/probe
 libraries. What accumulates all semester is the knowledge layer on top —
 triggers, probes, verification, context (§5.2) — the student's accountability
@@ -485,7 +491,8 @@ course premise (§1) that LLM leverage is designed around, not fenced off.
   (free tiers, educational credits) — no mechanism needed.
 - **Every question batch is calibrated on both sides before release.**
   *Floor:* the reference agent, configured with the recommended baseline
-  subscription tier, must solve every question — so money buys convenience,
+  subscription tier (Fall 2026: Claude Opus 4.6 / GPT-5.5 class or better,
+  the tier the syllabus names), must solve every question — so money buys convenience,
   never the passing line. *Ceiling:* a strong model given only a shell and
   **no VM access** must fail — if a question can be answered without touching
   the pinned kernel, it is a conceptual question that an LLM answers for free
@@ -500,7 +507,7 @@ course premise (§1) that LLM leverage is designed around, not fenced off.
 |---|---|---|
 | Weekly reports (cumulative) | 25% | two per week (instructor-assigned from the batch's four, §6.1); auto-checked + LLM-judge first pass + instructor spot-audit (§6.4) |
 | Defenses (4–5 per student) | 35% | random-draw within each question's preparers; §6.4 rubric; each student's lowest defense is dropped |
-| Design reviews × 2 | 10% | oral examinations over the student's own repo — tool interface (mid-M1), evidence pipeline / self-verification (M4); graded on the student's ability to defend its instrument choices, not on authorship or artifact polish (§5.1) |
+| Design reviews × 2 | 10% | oral examinations over the student's own repo — tool interface (DR1, week 7), evidence pipeline / self-verification (DR2, week 12); graded on the student's ability to defend its instrument choices, not on authorship or artifact polish (§5.1) |
 | Participation | 10% | audience questioning + duty-student service |
 | Final interview | 20% | fresh per-student mutation, 48 h lead, ~20 min one-on-one in the last three class sessions (§6.4) |
 
@@ -519,15 +526,15 @@ for humans):
 ```json
 {
   "question_id": "vm-cow-01",
-  "claim": "COW is implemented via write-protected shared PTEs resolved in wp_page_copy().",
+  "claim": "COW is implemented via write-protected shared PTEs resolved in do_wp_page().",
   "confidence": "high",
   "evidence": [
     {
       "kind": "trace",
       "tool": "bpftrace",
-      "command": "bpftrace -e 'kprobe:wp_page_copy /pid == $CHILD/ { printf(...) }'",
-      "output_excerpt": "wp_page_copy fired: pid=142 addr=0x7f3a...",
-      "interpretation": "The probe fires exactly once, at the child's first write to the shared page."
+      "command": "bpftrace -e 'kprobe:do_wp_page /pid == $CHILD/ { printf(...) }'",
+      "output_excerpt": "do_wp_page fired: pid=142 addr=0x7f3a...",
+      "interpretation": "The probe fires exactly once, at the child's first write to the shared page. (The copy itself happens in wp_page_copy, which this build INLINES into do_wp_page — no kallsyms entry, nothing to attach to. Probing the caller and letting the pagemap evidence below carry the copy claim is the honest move, and the kind of thing you will find out the hard way at least once.)"
     },
     {
       "kind": "state",
@@ -538,15 +545,15 @@ for humans):
     },
     {
       "kind": "source",
-      "ref": "mm/memory.c:3412",
-      "symbol": "wp_page_copy",
-      "interpretation": "Allocates the new page and re-maps the faulting PTE read-write."
+      "ref": "mm/memory.c:3354",
+      "symbol": "do_wp_page",
+      "interpretation": "Resolves the write-protect fault; allocates the new page (inlined wp_page_copy) and re-maps the faulting PTE read-write."
     }
   ],
   "repro": {
     "script": "repro/vm-cow-01.sh",
     "expected": [
-      "probe wp_page_copy fires >=1 time under child PID",
+      "probe do_wp_page fires >=1 time under child PID",
       "child PFN changes across the write; parent PFN does not"
     ],
     "tolerance": "exact"
@@ -565,7 +572,7 @@ what an on-the-spot re-run or a spot replay executes (§6.4).
 Weeks 1–3 build foundations by hand, through the same weekly question format
 (§6.2). Batches 4–12 then tour **nine kernel subsystems, one per week,
 classified by source-tree directory** — each subsystem has its own claim
-bank (`questions/<subsystem>/claims.md`) from which its week's four
+bank (instructor-side) from which its week's four
 questions are generated. The ordering tells a story: process → memory →
 scheduling are three mutually explanatory foundations; entry →
 interrupts/signals cover how the kernel gets entered; VFS → ext4 → block
@@ -620,10 +627,13 @@ writeback throttling.
 
 **Batch 12 — `kernel/locking/` + RCU: synchronization.** Lock contention
 made visible under a designed adversarial workload; an RCU grace period
-demonstrated; lockdep as an oracle. Mutation: remove a lock on a
+demonstrated as a measurable duration; and the toolbox map — which
+synchronization oracles this kernel does *not* carry (lockdep, LOCK_STAT,
+KCSAN) and what each would and would not have caught. Mutation: remove a lock on a
 well-chosen path — with the standing caution that race evidence is
 nondeterministic, so this mutation must be validated
-observable-under-stress (the KASAN debug variant helps) before release.
+observable-under-stress before release — with a workload, an invariant and
+a trial count, since this kernel ships no sanitizer to lean on.
 
 **Out of scope by design:** `net/` (belongs to the networking course),
 `drivers/`, and arch internals beyond the entry path.
@@ -690,7 +700,8 @@ There is no TA. Support is structured so you are never stuck alone:
 
 ### 11.1 Getting unstuck
 
-- **First line: your own agent** plus the course troubleshooting playbook —
+- **First line: your own agent** plus the environment's troubleshooting
+  notes (`env/README.md`) and the gotchas your own workspace accumulates —
   "my probe doesn't fire" is itself a kernel investigation, and solving it
   with the course's own methodology is the course working as intended.
 - **Second line: the week's duty student** (rotates; everyone serves once

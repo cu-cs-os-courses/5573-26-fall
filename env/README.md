@@ -25,10 +25,11 @@ make smoke
 make run
 ```
 
-Linux (Ubuntu/Debian) hosts: run `scripts/host-setup-ubuntu.sh` instead of
-`make setup` (installs qemu + docker, adds you to the docker/kvm groups —
-re-login after the first run), then continue from step 2. On x86_64 with
-`/dev/kvm`, the VM runs hardware-accelerated automatically.
+`make setup` detects your OS and runs the right script (`make setup-macos` /
+`make setup-linux` force one). On Linux it installs qemu, docker and the
+build tools, and adds you to the docker/kvm groups — **re-login after the
+first run**, then continue from step 2. On x86_64 with `/dev/kvm` the VM
+runs hardware-accelerated automatically. `make help` lists every target.
 
 ## Using the VM
 
@@ -37,9 +38,22 @@ re-login after the first run), then continue from step 2. On x86_64 with
 | Console | `./run.sh` — serial console, root auto-login |
 | SSH | `ssh -p 2222 root@localhost` (password: see `config.sh`) |
 | Share a host dir | `SHARE=/some/dir ./run.sh` → appears at `/share` in guest |
+| **Boot a different kernel** | `KERNEL=/path/to/bzImage ./run.sh` — same rootfs, another image. **This is how you boot a mutation image** (`KERNEL=... tools/vm up` works too) |
+| Scripted / headless boot | `HEADLESS=1 ./run.sh` (no console on stdio); `CONSOLE_LOG=/path/console.log` captures the serial output |
+| **Second disk** (crash experiments) | `SCRATCH=/path/img ./run.sh` → `/dev/vdb`, created 512 M if missing. `mkfs.ext4` it in the guest and keep crash tests off the rootfs |
+| Make the disk slow (on purpose) | `SCRATCH_BPS=8388608` (bytes/s), `SCRATCH_IOPS=300`, `SCRATCH_QSIZE=8` (virtio queue depth) — a fast disk never queues, so queueing has to be manufactured |
 | Run a script at boot | put `autorun.sh` in the shared dir; output → `autorun.log`, exit code → `autorun.exit` |
 | Kernel debugging | `./run.sh -g` (VM waits, frozen), then **`scripts/gdb.sh`** in another terminal — runs gdb inside the amd64 build container, so no host gdb is needed on either platform; extra args pass through (`scripts/gdb.sh -ex 'break do_sys_openat2' -ex continue`). KASLR is off, so vmlinux symbols match runtime addresses |
 | Tracing | tracefs at `/sys/kernel/tracing`, `bpftrace`, `trace-cmd` preinstalled |
+
+## Working on the kernel source
+
+| Task | How |
+|---|---|
+| Browse the source | `make src-export` copies the pinned tree to `env/src/` (host-side **browsing only** — the build does not read it) |
+| Edit and rebuild | `make src` opens a shell inside the build container on the real tree, then `make kernel` rebuilds incrementally (the Docker cache volume keeps it fast) |
+| Rebuild only the rootfs | `make rootfs` |
+| Start over | `make clean` (keeps downloads) / `make distclean` (removes everything) |
 
 The **autorun channel** (9p share + `kl-autorun.service`) is the deterministic
 host→guest execution path: the smoke test uses it, and in-class re-runs and

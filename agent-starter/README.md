@@ -9,8 +9,9 @@ methodology (`CLAUDE.md`), and empty library shelves (`triggers/`,
 
 1. Make this the root of **your own private repo** (copy the directory or
    use it as a template — week 4, session A shows the workflow).
-2. You need the course environment built once on your machine:
-   `make -C <offering-repo>/env setup images smoke`. The tools find `env/`
+2. You need the course environment built once on your machine — follow
+   `env/README.md` in the offering repo (`make setup` detects macOS vs
+   Linux, then `make images && make smoke`). The tools find `env/`
    automatically when your repo sits inside the offering repo checkout;
    anywhere else, export `KL_ENV=/path/to/env`.
 3. Open your agent product of choice in this directory (`CLAUDE.md` is
