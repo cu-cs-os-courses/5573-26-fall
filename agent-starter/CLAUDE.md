@@ -38,6 +38,16 @@ exists only if a command produced it and can produce it again.
   Cite `file:line` from it; it matches the running kernel exactly.
 - `tools/report-check REPORT.json` — validate a report against the evidence
   contract before calling an investigation done.
+
+## When the environment misbehaves
+
+Environment trouble (VM won't boot, docker unreachable, build fails, ssh
+or gdb broken) is a solved-problems domain, not an investigation: run
+`make doctor` in `env/`, then work through `env/TROUBLESHOOTING.md` — it
+is written for you, the agent, to act on. Escalate to studio only with
+doctor output + the exact command + its log. But a probe that attaches
+and doesn't fire, or a count that surprises you, is *course material* —
+investigate it with the method above, never file it as an env problem.
 - Kernel debugging: `"$KL_ENV"/run.sh -g` then `"$KL_ENV"/scripts/gdb.sh`
   in another terminal (containerized gdb — no host gdb needed; breakpoints
   freeze the guest **and its clock**). `KL_ENV` defaults to the `env/` the

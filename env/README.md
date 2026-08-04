@@ -25,6 +25,10 @@ make smoke
 make run
 ```
 
+Anything fails or misbehaves: `make doctor` (fast self-diagnosis), then
+[TROUBLESHOOTING.md](TROUBLESHOOTING.md) — the playbook for every known
+failure mode, written to be actionable by your agent.
+
 `make setup` detects your OS and runs the right script (`make setup-macos` /
 `make setup-linux` force one). On Linux it installs qemu, docker and the
 build tools, and adds you to the docker/kvm groups — **re-login after the

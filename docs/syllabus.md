@@ -154,10 +154,12 @@ Two of them matter enough to say in my own words as well:
 
 There is no TA. The support model is deliberate and layered:
 
-1. **Your own agent**, plus the environment's troubleshooting notes
-   (`env/README.md`) and the gotchas your workspace accumulates. "My probe
-   doesn't fire" is itself a kernel investigation — solving it with the
-   course's own method is the course working as intended.
+1. **Your own agent**, plus the environment's self-diagnosis (`make
+   doctor` in `env/`) and troubleshooting playbook
+   (`env/TROUBLESHOOTING.md`), and the gotchas your workspace
+   accumulates. "My probe doesn't fire" is itself a kernel investigation
+   — solving it with the course's own method is the course working as
+   intended.
 2. **The week's duty student** (the role rotates; everyone serves once or
    twice), in the Wednesday studio.
 3. **Me**, for judgment calls — is this the right invariant to test, would

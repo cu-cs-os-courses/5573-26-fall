@@ -1,5 +1,5 @@
 # KernelLens reference environment. See env/README.md.
-.PHONY: all setup setup-macos setup-linux images kernel rootfs run smoke src src-export clean distclean help
+.PHONY: all setup setup-macos setup-linux images kernel rootfs run smoke doctor src src-export clean distclean help
 
 all: images
 
@@ -49,6 +49,9 @@ src-export:       ## copy source to env/src/ for host-side BROWSING ONLY
 
 smoke:            ## boot headless + verify observability contract
 	scripts/smoke-test.sh
+
+doctor:           ## diagnose host + toolchain + artifacts (fast, no boot)
+	scripts/doctor.sh
 
 clean:            ## remove built artifacts, keep downloads
 	rm -rf dist

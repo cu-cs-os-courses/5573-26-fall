@@ -700,10 +700,11 @@ There is no TA. Support is structured so you are never stuck alone:
 
 ### 11.1 Getting unstuck
 
-- **First line: your own agent** plus the environment's troubleshooting
-  notes (`env/README.md`) and the gotchas your own workspace accumulates —
-  "my probe doesn't fire" is itself a kernel investigation, and solving it
-  with the course's own methodology is the course working as intended.
+- **First line: your own agent** plus the environment's self-diagnosis
+  (`make doctor`) and troubleshooting playbook (`env/TROUBLESHOOTING.md`),
+  and the gotchas your own workspace accumulates — "my probe doesn't fire"
+  is itself a kernel investigation, and solving it with the course's own
+  methodology is the course working as intended.
 - **Second line: the week's duty student** (rotates; everyone serves once
   or twice), in studio.
 - **The instructor owns judgment calls** — is this the right invariant to
