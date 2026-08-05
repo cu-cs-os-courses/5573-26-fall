@@ -37,18 +37,10 @@ students. There are no lectures and no exams — the loop is the course.
   question has a ~5-person draw pool and every student lands **4–5
   defenses** — a deliberate course-size decision. The final interview adds
   one more high-weight individual sample.
-- **Duty student:** rotates weekly; fields other students'
-  environment/tooling problems in studio (defense questioning is opened by
-  same-question peers, not the duty student).
-- **Design reviews** (twice, in Wednesday studio slots): oral examinations
-  over each student's own repo — tool interface (DR1), evidence pipeline /
-  self-verification (DR2). Authorship is not the question; the student's
-  ability to defend every instrument choice is (design-doc §6.6).
-
 Division of labor per design-doc §11.1 (no TA): **hands-on unblocking is
-self-serve** — first line is the student's own agent plus the environment's
-own troubleshooting notes (`env/README.md`), second line is the duty
-student; the
+self-serve** — the student's own agent plus the environment's own
+troubleshooting notes (`env/README.md`), with cross-student tooling help
+explicitly legal; the
 **instructor owns judgment calls** — is this the right invariant to test,
 would this evidence actually support that claim.
 
@@ -80,20 +72,20 @@ just means that week hasn't arrived yet.*
 | 4 | Observability: probes anywhere (defends batch 3); the agent arrives | • Anchor: the tool layer & report schema<br>• **Thick-starter walkthrough** (deferred from W1)<br>• Demo: an agent-driven fork/exec investigation<br>• Rounds (batch 3) | • Rounds (batch 3)<br>• Studio (tool-layer work) | **[Batch 4](../questions/batches/batch-04.md)** (`kernel/`: fork/exec/exit/wait) — first trigger-design questions; agent now necessary |
 | 5 | `kernel/` — process lifecycle (defends batch 4) | • Anchor: `mm/` — address spaces & fault paths<br>• **Live COW demo** (worked example, design-doc §9)<br>• Rounds (batch 4) | • Rounds (batch 4)<br>• Studio | **[Batch 5](../questions/batches/batch-05.md)** (`mm/`) |
 | 6 | `mm/` — virtual memory (defends batch 5) | • Anchor: `kernel/sched/` — what the scheduler guarantees, EEVDF/vruntime; honest timing methodology<br>• Demo: mutation investigation (Q3 walkthrough on the §9 COW mutation — mm/ is fresh)<br>• Rounds (batch 5) | • Rounds (batch 5)<br>• Studio | **[Batch 6](../questions/batches/batch-06.md)** (`kernel/sched/`; **first mutation question**) |
-| 7 | `kernel/sched/` — the scheduler (defends batch 6 — first mutation defenses) | • Anchor: `arch/x86/entry/` — how the kernel gets entered: vDSO vs. trap, entry paths<br>• Rounds (batch 6) | • **Design review 1** (tool interface)<br>• Rounds (batch 6) | **[Batch 7](../questions/batches/batch-07.md)** (`arch/x86/entry/` + `kernel/entry/`) |
+| 7 | `kernel/sched/` — the scheduler (defends batch 6 — first mutation defenses) | • Anchor: `arch/x86/entry/` — how the kernel gets entered: vDSO vs. trap, entry paths<br>• Rounds (batch 6) | • Rounds (batch 6)<br>• Studio | **[Batch 7](../questions/batches/batch-07.md)** (`arch/x86/entry/` + `kernel/entry/`) |
 | 8 | `arch/x86/entry/` — syscall entry (defends batch 7) | • Anchor: `kernel/irq/` `time/` `signal.c` — timer tick → preemption chain; signal delivery on return-to-user<br>• Rounds (batch 7) | • Rounds (batch 7)<br>• Studio | **[Batch 8](../questions/batches/batch-08.md)** (irq/time/signals; mutation) |
 | 9 | `kernel/irq/` `time/` `signal.c` — interrupts, timers, signals (defends batch 8) | • Anchor: `fs/` — path lookup; a `read()`'s journey through `mm/filemap.c`<br>• Rounds (batch 8) | • Rounds (batch 8)<br>• Studio | **[Batch 9](../questions/batches/batch-09.md)** (VFS + page cache) |
 | 10 | `fs/` — VFS & page cache (defends batch 9) | • Anchor: `fs/ext4/` + `fs/jbd2/` — what `fsync` guarantees; journaling & crash consistency<br>• Rounds (batch 9) | • Rounds (batch 9)<br>• Studio | **[Batch 10](../questions/batches/batch-10.md)** (ext4/jbd2; mutation) |
 | 11 | `fs/ext4/` + `fs/jbd2/` — a real filesystem (defends batch 10) | • Anchor: `block/` — a bio's life from page cache to virtual disk; writeback<br>• Rounds (batch 10) | • Rounds (batch 10)<br>• Studio | **[Batch 11](../questions/batches/batch-11.md)** (`block/`) |
-| 12 | `block/` — the block layer (defends batch 11) | • Anchor: `kernel/locking/` + RCU — what locks promise; an RCU grace period as an observable event<br>• Rounds (batch 11) | • **Design review 2** (evidence pipeline)<br>• Rounds (batch 11) | **[Batch 12](../questions/batches/batch-12.md)** (locking/RCU; mutation) — **the last batch** |
-| 13 | `kernel/locking/` + RCU — synchronization (defends batch 12, the last) | • Rounds (batch 12) | • Rounds (batch 12)<br>• **Final-interview briefing**: format, per-student slot schedule, 48-h mutation issuance | Interview slots posted |
+| 12 | `block/` — the block layer (defends batch 11) | • Anchor: `kernel/locking/` + RCU — what locks promise; an RCU grace period as an observable event<br>• Rounds (batch 11) | • Rounds (batch 11)<br>• Studio | **[Batch 12](../questions/batches/batch-12.md)** (locking/RCU; mutation) — **the last batch** |
+| 13 | `kernel/locking/` + RCU — synchronization (defends batch 12, the last) | • Rounds (batch 12) | • Rounds (batch 12)<br>• **Final-interview briefing**: format, per-student slot schedule, 48-h mutation issuance, final-report requirements (incl. the toolkit design section, design-doc §6.6) | Interview slots posted |
 | 14 | **Break** | — | — | Mutations for W15 Monday's slots issued the Saturday before (48 h ahead) |
-| 15 | **Final interviews I & II** | • 3–4 individual interviews (~20 min each) | • 3–4 individual interviews | Each student's fresh mutation issued 48 h before their own slot |
+| 15 | **Final interviews I & II** | • 3–4 individual interviews (~20 min each) | • 3–4 individual interviews | Each student's fresh mutation issued 48 h before their own slot; **final report** (evidence + toolkit design section) committed before the slot |
 | 16 | **Final interviews III; wrap** | • Remaining 3–4 interviews | • Retrospective + results discussion<br>• **Repos pinned** (archival, design-doc §5.4) | — |
 | F | Finals week — **nothing scheduled**; grades finalized | | | |
 
 Grade weights (design-doc §6.6): weekly reports 25 %, defenses 35 % (lowest
-dropped), design reviews 10 %, participation 10 %, final interview 20 %.
+dropped), participation 10 %, final report 10 %, final interview 20 %.
 
 ## 3. Rhythm rules
 

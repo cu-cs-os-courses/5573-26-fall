@@ -253,9 +253,10 @@ line of it is yours to answer for. Four kinds of work cannot be delegated:
   the understanding cost is undiminished — and understanding was the goal
   all along (LO1–LO4).
 - **Accountability for the toolkit.** Who wrote a probe is irrelevant; being
-  unable to say why it attaches where it does is disqualifying. The design
-  reviews are conducted accordingly — oral examinations over the student's own
-  repository, not artifact quality reviews (§6.6).
+  unable to say why it attaches where it does is disqualifying. That
+  accountability is enforced live in every defense, and in the final
+  report's design section, defended one-on-one at the final interview
+  (§6.6).
 - **The manual foundation (weeks 1–3).** The only work required to be done
   by hand — and the reframing makes it more necessary, not less: a student
   who cannot verify by hand cannot tell when the model is wrong.
@@ -264,7 +265,7 @@ line of it is yours to answer for. Four kinds of work cannot be delegated:
 
 Authorship aside, each student's repository must accumulate a working
 investigation toolkit: it is the scaffolding every defense stands on, the
-subject of the design reviews, and the durable take-home of §1.1. Its parts,
+subject of the final report's design section, and the durable take-home of §1.1. Its parts,
 each documented well enough to defend:
 
 - **Trigger library:** parameterized userspace workloads, each documented with
@@ -336,10 +337,10 @@ serves three quieter purposes:
   session in which that question may be drawn. The commit timestamp is the
   deadline mechanism; course tooling pulls all student repos before each session
   and lists who has submitted what.
-- **Design reviews and audit.** The two design reviews (§6.6) are conducted
-  against the repo as an engineering artifact, and the instructor can always
-  inspect exactly what produced a given report — or spot-replay any repro
-  script against a clean environment.
+- **Audit.** The instructor can always inspect exactly what produced a
+  given report — or spot-replay any repro script against a clean
+  environment; the final report's design section (§6.6) is defended
+  against the repo as it actually is.
 - **Archival.** A final submodule pin at semester end freezes each student's work
   for records — and for the student to take with them (§1.1).
 
@@ -468,7 +469,11 @@ Four graded surfaces replace the earlier gates-and-batch-scoring design:
    weeks, 3–4 individual interviews per 75-minute session, ~20 minutes per
    student. Each student receives a **fresh, never-published mutation** 48
    hours before their own slot, investigates it with their own toolkit, then
-   presents and defends it one-on-one, including a live twist variant. The
+   presents and defends it one-on-one, including a live twist variant. Before
+   the slot the student commits a **final report**: the mutation evidence in
+   the §7 schema, plus a **design section** describing and justifying the
+   toolkit — trigger and observation libraries, evidence pipeline,
+   self-verification (§5.2) — which the interview may probe. The
    semester's only fully unseen assessment — it exists precisely because
    everything else is published a week ahead.
 
@@ -507,9 +512,9 @@ course premise (§1) that LLM leverage is designed around, not fenced off.
 |---|---|---|
 | Weekly reports (cumulative) | 25% | two per week (instructor-assigned from the batch's four, §6.1); auto-checked + LLM-judge first pass + instructor spot-audit (§6.4) |
 | Defenses (4–5 per student) | 35% | random-draw within each question's preparers; §6.4 rubric; each student's lowest defense is dropped |
-| Design reviews × 2 | 10% | oral examinations over the student's own repo — tool interface (DR1, week 7), evidence pipeline / self-verification (DR2, week 12); graded on the student's ability to defend its instrument choices, not on authorship or artifact polish (§5.1) |
-| Participation | 10% | audience questioning + duty-student service |
-| Final interview | 20% | fresh per-student mutation, 48 h lead, ~20 min one-on-one in the last three class sessions (§6.4) |
+| Participation | 10% | audience questioning + studio engagement |
+| Final report | 10% | the final-mutation report (§7 schema) plus a **design section** over the student's own toolkit — tool interface, evidence pipeline, self-verification; graded on the student's ability to defend its instrument choices, not on authorship or artifact polish (§5.1) |
+| Final interview | 20% | fresh per-student mutation, 48 h lead, ~20 min one-on-one in the last three class sessions (§6.4); probes the final report, design section included |
 
 The distribution is deliberately flat across the semester: with 4–5 defenses
 per student plus weekly reports, no single performance is decisive, and the final
@@ -690,8 +695,8 @@ violated; evidence: the parent-side value change.
   concern, the cheap additional lock is issuing each question in 2–3 parameter
   variants.
 - **Inter-student sharing:** trigger/probe libraries are each student's graded work;
-  sharing them is collusion, and design reviews plus the weekly defenses make
-  a copied library hard to defend. Cross-student *tooling help* (fixing builds,
+  sharing them is collusion, and the weekly defenses plus the final report's
+  design section make a copied library hard to defend. Cross-student *tooling help* (fixing builds,
   environment problems) is explicitly legal (§11.1).
 
 ## 11. Support model
@@ -705,8 +710,6 @@ There is no TA. Support is structured so you are never stuck alone:
   and the gotchas your own workspace accumulates — "my probe doesn't fire"
   is itself a kernel investigation, and solving it with the course's own
   methodology is the course working as intended.
-- **Second line: the week's duty student** (rotates; everyone serves once
-  or twice), in studio.
 - **The instructor owns judgment calls** — is this the right invariant to
   test, would this evidence actually support that claim. Bring those
   questions to studio; they are the highest-value conversations in the

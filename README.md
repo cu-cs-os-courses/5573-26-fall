@@ -33,7 +33,7 @@ of this course is that "my tool doesn't work" is itself an investigation.
 | `examples/cow/` | a complete worked investigation (copy-on-write), the model of full credit |
 | `docs/course-design.md` | why the course is built this way: motivation, learning objectives, assessment design, the evidence contract |
 | `docs/syllabus.md` | grading, late policy, AI use, required setup, university policies |
-| `docs/schedule.md` | the week-by-week structure: batches, defenses, design reviews, the final |
+| `docs/schedule.md` | the week-by-week structure: batches, defenses, the final |
 | `questions/batches/` | question batches appear here every Monday |
 | `students/` | your private repos, registered as submodules once the roster settles |
 

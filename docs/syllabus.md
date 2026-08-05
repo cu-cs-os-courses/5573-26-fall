@@ -1,7 +1,7 @@
 
 # CSCI 5573 — Graduate Operating Systems
 
-**Fall 2026 · University of Colorado Boulder · Mon/Wed, 75 minutes**
+**Fall 2026 · University of Colorado Boulder · Mon/Wed 4:40–5:55 PM MT · ECCR 116**
 **Instructor:** Yueqi Chen (yueqi.chen@colorado.edu) · **TA:** none
 
 ---
@@ -41,7 +41,7 @@ explanations.
 | | |
 |---|---|
 | First class | **Mon Aug 24** |
-| Meetings | Monday & Wednesday, 75 min |
+| Meetings | Monday & Wednesday, **4:40–5:55 PM MT**, **ECCR 116** |
 | No class | **Mon Sep 7** (Labor Day) · **Nov 23–27** (fall break) |
 | Last teaching week | week of **Nov 16** (batch 12 defenses) |
 | Final interviews | **Nov 30, Dec 2, Dec 4** — in our regular class slots |
@@ -84,9 +84,10 @@ semester — about the price of a textbook.**
 - Weeks 1–3 need no agent at all — they are deliberately hand-answerable —
   so you have until roughly **mid-September** to choose and subscribe.
 - **If this cost is a genuine hardship, talk to me privately.** There are
-  options (free tiers, educational credits, department support) and no
-  student will be graded down for lacking a subscription. Do not skip the
-  course over $20.
+  options (free tiers, educational credits — the department does not
+  currently fund model access, so do not count on that) and no student
+  will be graded down for lacking a subscription. Do not skip the course
+  over $20.
 
 ## 6. Grading
 
@@ -94,9 +95,15 @@ semester — about the price of a textbook.**
 |---|---|---|
 | Weekly reports | 25% | evidence submitted on time, in the required schema, re-runnable |
 | **Defenses** | **35%** | your live defense of your own evidence (lowest defense dropped) |
-| Design reviews (×2) | 10% | oral exams over your own repo: tool interface (W7), evidence pipeline (W12) |
-| Participation | 10% | questioning peers, studio engagement, duty-student weeks |
+| Participation | 10% | questioning peers, studio engagement |
+| Final report | 10% | your final-mutation report, plus a **design section** defending your toolkit: tool interface, evidence pipeline, self-verification |
 | Final interview | 20% | one-on-one, on a kernel mutation no one has seen before |
+
+The **final report** is the report you commit for your final-interview
+mutation, before your slot. It follows the same evidence schema as a weekly
+report, plus a design section: what your toolkit is, why each instrument is
+built the way it is, and how your pipeline protects you from your own
+model's mistakes. Expect the interview to probe it.
 
 **Reports are your ticket to the draw and your audit trail** — most students
 score near the top on them. The discrimination lives in the defenses and the
@@ -152,16 +159,15 @@ Two of them matter enough to say in my own words as well:
 
 ## 10. Getting unstuck
 
-There is no TA. The support model is deliberate and layered:
+There is no TA. The support model is deliberate:
 
 1. **Your own agent**, plus the environment's self-diagnosis (`make
    doctor` in `env/`) and troubleshooting playbook
    (`env/TROUBLESHOOTING.md`), and the gotchas your workspace
    accumulates. "My probe doesn't fire" is itself a kernel investigation
    — solving it with the course's own method is the course working as
-   intended.
-2. **The week's duty student** (the role rotates; everyone serves once or
-   twice), in the Wednesday studio.
-3. **Me**, for judgment calls — is this the right invariant to test, would
+   intended. Classmates helping each other with builds and environment
+   problems is explicitly legal (§7) — lean on each other in studio.
+2. **Me**, for judgment calls — is this the right invariant to test, would
    this evidence actually support that claim. Those are the highest-value
    conversations available in this course; bring them to studio.

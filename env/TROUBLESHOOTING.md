@@ -217,8 +217,8 @@ checkout.
 
 ## When to escalate
 
-Exhausted this file with your agent? Bring it to studio (duty student
-first), or email the instructor. Include, always:
+Exhausted this file with your agent? Bring it to studio, or email the
+instructor. Include, always:
 
 1. `make doctor` output,
 2. the exact command you ran,
