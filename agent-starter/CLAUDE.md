@@ -68,10 +68,19 @@ investigate it with the method above, never file it as an env problem.
 
 ## Reports
 
-One directory per question: `reports/batch-NN/<question-id>/` containing
-`report.md` (or `report.json` from week 4 on), the raw captures, and a
-`repro.sh` that regenerates the key evidence in one shot with hard
-assertions. Schema fields: `question_id, claim, confidence, evidence[]
+One directory per question, at an **exact** path — collection is automated
+and does not look anywhere else, so a misplaced report grades as missing:
+
+    reports/batch-01/obs-ls-trace-01/{report.md, repro.sh, <raw captures>}
+
+`batch-NN` is zero-padded to two digits. The question id is the batch file's
+heading for that question verbatim (`## obs-ls-trace-01 — …` gives
+`obs-ls-trace-01`) — never an abbreviation of it. Copy it, don't retype it.
+See `reports/README.md`.
+
+The directory holds `report.md` (or `report.json` from week 4 on), the raw
+captures, and a `repro.sh` that regenerates the key evidence in one shot with
+hard assertions. Schema fields: `question_id, claim, confidence, evidence[]
 (kind, tool, command, output_excerpt, interpretation | kind: "source",
 ref: "file:line", symbol, interpretation), repro {script, expected[],
 tolerance}, limitations`.
