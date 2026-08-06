@@ -39,7 +39,7 @@ students. There are no lectures and no exams — the loop is the course.
   one more high-weight individual sample.
 Division of labor per design-doc §11.1 (no TA): **hands-on unblocking is
 self-serve** — the student's own agent plus the environment's own
-troubleshooting notes (`env/README.md`), with cross-student tooling help
+troubleshooting playbook (`env/TROUBLESHOOTING.md`), with cross-student tooling help
 explicitly legal; the
 **instructor owns judgment calls** — is this the right invariant to test,
 would this evidence actually support that claim.

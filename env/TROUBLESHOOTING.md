@@ -103,6 +103,20 @@ time only) and deb.debian.org (rootfs packages). Failure modes:
   a failed copy (disk full) leaves the old one.
 - **doctor: "bzImage does not look like 6.6.87":** versions drifted
   between `config.sh` and your build — `make kernel` refreshes it.
+- **Smoke test times out:** check the `console.log` path the script
+  prints. The most common cause is a partial `dist/` from an interrupted
+  build — `make clean images`.
+- **bpftrace errors about BTF:** `dist/bzImage` and `dist/rootfs.ext4`
+  are out of sync with each other — rebuild both (`make images`).
+- **`rosetta error: Unable to open /proc/self/exe`:** something is trying
+  to chroot into an amd64 tree on Apple Silicon; Rosetta cannot execute
+  inside a chroot. The rootfs is deliberately built as a Docker image and
+  docker-exported (see `docker/rootfs.Dockerfile`) to avoid chroot
+  entirely — don't introduce one.
+- **`No rule to make target 'net/netfilter/xt_TCPMSS.o'`** (or similar
+  odd-missing-file errors): the kernel tree ended up on a
+  case-insensitive filesystem. The build cache must stay in the
+  `kernel-lens-cache` Docker volume; never bind-mount it to a macOS path.
 - **Dockerfile edits fail mysteriously:** the environment uses the legacy
   docker builder (no buildx on the course toolchain) — heredoc `RUN <<EOF`
   syntax is not supported. Not a student-facing path, but if you tinker:

@@ -82,22 +82,3 @@ major versions: config-fragment options occasionally get renamed, and probe
 attach points can shift as functions are renamed or inlined (you have already
 seen `wp_page_copy` disappear into `do_wp_page` — diagnosing that kind of
 drift is exactly what the course trained you for).
-
-## Troubleshooting
-
-- **`docker: command not found` / cannot connect** — run `make setup`
-  (macOS) or install/start Docker (Linux). On macOS check `colima status`.
-- **Smoke test times out** — check `console.log` path printed by the script;
-  most common cause is a partial `dist/` from an interrupted build: run
-  `make clean images`.
-- **`rosetta error: Unable to open /proc/self/exe`** — something is trying to
-  chroot into an amd64 tree on Apple Silicon; Rosetta cannot execute inside a
-  chroot. The rootfs is deliberately built as a Docker image and
-  docker-exported (see `docker/rootfs.Dockerfile`) to avoid chroot entirely —
-  keep it that way.
-- **bpftrace errors about BTF** — `dist/bzImage` and `dist/rootfs.ext4` are
-  out of sync with each other; rebuild both (`make images`).
-- **`No rule to make target 'net/netfilter/xt_TCPMSS.o'`** (or similar
-  odd-missing-file errors) — the kernel tree ended up on a case-insensitive
-  filesystem. The build cache must stay in the `kernel-lens-cache` Docker
-  volume; never bind-mount it to a macOS path.

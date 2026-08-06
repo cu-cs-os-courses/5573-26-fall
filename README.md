@@ -21,8 +21,9 @@ make images   # build the kernel + rootfs (first run: ~30-60 min, one time)
 make smoke    # must end all-green
 ```
 
-Stuck? `env/README.md` has a troubleshooting section, and the whole point
-of this course is that "my tool doesn't work" is itself an investigation.
+Stuck? `make doctor` (in `env/`) diagnoses the common failures and points
+into `env/TROUBLESHOOTING.md`, and the whole point of this course is that
+"my tool doesn't work" is itself an investigation.
 
 ## Layout
 
