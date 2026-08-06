@@ -25,6 +25,23 @@ Stuck? `make doctor` (in `env/`) diagnoses the common failures and points
 into `env/TROUBLESHOOTING.md`, and the whole point of this course is that
 "my tool doesn't work" is itself an investigation.
 
+## Your repo (week 1)
+
+You work with **two checkouts**. This repo is read-only: `git pull` every
+Monday brings the new batch. Your graded work lives in your own
+**workspace repo**, born from the starter template:
+
+```sh
+cp -r agent-starter my-workspace   # inside this checkout, so the tools find env/
+cd my-workspace && git init
+```
+
+Push it to a **private** GitHub repository (a public one leaks graded work
+— an honor-code problem), add the instructor as a collaborator, and email
+the repo URL so it can be registered for grading — all by the week-1
+Wednesday studio; batch 1 reports are collected from it. Details:
+[agent-starter/README.md](agent-starter/README.md).
+
 ## Layout
 
 | Path | What |

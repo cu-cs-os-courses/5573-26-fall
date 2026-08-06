@@ -7,23 +7,42 @@ methodology (`CLAUDE.md`), and empty library shelves (`triggers/`,
 
 ## Setup
 
-1. Make this the root of **your own repo** (copy the directory out and
-   `git init` — week 4, session A shows the full workflow). Three things
-   must be true before your first report is due: the GitHub repo is
-   **private** (a public one leaks graded work and is an honor-code
-   problem), the **instructor is added as a collaborator**, and you have
-   emailed the repo URL so it can be registered for grading. Do all three
-   in the week-1 Wednesday studio — batch 1 reports are collected from
-   this repo.
-2. You need the course environment built once on your machine — follow
+You will work with **two checkouts**: the offering repo (read-only —
+`git pull` there brings each Monday's batch; you never push to it) and
+this directory copied out as **your own workspace repo**, where your
+toolkit and reports live and grading happens.
+
+**Week 1:**
+
+1. Copy this directory out and make it a repo of your own — keep it
+   inside the offering checkout, so the tools find `env/` automatically
+   (anywhere else works too: export `KL_ENV=/path/to/env`):
+
+   ```sh
+   cp -r agent-starter my-workspace
+   cd my-workspace && git init
+   ```
+
+   Three things must be true before your first report is due: the GitHub
+   repo is **private** (a public one leaks graded work and is an
+   honor-code problem), the **instructor is added as a collaborator**,
+   and you have emailed the repo URL so it can be registered for grading.
+   Do all three in the week-1 Wednesday studio — batch 1 reports are
+   collected from this repo.
+2. Build the course environment once on your machine — follow
    `env/README.md` in the offering repo (`make setup` detects macOS vs
-   Linux, then `make images && make smoke`). The tools find `env/`
-   automatically when your repo sits inside the offering repo checkout;
-   anywhere else, export `KL_ENV=/path/to/env`.
-3. Open your agent product of choice in this directory (`CLAUDE.md` is
+   Linux, then `make images && make smoke`).
+3. That is all weeks 1–3 need: batches 1–3 are answered **by hand**, and
+   each report (`report.md` + raw captures + `repro.sh` under
+   `reports/batch-NN/<question-id>/`) is committed here.
+
+**Week 4 — the agent arrives:**
+
+4. Open your agent product of choice in this directory (`CLAUDE.md` is
    picked up as context by Claude Code; other products can be pointed at
    it) — then start investigating: `tools/vm up`, ask your question, make
-   it prove its answers.
+   it prove its answers. Week 4's Monday session walks through the tool
+   layer; nothing before then requires it.
 
 ## Layout
 
