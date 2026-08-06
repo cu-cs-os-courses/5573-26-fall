@@ -40,8 +40,10 @@ toolkit and reports live and grading happens.
 
 **Week 4 — the agent arrives:**
 
-4. Open your agent product of choice in this directory (`CLAUDE.md` is
-   picked up as context by Claude Code; other products can be pointed at
+4. Open your agent product of choice in this directory — the methodology
+   file is picked up automatically whatever you run (`CLAUDE.md` by
+   Claude Code; `AGENTS.md`, a symlink to the same file, by Codex CLI,
+   Cursor, and most other agent products; anything else can be pointed at
    it) — then start investigating: `tools/vm up`, ask your question, make
    it prove its answers. Week 4's Monday session walks through the tool
    layer; nothing before then requires it.
@@ -50,7 +52,7 @@ toolkit and reports live and grading happens.
 
 | Path | What |
 |---|---|
-| `CLAUDE.md` | the investigation methodology your agent works under |
+| `CLAUDE.md` | the investigation methodology your agent works under (`AGENTS.md` is a symlink to it, for non-Claude agent products) |
 | `tools/` | `vm` (drive the reference VM), `ksrc` (pinned source search), `report-check` |
 | `triggers/`, `probes/` | your instrument libraries — empty shelves, graded as they fill |
 | `reports/` | weekly reports: `reports/batch-NN/<question-id>/` |
