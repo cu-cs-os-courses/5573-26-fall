@@ -73,7 +73,7 @@ Wednesday studio; batch 1 reports are collected from it. Details:
 | `docs/syllabus.md` | grading, late policy, AI use, required setup, university policies |
 | `docs/schedule.md` | the week-by-week structure: batches, defenses, the final |
 | `questions/batches/` | question batches appear here every Monday |
-| `students/` | your private repos, registered as submodules once the roster settles |
+| `students/` | pointers to everyone's private repos, registered as submodules **by the instructor** once the roster settles — nothing for you to do or put here (park your workspace copy elsewhere) |
 
 ## The rhythm (one paragraph)
 
