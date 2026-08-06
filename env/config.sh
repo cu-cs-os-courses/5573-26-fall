@@ -8,7 +8,9 @@ DEBIAN_SUITE=bookworm
 DEBIAN_MIRROR="http://deb.debian.org/debian"
 
 # Packages installed into the guest rootfs (space-separated, apt syntax).
-# Binary packages only — no source builds — per course-design.md §11.1.
+# Binary packages only — no source builds. Everything hands-on in this
+# course has to be prebuilt, automated, or self-serve, and a source build
+# here would be none of the three.
 ROOTFS_PACKAGES="systemd-sysv udev openssh-server bpftrace trace-cmd gcc make libc6-dev python3 procps psmisc strace file less nano kmod iproute2"
 
 ROOTFS_SIZE_MB=4096

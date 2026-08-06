@@ -19,8 +19,8 @@ for forked processes? Support every claim with runtime evidence."*
 ```
 
 Expected output: 16 `PASS` lines and `ALL CHECKS PASSED`. The evidence files
-from a real passing run are archived in [`expected/`](expected/), and the §7
-answer built from them comes in both hand-in formats:
+from a real passing run are archived in [`expected/`](expected/), and the
+design-doc §7 answer built from them comes in both hand-in formats:
 [`answer/vm-cow-01.md`](answer/vm-cow-01.md) (prose — what batches 1–3 ask
 for) and [`answer/vm-cow-01.json`](answer/vm-cow-01.json) (structured — from
 batch 4 on). Same evidence, same claims; read whichever matches the week you
@@ -73,8 +73,8 @@ write can never race the instrumentation.
 **5. Run + evidence** (private mapping, from [`expected/`](expected/)):
 probe fires **exactly once**, in the child, at the mapped address, with
 `handle_mm_fault → do_wp_page` on the stack; PFNs identical before the write
-(`0x10afc` in both processes), divergent after (child `0x1c86d`, parent still
-`0x10afc`); the child's minor-fault counter increments by **exactly one**;
+(`0x1323a` in both processes), divergent after (child `0x143ad`, parent still
+`0x1323a`); the child's minor-fault counter increments by **exactly one**;
 the parent's sentinel is intact — isolation held.
 
 **6. Negative control** (shared mapping) — and the behavior is *more
@@ -86,7 +86,7 @@ the parent's page — same PFN, `do_wp_page` silent, and the parent sees the
 child's value. No copy anywhere. This control distinguishes COW from both
 generic fault noise *and* ordinary lazy population.
 
-**7. The answer.** Written twice, to the same §7 evidence contract:
+**7. The answer.** Written twice, to the same design-doc §7 evidence contract:
 [`answer/vm-cow-01.md`](answer/vm-cow-01.md) in prose and
 [`answer/vm-cow-01.json`](answer/vm-cow-01.json) structured. Either way every
 evidence entry carries the command that produced it, a raw-output excerpt,
@@ -106,13 +106,14 @@ contract with the punctuation taken out.
 | `guest/investigate.sh` | guest-side orchestration (compile → attach → run → collect) |
 | `expected/` | raw evidence files from a real passing run |
 | `answer/vm-cow-01.md` | the answer in prose — the batch 1–3 hand-in format |
-| `answer/vm-cow-01.json` | the same answer structured (§7 schema) — the batch 4+ format |
+| `answer/vm-cow-01.json` | the same answer structured (design-doc §7 schema) — the batch 4+ format |
 
 ## Where this goes next (Q3 preview)
 
-Under the §9 mutation — skip the `pte_wrprotect` in `copy_present_pte` for
-private mappings — these same instruments produce the opposite record: probe
-never fires, PFNs stay shared after the child's write, and the parent's
-sentinel is corrupted (`parent_reads=0x5a` in a *private* mapping). The
-identical toolkit, with no changes, converts a mechanism question into a
-mutation verdict: fork's memory-isolation contract is violated.
+Under the design-doc §9 mutation — skip the `pte_wrprotect` in
+`copy_present_pte` for private mappings — these same instruments produce the
+opposite record: probe never fires, PFNs stay shared after the child's write,
+and the parent's sentinel is corrupted (`parent_reads=0x5a` in a *private*
+mapping). The identical toolkit, with no changes, converts a mechanism
+question into a mutation verdict: fork's memory-isolation contract is
+violated.
