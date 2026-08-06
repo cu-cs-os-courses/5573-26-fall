@@ -36,6 +36,26 @@ cp -r agent-starter my-workspace   # inside this checkout, so the tools find env
 cd my-workspace && git init
 ```
 
+```
+      GitHub                                     your laptop
+┌─────────────────────────────┐             ┌──────────────────────────────────┐
+│ 5573-26-fall — this repo:   │  git clone, │ 5573-26-fall/  (offering clone)  │
+│ public, read-only. Batches  │ pull Mondays│ ├─ env/            build once    │
+│ land Mondays; mutation      │────────────▶│ ├─ agent-starter/ ─┐  cp -r +    │
+│ kernels ship as release     │             │ │                  │  git init   │
+│ assets                      │             │ └─ my-workspace/ ◀─┘  YOURS:     │
+└─────────────────────────────┘             │      tools/  triggers/  probes/  │
+                                            │      reports/batch-NN/...        │
+┌─────────────────────────────┐             │      (untracked by the offering) │
+│ your workspace repo:        │◀─ git push ─│                                  │
+│ PRIVATE + instructor as     │             └──────────────────────────────────┘
+│ collaborator; registered    │
+│ under students/ as a        │
+│ submodule — grading pulls   │
+│ reports from here           │
+└─────────────────────────────┘
+```
+
 Push it to a **private** GitHub repository (a public one leaks graded work
 — an honor-code problem), add the instructor as a collaborator, and email
 the repo URL so it can be registered for grading — all by the week-1
