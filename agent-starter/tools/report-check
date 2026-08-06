@@ -53,6 +53,12 @@ def main():
 
     if "limitations" not in r:
         warnings.append("no limitations field — no investigation has none")
+    elif not isinstance(r["limitations"], str):
+        # §7 renders limitations as prose. A list validates here just as well
+        # but breaks anything that treats the field as text, so say so rather
+        # than let the two shapes drift apart unnoticed.
+        warnings.append(f"limitations is {type(r['limitations']).__name__}, "
+                        "not a string — §7 renders it as prose")
 
     for w in warnings: print(f"WARN  {w}")
     if problems: fail(problems)
