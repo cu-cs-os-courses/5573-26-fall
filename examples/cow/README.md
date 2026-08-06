@@ -19,8 +19,13 @@ for forked processes? Support every claim with runtime evidence."*
 ```
 
 Expected output: 16 `PASS` lines and `ALL CHECKS PASSED`. The evidence files
-from a real passing run are archived in [`expected/`](expected/); the §7
-structured answer built from them is [`answer/vm-cow-01.json`](answer/vm-cow-01.json).
+from a real passing run are archived in [`expected/`](expected/), and the §7
+answer built from them comes in both hand-in formats:
+[`answer/vm-cow-01.md`](answer/vm-cow-01.md) (prose — what batches 1–3 ask
+for) and [`answer/vm-cow-01.json`](answer/vm-cow-01.json) (structured — from
+batch 4 on). Same evidence, same claims; read whichever matches the week you
+are in. Every excerpt in both is quoted from `expected/`, so you can check
+them against the raw files — and should.
 
 ## The investigation, step by step
 
@@ -81,10 +86,14 @@ the parent's page — same PFN, `do_wp_page` silent, and the parent sees the
 child's value. No copy anywhere. This control distinguishes COW from both
 generic fault noise *and* ordinary lazy population.
 
-**7. Structured answer.** [`answer/vm-cow-01.json`](answer/vm-cow-01.json)
-per the §7 schema: every evidence entry carries the command that produced it,
-a raw-output excerpt, and an interpretation; `repro` points back at this
-directory's scripts with the assertion list `check.sh` enforces.
+**7. The answer.** Written twice, to the same §7 evidence contract:
+[`answer/vm-cow-01.md`](answer/vm-cow-01.md) in prose and
+[`answer/vm-cow-01.json`](answer/vm-cow-01.json) structured. Either way every
+evidence entry carries the command that produced it, a raw-output excerpt,
+and an interpretation; `repro` points back at this directory's scripts with
+the assertion list `check.sh` enforces. The JSON is what `tools/report-check`
+validates and what an agent emits from batch 4 on — the prose is the same
+contract with the punctuation taken out.
 
 ## Files
 
@@ -96,7 +105,8 @@ directory's scripts with the assertion list `check.sh` enforces.
 | `guest/probe-do-wp-page.bt` | bpftrace probe on the wp-fault path |
 | `guest/investigate.sh` | guest-side orchestration (compile → attach → run → collect) |
 | `expected/` | raw evidence files from a real passing run |
-| `answer/vm-cow-01.json` | the structured answer (§7 schema) built from that evidence |
+| `answer/vm-cow-01.md` | the answer in prose — the batch 1–3 hand-in format |
+| `answer/vm-cow-01.json` | the same answer structured (§7 schema) — the batch 4+ format |
 
 ## Where this goes next (Q3 preview)
 

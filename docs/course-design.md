@@ -525,8 +525,19 @@ discriminating weight sits in the defenses and the final interview.
 
 ## 7. Report schema (evidence contract)
 
-Every weekly report is one JSON document per question (rendered to Markdown
-for humans):
+Every weekly report is one document per question, carrying the fields below.
+
+**Two renderings, one contract.** Batches 1–3 are answered by hand, and the
+hand-in is `report.md` — these fields as prose, no JSON, nothing to validate.
+From batch 4 the agent emits `report.json` in the shape given here, and
+`tools/report-check` enforces its structure mechanically. The JSON is not a
+stricter standard, only a machine-readable one: the same claim, the same
+evidence entries, the same repro assertions. The worked example is written
+both ways from the same run — [prose](../examples/cow/answer/vm-cow-01.md),
+[structured](../examples/cow/answer/vm-cow-01.json) — and reading them side
+by side is the cheapest way to see that the format is not the point.
+
+The structured rendering:
 
 ```json
 {

@@ -14,14 +14,14 @@
       "kind": "state",
       "tool": "pagemap",
       "command": "/tmp/cow-trigger private (reads /proc/self/pagemap in parent and child before/after the child's single write; see guest/cow-trigger.c)",
-      "output_excerpt": "parent_pfn_before=0x10afc\nchild_pfn_before=0x10afc\nchild_minflt_delta=1\nchild_pfn_after=0x1c86d\nparent_pfn_after=0x10afc\nparent_reads=0xa5",
-      "interpretation": "One physical page (PFN 0x10afc) is shared by both processes after fork; after the child's write the child maps a new page (0x1c86d) while the parent keeps the original. The write cost exactly one minor fault, and the parent's sentinel (0xa5) is untouched — memory isolation held."
+      "output_excerpt": "parent_pfn_before=0x1323a\nchild_pfn_before=0x1323a\nchild_minflt_delta=1\nchild_pfn_after=0x143ad\nparent_pfn_after=0x1323a\nparent_reads=0xa5",
+      "interpretation": "One physical page (PFN 0x1323a) is shared by both processes after fork; after the child's write the child maps a new page (0x143ad) while the parent keeps the original. The write cost exactly one minor fault, and the parent's sentinel (0xa5) is untouched — memory isolation held."
     },
     {
       "kind": "state",
       "tool": "pagemap",
       "command": "/tmp/cow-trigger shared /share/evidence/trigger-shared.txt (negative control, MAP_SHARED)",
-      "output_excerpt": "parent_pfn_before=0x12321\nchild_pfn_before=0x0\nchild_present_before=0\nchild_minflt_delta=1\nchild_pfn_after=0x12321\nparent_reads=0x5a",
+      "output_excerpt": "parent_pfn_before=0x855d\nchild_pfn_before=0x0\nchild_present_before=0\nchild_minflt_delta=1\nchild_pfn_after=0x855d\nparent_reads=0x5a",
       "interpretation": "For a shared mapping fork copies no PTEs at all (child PTE non-present); the child's write takes one minor fault that maps the parent's page — same PFN, do_wp_page silent, write visible to the parent. This distinguishes COW from both fault noise and ordinary lazy population."
     },
     {
