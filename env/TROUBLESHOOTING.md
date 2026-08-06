@@ -55,9 +55,19 @@ amd64 build containers fast). Failure modes:
 ## Host setup, Linux
 
 `make setup` uses apt (Ubuntu/Debian): qemu, docker.io, build tools, and
-adds you to the `docker` and `kvm` groups. Non-apt distros: read
-`scripts/host-setup-ubuntu.sh` — it is short — and install the same list
-with your package manager.
+adds you to the `docker` and `kvm` groups. It installs docker.io only if
+you have no `docker` on PATH already — any working Docker is fine.
+Non-apt distros: read `scripts/host-setup-ubuntu.sh` — it is short — and
+install the same list with your package manager.
+
+- **`containerd.io : Conflicts: containerd`, setup exits 100** — you
+  installed Docker CE from docker.com's apt repo, and its `containerd.io`
+  package is incompatible with the `containerd` that `docker.io` depends
+  on. apt cannot satisfy both and refuses. **You already have what the
+  course needs** — Docker CE is strictly newer than docker.io. Skip
+  `make setup` and confirm with `make doctor`; if it is green, go
+  straight to `make images`. (Setup also adds you to the `docker` and
+  `kvm` groups — `id -nG` to check, section below if either is missing.)
 
 ## Groups and re-login (Linux)
 

@@ -9,3 +9,8 @@ env/src/
 .vm/
 # Mutation kernel images arrive as release assets, not as repo content
 bzImage-*
+# A workspace copied from agent-starter/ into this checkout is local scratch.
+# publish.sh commits with `git add -A`, so without this an instructor (or a
+# student) trying the starter here would push their workspace to everyone.
+# Student work lives in their own repo under students/, not in this tree.
+my-workspace/

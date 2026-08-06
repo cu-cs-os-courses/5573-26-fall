@@ -5,7 +5,17 @@ set -euo pipefail
 
 echo "==> Installing qemu, docker and the build tools the next step needs"
 sudo apt-get update
-sudo apt-get install -y qemu-system-x86 docker.io make git rsync
+pkgs=(qemu-system-x86 make git rsync)
+if command -v docker >/dev/null 2>&1; then
+    # Any working Docker will do. Skipping matters, not just saves time:
+    # Docker CE (docker.com's repo) ships containerd.io, which Conflicts
+    # with the containerd that docker.io pulls in — asking for both makes
+    # apt fail outright.
+    echo "==> Docker already installed ($(docker --version)); not installing docker.io"
+else
+    pkgs+=(docker.io)
+fi
+sudo apt-get install -y "${pkgs[@]}"
 
 echo "==> Adding $USER to the docker group"
 sudo usermod -aG docker "$USER"
