@@ -18,7 +18,10 @@ GUEST_ROOT_PASSWORD=kernellens
 
 VM_MEM=2G
 VM_SMP=2
-SSH_FWD_PORT=2222
-GDB_PORT=1234
+# Host ports. Overridable from the environment so a second VM can be booted
+# without editing this file: SSH_FWD_PORT=2223 ./run.sh. (Two VMs must still
+# never share rootfs.ext4 — see env/TROUBLESHOOTING.md.)
+SSH_FWD_PORT=${SSH_FWD_PORT:-2222}
+GDB_PORT=${GDB_PORT:-1234}
 
 DOCKER_IMAGE=kernel-lens-build

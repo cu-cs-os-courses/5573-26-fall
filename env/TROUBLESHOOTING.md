@@ -153,8 +153,22 @@ rootfs (see below).
 
 The VM forwards guest ssh to host port 2222. If doctor says something
 other than the course VM holds it: `lsof -nP -iTCP:2222` and stop that
-process, or change `SSH_FWD_PORT` in `config.sh` (then your `tools/vm`
-picks it up from the same file).
+process, or move this VM's port:
+
+```sh
+SSH_FWD_PORT=2223 ./run.sh        # or: SSH_FWD_PORT=2223 tools/vm up
+ssh -p 2223 root@localhost
+```
+
+`config.sh` takes the value from the environment when one is set, so
+nothing needs editing for a one-off; to change it permanently, edit
+`SSH_FWD_PORT` there and `run.sh`, `tools/vm`, and `doctor` all follow.
+`GDB_PORT` (default 1234) works the same way.
+
+This is what you want when a **second** course VM must run — two
+checkouts of the offering, say. Give it its own port *and* make sure it
+is not the same `rootfs.ext4`: concurrent boots on one rootfs corrupt it
+(section above).
 
 ## Boot problems
 
