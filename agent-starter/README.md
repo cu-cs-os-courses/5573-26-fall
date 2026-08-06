@@ -7,8 +7,14 @@ methodology (`CLAUDE.md`), and empty library shelves (`triggers/`,
 
 ## Setup
 
-1. Make this the root of **your own private repo** (copy the directory or
-   use it as a template — week 4, session A shows the workflow).
+1. Make this the root of **your own repo** (copy the directory out and
+   `git init` — week 4, session A shows the full workflow). Three things
+   must be true before your first report is due: the GitHub repo is
+   **private** (a public one leaks graded work and is an honor-code
+   problem), the **instructor is added as a collaborator**, and you have
+   emailed the repo URL so it can be registered for grading. Do all three
+   in the week-1 Wednesday studio — batch 1 reports are collected from
+   this repo.
 2. You need the course environment built once on your machine — follow
    `env/README.md` in the offering repo (`make setup` detects macOS vs
    Linux, then `make images && make smoke`). The tools find `env/`
