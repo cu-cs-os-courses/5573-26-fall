@@ -28,7 +28,9 @@ toolkit and reports live and grading happens.
    honor-code problem), the **instructor is added as a collaborator**,
    and you have emailed the repo URL so it can be registered for grading.
    Do all three in the week-1 Wednesday studio — batch 1 reports are
-   collected from this repo.
+   collected from this repo. (Registration lists your repo URL, i.e. your
+   GitHub username, in the public offering repo; the contents stay
+   private to you and the instructor.)
 2. Build the course environment once on your machine — follow
    `env/README.md` in the offering repo (`make setup` detects macOS vs
    Linux, then `make images && make smoke`).

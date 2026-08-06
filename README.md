@@ -62,6 +62,12 @@ the repo URL so it can be registered for grading — all by the week-1
 Wednesday studio; batch 1 reports are collected from it. Details:
 [agent-starter/README.md](agent-starter/README.md).
 
+One transparency note: registration lists your repo's URL — and therefore
+your GitHub username — in this public repo's `.gitmodules`. Your repo's
+*contents* stay visible only to you and the instructor. If being publicly
+associated with the course is a problem for you, talk to the instructor
+before the week-1 studio.
+
 ## Layout
 
 | Path | What |
