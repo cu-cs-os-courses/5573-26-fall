@@ -71,7 +71,7 @@ investigate it with the method above, never file it as an env problem.
 One directory per question, at an **exact** path — collection is automated
 and does not look anywhere else, so a misplaced report grades as missing:
 
-    reports/batch-01/obs-ls-trace-01/{report.md, repro.sh, <raw captures>}
+    reports/batch-01/obs-ls-trace-01/{report.md, repro.sh, evidence/<raw captures>}
 
 `batch-NN` is zero-padded to two digits. The question id is the batch file's
 heading for that question verbatim (`## obs-ls-trace-01 — …` gives
@@ -80,7 +80,18 @@ See `reports/README.md`.
 
 The directory holds `report.md` (or `report.json` from week 4 on), the raw
 captures, and a `repro.sh` that regenerates the key evidence in one shot with
-hard assertions. Schema fields: `question_id, claim, confidence, evidence[]
+hard assertions.
+
+**Quote the run you committed.** Every excerpt in the report must be copied
+from a capture you committed beside it — same pids, same timestamps, same
+counts. Quoting a *different* run of the same experiment is the one thing
+you cannot defend: it reads as a measurement and it is not one, and the
+defense will find it by asking where a number came from. This bites hardest
+when your `repro.sh` overwrites the very captures your report cites, so have
+it write somewhere else by default and refresh the committed captures only
+when you also re-quote the report.
+
+Schema fields: `question_id, claim, confidence, evidence[]
 (kind, tool, command, output_excerpt, interpretation | kind: "source",
 ref: "file:line", symbol, interpretation), repro {script, expected[],
 tolerance}, limitations`.

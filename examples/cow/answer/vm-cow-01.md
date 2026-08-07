@@ -135,11 +135,23 @@ src-export`, or `tools/ksrc`).
 
 ## Reproduction
 
-**Script:** [`../run.sh`](../run.sh) — boots the VM headless, runs the
-investigation, checks the evidence (~1 min).
+**Script:** [`../repro.sh`](../repro.sh) — re-runs the investigation against
+a booted VM and asserts on what comes back. **That file is the model for the
+`repro.sh` you hand in**, and this directory is the model for the rest of the
+hand-in:
+
+| you commit | model to copy |
+|---|---|
+| `report.md` | this file |
+| `repro.sh` | [`../repro.sh`](../repro.sh) |
+| your raw captures, under `evidence/` | [`../expected/`](../expected/) — five plain text files, named however you like |
+
+(There is also [`../run.sh`](../run.sh), which boots a VM from cold and runs
+the whole example unattended. That one is the example's *harness*, not a
+model for your weekly hand-in — yours assumes the VM is already up.)
 
 **Expected** (what a re-run must show; enforced by
-[`../check.sh`](../check.sh)):
+[`../check.sh`](../check.sh), which `repro.sh` calls):
 
 1. Probe `do_wp_page` fires exactly once, under the child PID, at address
    `0x100000000000`, via `handle_mm_fault` — private mapping.

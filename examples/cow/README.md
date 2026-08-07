@@ -100,6 +100,7 @@ contract with the punctuation taken out.
 | File | Role |
 |---|---|
 | `run.sh` | host side: boot VM headless, run investigation via the autorun channel, check evidence |
+| `repro.sh` | **the model for the `repro.sh` you hand in every week** — re-run against an already-booted VM and assert; scratch output by default, `REPRO_ARCHIVE=1` to refresh `expected/` |
 | `check.sh` | the 16 machine-checkable assertions (replay-gate prototype) |
 | `guest/cow-trigger.c` | deterministic trigger workload (private + shared modes) |
 | `guest/probe-do-wp-page.bt` | bpftrace probe on the wp-fault path |

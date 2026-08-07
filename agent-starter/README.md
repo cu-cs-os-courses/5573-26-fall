@@ -35,8 +35,8 @@ toolkit and reports live and grading happens.
    `env/README.md` in the offering repo (`make setup` detects macOS vs
    Linux, then `make images && make smoke`).
 3. That is all weeks 1–3 need: batches 1–3 are answered **by hand**, and
-   each report (`report.md` + raw captures + `repro.sh` under
-   `reports/batch-NN/<question-id>/`) is committed here.
+   each report (`report.md` + `repro.sh` + raw captures under `evidence/`,
+   all under `reports/batch-NN/<question-id>/`) is committed here.
 
 **Week 4 — the agent arrives:**
 
