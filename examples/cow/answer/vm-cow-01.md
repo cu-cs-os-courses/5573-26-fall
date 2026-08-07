@@ -34,7 +34,7 @@ bpftrace guest/probe-do-wp-page.bt \
   -c '/tmp/cow-trigger private /share/evidence/trigger-private.txt'
 ```
 
-**Raw output** (excerpt — full file: [`expected/probe-private.txt`](../expected/probe-private.txt))
+**Raw output** (excerpt — full file: [`evidence/probe-private.txt`](../evidence/probe-private.txt))
 
 ```
 do_wp_page fired: pid=184 addr=0x100000000000
@@ -69,7 +69,7 @@ carry the claim together because neither can carry it alone.
 # child's single write; source: guest/cow-trigger.c
 ```
 
-**Raw output** (excerpt — full file: [`expected/trigger-private.txt`](../expected/trigger-private.txt))
+**Raw output** (excerpt — full file: [`evidence/trigger-private.txt`](../evidence/trigger-private.txt))
 
 ```
 parent_pfn_before=0x1323a
@@ -98,7 +98,7 @@ out a storm of unrelated faults; and the parent's sentinel still reads
 /tmp/cow-trigger shared /share/evidence/trigger-shared.txt
 ```
 
-**Raw output** (excerpt — full file: [`expected/trigger-shared.txt`](../expected/trigger-shared.txt))
+**Raw output** (excerpt — full file: [`evidence/trigger-shared.txt`](../evidence/trigger-shared.txt))
 
 ```
 parent_pfn_before=0x855d
@@ -144,7 +144,7 @@ hand-in:
 |---|---|
 | `report.md` | this file |
 | `repro.sh` | [`../repro.sh`](../repro.sh) |
-| your raw captures, under `evidence/` | [`../expected/`](../expected/) — five plain text files, named however you like |
+| your raw captures, under `evidence/` | [`../evidence/`](../evidence/) — five plain text files, named however you like |
 
 (There is also [`../run.sh`](../run.sh), which boots a VM from cold and runs
 the whole example unattended. That one is the example's *harness*, not a

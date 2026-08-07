@@ -19,12 +19,12 @@ for forked processes? Support every claim with runtime evidence."*
 ```
 
 Expected output: 16 `PASS` lines and `ALL CHECKS PASSED`. The evidence files
-from a real passing run are archived in [`expected/`](expected/), and the
+from a real passing run are archived in [`evidence/`](evidence/), and the
 design-doc §7 answer built from them comes in both hand-in formats:
 [`answer/vm-cow-01.md`](answer/vm-cow-01.md) (prose — what batches 1–3 ask
 for) and [`answer/vm-cow-01.json`](answer/vm-cow-01.json) (structured — from
 batch 4 on). Same evidence, same claims; read whichever matches the week you
-are in. Every excerpt in both is quoted from `expected/`, so you can check
+are in. Every excerpt in both is quoted from `evidence/`, so you can check
 them against the raw files — and should.
 
 ## The investigation, step by step
@@ -70,7 +70,7 @@ write can never race the instrumentation.
 > only a real ELF binary — a shell-wrapper script is rejected — hence the
 > trigger writes its own report file instead of relying on redirection.
 
-**5. Run + evidence** (private mapping, from [`expected/`](expected/)):
+**5. Run + evidence** (private mapping, from [`evidence/`](evidence/)):
 probe fires **exactly once**, in the child, at the mapped address, with
 `handle_mm_fault → do_wp_page` on the stack; PFNs identical before the write
 (`0x1323a` in both processes), divergent after (child `0x143ad`, parent still
@@ -100,12 +100,12 @@ contract with the punctuation taken out.
 | File | Role |
 |---|---|
 | `run.sh` | host side: boot VM headless, run investigation via the autorun channel, check evidence |
-| `repro.sh` | **the model for the `repro.sh` you hand in every week** — re-run against an already-booted VM and assert; scratch output by default, `REPRO_ARCHIVE=1` to refresh `expected/` |
+| `repro.sh` | **the model for the `repro.sh` you hand in every week** — re-run against an already-booted VM and assert; scratch output by default, `REPRO_ARCHIVE=1` to refresh `evidence/` |
 | `check.sh` | the 16 machine-checkable assertions (replay-gate prototype) |
 | `guest/cow-trigger.c` | deterministic trigger workload (private + shared modes) |
 | `guest/probe-do-wp-page.bt` | bpftrace probe on the wp-fault path |
 | `guest/investigate.sh` | guest-side orchestration (compile → attach → run → collect) |
-| `expected/` | raw evidence files from a real passing run |
+| `evidence/` | raw captures from a real passing run — the model for the `evidence/` directory in your own hand-in |
 | `answer/vm-cow-01.md` | the answer in prose — the batch 1–3 hand-in format |
 | `answer/vm-cow-01.json` | the same answer structured (design-doc §7 schema) — the batch 4+ format |
 

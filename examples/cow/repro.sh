@@ -8,7 +8,7 @@
 #     reports/batch-NN/<question-id>/
 #     ├── report.md      <- ../answer/vm-cow-01.md is the model
 #     ├── repro.sh       <- THIS FILE is the model
-#     └── evidence/      <- ../expected/ is the model (raw captures, any names)
+#     └── evidence/      <- ../evidence/ is the model (raw captures, any names)
 #
 # The shape to copy, in order:
 #   1. locate the VM tool and pick an output directory
@@ -41,7 +41,7 @@ fi
 }
 
 EV="${REPRO_OUT:-${TMPDIR:-/tmp}/kl-repro-vm-cow-01}"
-if [ "${REPRO_ARCHIVE:-0}" = "1" ]; then EV="$HERE/expected"; fi
+if [ "${REPRO_ARCHIVE:-0}" = "1" ]; then EV="$HERE/evidence"; fi
 mkdir -p "$EV"
 
 echo "== run: COW trigger under a do_wp_page probe, private and shared =="

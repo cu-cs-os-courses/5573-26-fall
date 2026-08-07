@@ -59,7 +59,7 @@ of the attention and the `repro.sh` is where marks are actually lost.
 | `report.md` (batches 1–3) | `examples/cow/answer/vm-cow-01.md` | the §7 fields as prose: claim, evidence entries (command + raw excerpt + interpretation), reproduction, limitations |
 | `report.json` (batches 4–12) | `examples/cow/answer/vm-cow-01.json` | the same contract, structured |
 | `repro.sh` (every week) | `examples/cow/repro.sh` (worked) · `repro-template.sh` (skeleton to copy) | push trigger+probe, run, pull raw output, then one `pass`/`fail` line per expectation; non-zero exit if any fails |
-| your raw captures, in `evidence/` | `examples/cow/expected/` | plain text straight out of the tools, no hand-editing; name the files whatever you like |
+| your raw captures, in `evidence/` | `examples/cow/evidence/` | plain text straight out of the tools, no hand-editing; name the files whatever you like |
 
 **Starting point:** `repro-template.sh`, here in this directory. Copy it to
 `reports/batch-NN/<question-id>/repro.sh` and replace the TODOs. It carries
