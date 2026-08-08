@@ -319,10 +319,11 @@ which is also what makes on-demand re-runs and spot replay possible.
   investigation workspace. You never need it.
 - **The offering repo — this one, rebuilt each semester.** Student-safe
   material is copied in on the course's cadence: the environment, the
-  starter workspace, the worked example and the schedule before week 1;
-  each batch file on its release Monday; mutation kernel images as release
-  assets when a batch calls for one. Copies rather than nested submodules,
-  so publication is always a deliberate act.
+  starter workspace, the worked example, the schedule and **all twelve
+  question batches** before week 1; then, on each batch's Monday, its
+  per-student assignments and — where the batch calls for one — its
+  mutation kernel image as a release asset. Copies rather than nested
+  submodules, so publication is always a deliberate act.
 
 - **Per-student private repos**, registered as submodules *of the offering
   repo*: each student's toolkit and reports. Repos are private — students
@@ -363,13 +364,18 @@ surface, growing week by week as the questions demand it.
 
 Assessment is one repeated mechanism, not a set of instruments:
 
-1. **Publish.** Each Monday the instructor releases the next week's batch of
-   **four questions**, drawn from the week's subsystem claim bank (§8) and
-   validated by the reference agent (§6.5), with a docket: two questions
-   defended the following Monday, two the following Wednesday. Mutation
-   questions ship as prebuilt kernel images. One week of lead time is
-   deliberate: investigations need iteration, and this format removes any
-   reason to keep questions secret.
+1. **Publish.** All twelve batches — **four questions** each, drawn from that
+   week's subsystem claim bank (§8) and validated by the reference agent
+   (§6.5) — are published before week 1. Because the questions carry no
+   secret, lead time costs nothing to give away, and a student who can see
+   the whole semester can plan around it; §6.4's final interview, not batch
+   timing, is what carries the unseen assessment. What still moves weekly is
+   the **docket**: each Monday one batch opens, two of its questions defended
+   the following Monday and two the following Wednesday. Two things ship with
+   the docket rather than up front, neither for secrecy: the per-student
+   assignments (below — they need a roster that add/drop is still moving) and
+   a mutation batch's prebuilt kernel image (published for a semester, it is
+   a semester available for binary diffing against the baseline).
 2. **Investigate.** The instructor **assigns each student two of the four**
    (published with the docket; a simple rotation keeps every question's pool
    at ~5 students, mixes question types per student, and lands every student
@@ -475,7 +481,7 @@ Four graded surfaces replace the earlier gates-and-batch-scoring design:
    toolkit — trigger and observation libraries, evidence pipeline,
    self-verification (§5.2) — which the interview may probe. The
    semester's only fully unseen assessment — it exists precisely because
-   everything else is published a week ahead.
+   every other question was published before the semester began.
 
 ### 6.5 Model and cost policy
 

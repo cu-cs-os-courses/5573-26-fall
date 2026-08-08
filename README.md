@@ -27,9 +27,12 @@ into `env/TROUBLESHOOTING.md`, and the whole point of this course is that
 
 ## Your repo (week 1)
 
-You work with **two checkouts**. This repo is read-only: `git pull` every
-Monday brings the new batch. Your graded work lives in your own
-**workspace repo**, born from the starter template:
+You work with **two checkouts**. This repo is read-only, and all twelve
+question batches are in it from week 1 — read ahead as far as you like.
+Still `git pull` every Monday: that is how each batch's per-student
+assignments reach you, and how any fix to `env/` or the starter tools
+does. Your graded work lives in your own **workspace repo**, born from
+the starter template:
 
 ```sh
 cp -r agent-starter my-workspace   # inside this checkout, so the tools find env/
@@ -40,10 +43,10 @@ cd my-workspace && git init
       GitHub                                     your laptop
 ┌─────────────────────────────┐             ┌──────────────────────────────────┐
 │ 5573-26-fall — this repo:   │  git clone, │ 5573-26-fall/  (offering clone)  │
-│ public, read-only. Batches  │ pull Mondays│ ├─ env/            build once    │
-│ land Mondays; mutation      │────────────▶│ ├─ agent-starter/ ─┐  cp -r +    │
-│ kernels ship as release     │             │ │                  │  git init   │
-│ assets                      │             │ └─ my-workspace/ ◀─┘  YOURS:     │
+│ public, read-only. All 12   │ pull weekly │ ├─ env/            build once    │
+│ batches from week 1;        │────────────▶│ ├─ agent-starter/ ─┐  cp -r +    │
+│ assignments + mutation      │             │ │                  │  git init   │
+│ images on their Monday      │             │ └─ my-workspace/ ◀─┘  YOURS:     │
 └─────────────────────────────┘             │      tools/  triggers/  probes/  │
                                             │      reports/batch-NN/...        │
 ┌─────────────────────────────┐             │      (untracked by the offering) │
@@ -78,12 +81,13 @@ before the week-1 studio.
 | `docs/course-design.md` | why the course is built this way: motivation, learning objectives, assessment design, the evidence contract |
 | `docs/syllabus.md` | grading, late policy, AI use, required setup, university policies |
 | `docs/schedule.md` | the week-by-week structure: batches, defenses, the final |
-| `questions/batches/` | question batches appear here every Monday |
+| `questions/batches/` | all twelve question batches, from week 1; each batch's per-student assignment sheet lands on the Monday that batch opens |
 | `students/` | pointers to everyone's private repos, registered as submodules **by the instructor** once the roster settles — nothing for you to do or put here (park your workspace copy elsewhere) |
 
 ## The rhythm (one paragraph)
 
-Four questions publish most Mondays (week 3 differs — see the schedule);
+Every batch is published up front, but one opens each Monday (week 3
+differs — see the schedule): four questions, of which
 you are assigned two; you investigate
 them with your agent and commit evidence-backed reports to your repo before
 the session where each is scheduled; in class, one student per question is

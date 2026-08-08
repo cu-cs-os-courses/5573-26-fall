@@ -46,7 +46,8 @@ would this evidence actually support that claim.
 
 ## 2. Week-by-week
 
-Batches are numbered by the Monday they are **released**; batch N is defended
+Batches are numbered by the Monday they **open** — the week their questions
+are in play, not the week they became readable; batch N is defended
 the following week. Twelve batches total — teaching ends with batch 12's
 defenses in W13, and the last three sessions are the final. Batches 1–3 are
 deliberately hand-answerable (design-doc §6.2); batches 4–12 are the
@@ -54,21 +55,26 @@ deliberately hand-answerable (design-doc §6.2); batches 4–12 are the
 directory (design-doc §8), ordered process → memory → scheduling (three
 mutually explanatory foundations), then entry → interrupts/signals (how the
 kernel gets entered), then VFS → ext4 → block (one I/O path walked top to
-bottom), closing on synchronization. Each week's anchor and released batch
+bottom), closing on synchronization. Each week's anchor and opening batch
 cover the same subsystem; that batch is defended the following week while
 the next subsystem opens. **The Theme column below names what is being
 defended that week** — defenses are the bulk of class time — while the
-Monday anchor always belongs to the batch released the same day, one
+Monday anchor always belongs to the batch that opens the same day, one
 subsystem ahead.
 
-*Batch links below go live in this repo on their release Mondays — a 404
-just means that week hasn't arrived yet.*
+*All twelve batches are in this repo from week 1 — the questions were never
+secret, and seeing the whole semester lets you plan it. The **Opens / due**
+column below says which batch is in play each week: that is when its
+per-student assignments and (where a batch calls for one) its mutation
+kernel image ship, and it sets the report deadlines. Working ahead is
+allowed and is not rewarded on its own — what is graded is whether you can
+defend the evidence live.*
 
-| Wk | Theme | Monday | Wednesday | Released / due |
+| Wk | Theme | Monday | Wednesday | Opens / due |
 |---|---|---|---|---|
-| 1 | The course & the environment | • Course pitch — open by asking an LLM a conceptual question live ("so we never grade that")<br>• The weekly cycle, grading, cost disclosure<br>• **Full-loop demo** on a toy question (reference agent, live, with a scripted probe-failure the evidence catches) | • Studio: env bring-up — goal: everyone boots the VM and commits a first ftrace capture before leaving | **[Batch 1](../questions/batches/batch-01.md) released in the last ~15 min of Monday's class**, together with the per-student assignments, one question walked through as a worked "what counts as evidence" example. Manual observability; doubles as env acceptance; defended W2 (Mon 2 + Wed 2). Realistic working window opens after Wednesday's env studio — students who arrive with the env preinstalled (pre-semester email) can start Monday night |
+| 1 | The course & the environment | • Course pitch — open by asking an LLM a conceptual question live ("so we never grade that")<br>• The weekly cycle, grading, cost disclosure<br>• **Full-loop demo** on a toy question (reference agent, live, with a scripted probe-failure the evidence catches) | • Studio: env bring-up — goal: everyone boots the VM and commits a first ftrace capture before leaving | **[Batch 1](../questions/batches/batch-01.md) opens in the last ~15 min of Monday's class** — the per-student assignments ship then, and one question is walked through as a worked "what counts as evidence" example. Manual observability; doubles as env acceptance; defended W2 (Mon 2 + Wed 2). Realistic working window opens after Wednesday's env studio — students who arrive with the env preinstalled (pre-semester email) can start Monday night |
 | 2 | Observability: first contact (defends batch 1) | • Anchor: ftrace/tracepoints<br>• **First defenses** — rounds (batch 1) | • Rounds (batch 1)<br>• Studio | **[Batch 2](../questions/batches/batch-02.md)** (2 questions, and everyone does both — week 3 has a single session because of the Monday holiday) |
-| 3 | Observability: the inside view (defends batch 2) | *Holiday — no class* | • Anchor: kprobes/bpftrace/BTF, gdbstub<br>• Rounds (batch 2) | **[Batch 3](../questions/batches/batch-03.md)** released Wed |
+| 3 | Observability: the inside view (defends batch 2) | *Holiday — no class* | • Anchor: kprobes/bpftrace/BTF, gdbstub<br>• Rounds (batch 2) | **[Batch 3](../questions/batches/batch-03.md)** opens Wed (assignments ship Wed — the Monday is the holiday) |
 | 4 | Observability: probes anywhere (defends batch 3); the agent arrives | • Anchor: the tool layer & report schema<br>• **Thick-starter walkthrough** (deferred from W1)<br>• Demo: an agent-driven fork/exec investigation<br>• Rounds (batch 3) | • Rounds (batch 3)<br>• Studio (tool-layer work) | **[Batch 4](../questions/batches/batch-04.md)** (`kernel/`: fork/exec/exit/wait) — first trigger-design questions; agent now necessary |
 | 5 | `kernel/` — process lifecycle (defends batch 4) | • Anchor: `mm/` — address spaces & fault paths<br>• **Live COW demo** (worked example, design-doc §9)<br>• Rounds (batch 4) | • Rounds (batch 4)<br>• Studio | **[Batch 5](../questions/batches/batch-05.md)** (`mm/`) |
 | 6 | `mm/` — virtual memory (defends batch 5) | • Anchor: `kernel/sched/` — what the scheduler guarantees, EEVDF/vruntime; honest timing methodology<br>• Demo: mutation investigation (Q3 walkthrough on the design-doc §9 COW mutation — mm/ is fresh)<br>• Rounds (batch 5) | • Rounds (batch 5)<br>• Studio | **[Batch 6](../questions/batches/batch-06.md)** (`kernel/sched/`; **first mutation question**) |
@@ -89,12 +95,18 @@ dropped), participation 10 %, final report 10 %, final interview 20 %.
 
 ## 3. Rhythm rules
 
-- **Publication:** batch N is published Monday of week N with a **docket** —
-  two questions defended Monday of week N+1, two Wednesday — so every
-  student knows each question's report deadline; per-student assignments
-  (two of the four) are published alongside.
+- **Publication:** all twelve batches are published before week 1 (design-doc
+  §6.1 — the format removes any reason to keep the questions secret, and the
+  only unseen assessment is the final interview's mutation). What moves
+  weekly is the **docket**: batch N opens Monday of week N — two of its
+  questions defended Monday of week N+1, two Wednesday — so every student
+  knows each question's report deadline. Per-student assignments ship when
+  the batch opens, not before: they depend on a roster that is still moving
+  through add/drop in weeks 1–2. Mutation kernel images likewise ship as
+  release assets on their batch's Monday, so no image sits published for a
+  semester waiting to be diffed against the baseline.
 - **Assignment:** the instructor assigns each student two of the four,
-  published with the batch (design-doc §6.1). A simple rotation script keeps
+  published when the batch opens (design-doc §6.1). A simple rotation script keeps
   every pool at ~5, mixes question types per student, and spreads mutation
   questions so everyone lands one several times over the semester.
 - **Reports:** committed to the student repo before the session in which the

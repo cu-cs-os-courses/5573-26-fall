@@ -14,7 +14,9 @@ modifying it, with an LLM agent doing the mechanical work and **you**
 answering for everything it produces.
 
 There are **no lectures and no written exams.** The course is one repeated
-loop: four investigation questions publish every Monday, you are assigned
+loop: every batch of investigation questions is published before week 1 —
+read the whole semester on day one if you want — and one batch of four
+opens each Monday. You are assigned
 two, you commit evidence-backed reports before class, and in class one
 student per question is drawn at random to present and defend that evidence
 — with live re-runs on demand.
@@ -143,19 +145,189 @@ depreciate quickly. Those three do not.
 ## 9. University policies
 
 This section carries the University of Colorado Boulder's required policy
-statements — accommodations, classroom behavior, names and pronouns, the
-Honor Code, discrimination and harassment, and religious observance — in
-the Provost's current official wording. They are posted in full on the
-course Canvas page, and they apply here exactly as written there.
+statements in the university's official wording, reproduced in full below
+and also posted on the course Canvas page. Where a statement calls for a
+course-specific procedure, mine follows it in a note marked *In this
+class*.
 
-Two of them matter enough to say in my own words as well:
+### Honor Code
 
-- **Accommodations.** If you have a documented disability, or think you may
-  need an accommodation of any kind, contact me early — the weekly-defense
-  format has more moving parts than a lecture course, and there is a lot I
-  can adjust if I know in advance.
-- **Religious observance.** Tell me ahead of time and we will move your
-  defense slot. The draw is a mechanism, not a trap.
+All students enrolled in a University of Colorado Boulder course are
+responsible for knowing and adhering to the Honor Code. Violations of the
+Honor Code may include but are not limited to: plagiarism (including use
+of paper writing services or technology [such as essay bots]), cheating,
+fabrication, lying, bribery, threat, unauthorized access to academic
+materials, clicker fraud, submitting the same or similar work in more than
+one course without permission from all course instructors involved, and
+aiding academic dishonesty. Understanding the course's syllabus is a vital
+part of adhering to the Honor Code.
+
+All incidents of academic misconduct will be reported to Student Conduct &
+Conflict Resolution: StudentConduct@colorado.edu. Students found
+responsible for violating the Honor Code will be assigned resolution
+outcomes from Student Conduct & Conflict Resolution and will be subject to
+academic sanctions from the faculty member. Visit
+[Honor Code](https://www.colorado.edu/sccr/honor-code) for more information
+on the academic integrity policy.
+
+*In this class:* the Honor Code applies exactly as written, and the
+university-wide language above is deliberately broad because most courses
+restrict AI use. This one does not. **Section 7 defines permitted AI use
+here, and it permits everything** — any model, any part of the work, no
+disclosure required. Using an LLM to write your triggers, probes, analysis,
+or prose is never an Honor Code matter in this course. What the Honor Code
+still governs is unchanged by that: submitting another student's triggers,
+probes, or reports as your own, fabricating evidence or results, or
+claiming a re-run you did not perform. The line is authorship of the
+*artifact you are defending*, not which tool produced it.
+
+### Accommodation for Disabilities, Temporary Medical Conditions, and Medical Isolation
+
+If you qualify for accommodations because of a disability, please submit
+your accommodation letter from Disability Services to your faculty member
+in a timely manner so that your needs can be addressed. Disability Services
+determines accommodations based on documented disabilities in the academic
+environment. Information on requesting accommodations is located on the
+[Disability Services website](https://www.colorado.edu/disabilityservices/).
+Contact Disability Services at 303-492-8671 or DSinfo@colorado.edu for
+further assistance. If you have a temporary medical condition, see
+[Temporary Medical Conditions](https://www.colorado.edu/disabilityservices/students/temporary-medical-conditions)
+on the Disability Services website.
+
+*In this class:* if illness, injury, or required medical isolation keeps
+you from a class session or a deadline, **email me before the session if
+you can, or as soon as you are able afterwards.** Do not tell me what is
+wrong — I am not permitted to ask, and I do not want to know — and do not
+send a doctor's note; I will not ask for one and campus health services no
+longer issues them. What happens next:
+
+- **A defense day you cannot attend.** You are withdrawn from that
+  session's draw. It is not an absence, it does not affect your
+  participation grade, and it does **not** use up your dropped defense —
+  that stays available for a defense you actually give and would rather not
+  count.
+- **A report deadline you cannot meet.** Tell me and we will set a new one.
+  An extension for illness does not consume any of your three late days.
+
+If you have a documented disability, or think you may need an
+accommodation of any kind, contact me early. The weekly-defense format has
+more moving parts than a lecture course, and there is a great deal I can
+adjust when I know in advance — far less once a defense day has passed.
+
+### Accommodation for Religious Obligations
+
+Instructional faculty members must make every reasonable effort to
+accommodate all students who have conflicts with scheduled exams,
+assignment deadlines or required attendance due to a religious observance.
+Whenever possible, students must notify the instructional faculty member at
+least two weeks in advance of the expected exam, assignment deadline, or
+attendance conflict to request an accommodation for religious observance.
+If the start date of the course is less than two weeks before the date of
+requested accommodation, students must notify the instructional faculty
+member on the start date of the course. See the
+[Student Academic Accommodations for Religious Observances Policy](https://www.colorado.edu/compliance/student-academic-accommodations-religious-observances-policy)
+for more information.
+
+*In this class:* email me at least two weeks ahead — or on the first day of
+class, if the conflict falls in the first two weeks — and name the sessions
+or deadlines involved. You never need to explain or justify the observance.
+Then:
+
+- **A defense day.** I move your defense to another session, or hold your
+  question over to the next docket. A defense missed for religious
+  observance is not an absence, does not affect your participation grade,
+  and does **not** count against your dropped defense.
+- **A report deadline.** It shifts to accommodate the observance, without
+  using your late days.
+- **A final-interview slot.** Tell me when the slot schedule is published
+  in Week 13 and I will place you outside the conflict. The interview
+  window spans three sessions, so there is room.
+
+The draw is a mechanism, not a trap. It exists to make defenses
+unbluffable, not to punish you for observing your religion.
+
+### Student Names and Pronouns
+
+CU Boulder recognizes that students' legal information does not always
+align with how they identify. If you wish to have a name other than your
+legal name appear on your instructors’ class rosters and in Canvas, or if
+you wish to choose pronouns to appear on your instructors’ class rosters
+and in Canvas, visit the
+[Registrar’s website](https://www.colorado.edu/registrar/students/records/info/preferred)
+for instructions on how to change your personal information in university
+systems.
+
+*In this class:* you can also just tell me, and I will use it from that
+point on whatever the roster says.
+
+### Classroom Behavior
+
+Students and faculty are responsible for maintaining an appropriate
+learning environment in all instructional settings, whether in person,
+remote, or online. Failure to adhere to such behavioral standards may be
+subject to discipline. Professional courtesy and sensitivity are especially
+important with respect to individuals and topics dealing with race, color,
+national origin, sex, pregnancy, age, disability, creed, religion, sexual
+orientation, gender identity, gender expression, veteran status, marital
+status, political affiliation, or political philosophy.
+
+Additional classroom behavior information:
+
+- [Student Classroom and Course-Related Behavior Policy](https://www.colorado.edu/compliance/policies/student-classroom-course-related-behavior)
+- [Student Code of Conduct](https://www.colorado.edu/sccr/students/honor-code-and-student-code-conduct)
+- [Office of Institutional Equity and Compliance](https://www.colorado.edu/oiec/)
+
+*In this class:* this one has teeth in a course built on public defense.
+You will watch classmates be questioned hard about evidence that turns out
+to be wrong — that is the format working, and it is the most useful thing
+in the room. Challenge the evidence as sharply as you like. Never make it
+about the person holding it.
+
+### Sexual Misconduct, Discrimination, Harassment and/or Related Retaliation
+
+CU Boulder is committed to fostering a productive and welcoming learning,
+working, and living environment. University policy prohibits
+protected-class discrimination and harassment, sexual misconduct
+(harassment, exploitation, and assault), intimate partner abuse (dating or
+domestic violence), stalking, and related retaliation by or against members
+of our community on- or off-campus. Denial of an approved accommodation for
+disability, religious observance, or pregnancy or pregnancy related medical
+conditions may be discriminatory.
+
+The Office of Institutional Equity and Compliance (OIEC) addresses these
+concerns, and individuals who have been subjected to misconduct can contact
+OIEC at 303-492-2127 or email OIEC@colorado.edu. Information about
+university policies, OIEC reporting options, and OIEC support resources
+including confidential services can be found on the
+[OIEC website](https://www.colorado.edu/oiec/).
+
+Faculty and graduate instructors are required to inform OIEC when someone
+discloses misconduct regardless of when or where it occurred. This is to
+ensure that those impacted receive outreach from OIEC about resolution
+options and support resources. To learn more about reporting and support
+options for a variety of concerns, visit the
+[Don’t Ignore It](https://www.colorado.edu/dontignoreit/) page.
+
+*In this class:* note the reporting duty above — I am required to pass a
+disclosure to OIEC, so I cannot be a confidential resource. If you want to
+talk to someone who can keep it confidential, OIEC's support-resources page
+lists those options.
+
+### Mental Health and Wellness
+
+The University of Colorado Boulder is committed to supporting students’
+mental health and overall wellbeing. If personal, academic, or emotional
+challenges are affecting your wellbeing or success, Counseling and
+Psychiatric Services
+([CAPS](https://www.colorado.edu/counseling/)), is here to help. CAPS
+offers counseling, referrals, psychiatric care, crisis support, and much
+more. Visit CAPS in the C4C, or call (303) 492-2277, 24/7.
+
+*In this class:* a weekly cadence with a public defense attached is a
+sustained kind of pressure, and it is easy to read a bad defense as a
+verdict on you. It is not — the lowest one is dropped precisely because
+everyone has one. If the cadence is becoming a health problem rather than a
+workload problem, come talk to me early and we will find adjustments.
 
 ## 10. Getting unstuck
 

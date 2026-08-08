@@ -33,18 +33,18 @@ Themes, batch numbers, and session content are defined in
 
 | Wk | Monday | Wednesday | Calendar notes |
 |---|---|---|---|
-| 1 | Aug 24 | Aug 26 | Batch 1 released Mon |
-| 2 | Aug 31 | Sep 2 | Defends batch 1 · batch 2 released Mon |
-| 3 | *Sep 7 — Labor Day, no class* | Sep 9 | Defends batch 2 (Wed only) · batch 3 released Wed |
-| 4 | Sep 14 | Sep 16 | Defends batch 3 · batch 4 released Mon — the agent arrives |
-| 5 | Sep 21 | Sep 23 | Defends batch 4 · batch 5 released |
-| 6 | Sep 28 | Sep 30 | Defends batch 5 · batch 6 released (**first mutation**) |
-| 7 | Oct 5 | Oct 7 | Defends batch 6 · batch 7 released |
-| 8 | Oct 12 | Oct 14 | Defends batch 7 · batch 8 released (mutation) |
-| 9 | Oct 19 | Oct 21 | Defends batch 8 · batch 9 released |
-| 10 | Oct 26 | Oct 28 | Defends batch 9 · batch 10 released (mutation) |
-| 11 | Nov 2 | Nov 4 | Defends batch 10 · batch 11 released |
-| 12 | Nov 9 | Nov 11 | Defends batch 11 · batch 12 released (mutation, last) |
+| 1 | Aug 24 | Aug 26 | Batch 1 opens Mon |
+| 2 | Aug 31 | Sep 2 | Defends batch 1 · batch 2 opens Mon |
+| 3 | *Sep 7 — Labor Day, no class* | Sep 9 | Defends batch 2 (Wed only) · batch 3 opens Wed |
+| 4 | Sep 14 | Sep 16 | Defends batch 3 · batch 4 opens Mon — the agent arrives |
+| 5 | Sep 21 | Sep 23 | Defends batch 4 · batch 5 opens |
+| 6 | Sep 28 | Sep 30 | Defends batch 5 · batch 6 opens (**first mutation**) |
+| 7 | Oct 5 | Oct 7 | Defends batch 6 · batch 7 opens |
+| 8 | Oct 12 | Oct 14 | Defends batch 7 · batch 8 opens (mutation) |
+| 9 | Oct 19 | Oct 21 | Defends batch 8 · batch 9 opens |
+| 10 | Oct 26 | Oct 28 | Defends batch 9 · batch 10 opens (mutation) |
+| 11 | Nov 2 | Nov 4 | Defends batch 10 · batch 11 opens |
+| 12 | Nov 9 | Nov 11 | Defends batch 11 · batch 12 opens (mutation, last) |
 | 13 | Nov 16 | Nov 18 | Defends batch 12 · **final-interview briefing Wed Nov 18**, slot schedule posted |
 | 14 | *Nov 23–27 — fall break* | | W15-Monday interviewees' mutations issued **Sat Nov 28** |
 | 15 | Nov 30 | Dec 2 | **Final interviews I (4) and II (3)** |
