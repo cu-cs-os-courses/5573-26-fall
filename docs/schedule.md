@@ -103,8 +103,8 @@ dropped), participation 10 %, final report 10 %, final interview 20 %.
   knows each question's report deadline. Per-student assignments ship when
   the batch opens, not before: they depend on a roster that is still moving
   through add/drop in weeks 1–2. Mutation kernel images likewise ship as
-  release assets on their batch's Monday, so no image sits published for a
-  semester waiting to be diffed against the baseline.
+  release assets on the Monday their batch opens: the image belongs to its
+  question and is no use before it.
 - **Assignment:** the instructor assigns each student two of the four,
   published when the batch opens (design-doc §6.1). A simple rotation script keeps
   every pool at ~5, mixes question types per student, and spreads mutation

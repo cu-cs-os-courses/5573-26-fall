@@ -137,9 +137,9 @@ The course runs on a weekly evaluation cycle, not on lectures and exams:
 
 ```
   Instructor                                  Classroom (Mon & Wed)
-  ┌──────────────────────┐   publish 1 week   ┌───────────────────────────────┐
+  ┌──────────────────────┐  all 12 batches    ┌───────────────────────────────┐
   │ subsystem claim banks│ ─────────────────► │ every student: per-question       │
-  │  → weekly question   │       ahead        │ report due before class;       │
+  │  → weekly question   │  before week 1     │ report due before class;       │
   │  batch, validated by │                    │ random draw picks presenter;   │
   │  the reference agent │                    │ defense under questioning;     │
   │  (+ mutation images) │                    │ live re-runs on demand         │
@@ -374,8 +374,10 @@ Assessment is one repeated mechanism, not a set of instruments:
    the following Monday and two the following Wednesday. Two things ship with
    the docket rather than up front, neither for secrecy: the per-student
    assignments (below — they need a roster that add/drop is still moving) and
-   a mutation batch's prebuilt kernel image (published for a semester, it is
-   a semester available for binary diffing against the baseline).
+   a mutation batch's prebuilt kernel image, which ships with the question it
+   serves. Not a secret either: the mutation drill (§6.3) tells students
+   outright that they may take the image apart, and that binary archaeology
+   answers a different question than the defense asks.
 2. **Investigate.** The instructor **assigns each student two of the four**
    (published with the docket; a simple rotation keeps every question's pool
    at ~5 students, mixes question types per student, and lands every student

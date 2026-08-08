@@ -7,8 +7,10 @@ methodology (`CLAUDE.md`), and empty library shelves (`triggers/`,
 
 ## Setup
 
-You will work with **two checkouts**: the offering repo (read-only —
-`git pull` there brings each Monday's batch; you never push to it) and
+You will work with **two checkouts**: the offering repo (read-only — all
+twelve question batches are in it from week 1; `git pull` there brings each
+Monday's assignments and any fix to `env/` or these tools; you never push
+to it) and
 this directory copied out as **your own workspace repo**, where your
 toolkit and reports live and grading happens.
 
