@@ -8,7 +8,10 @@ sched-mutation-01**. You are assigned two of the four.*
 ([course-design.md §6.3](../../docs/course-design.md)). The drill, once, in
 full: alongside this batch you get a
 prebuilt kernel image, `bzImage-2026f-01` (release asset `batch-06` on
-the course repo — `gh release download batch-06`). It is the pinned
+the course repo — `gh release download batch-06 -R
+cu-cs-os-courses/5573-26-fall`; the `-R` matters because you will
+usually be standing in your own workspace repo, not the offering
+clone). It is the pinned
 6.6.87 **plus exactly one private modification, somewhere in
 `kernel/sched/`**. Boot it with the same rootfs and tooling:
 `KERNEL=path/to/bzImage-2026f-01 ./run.sh` (or `KERNEL=... tools/vm
