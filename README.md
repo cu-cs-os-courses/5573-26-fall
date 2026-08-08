@@ -77,7 +77,7 @@ before the week-1 studio.
 |---|---|
 | `env/` | the reference environment: QEMU + pinned kernel 6.6.87 + tracing rootfs |
 | `agent-starter/` | your workspace template — tools, methodology, empty instrument libraries ([README](agent-starter/README.md)) |
-| `examples/cow/` | a complete worked investigation (copy-on-write), the model of full credit |
+| `worked-example/` | a complete worked investigation (copy-on-write), the model of full credit |
 | `docs/course-design.md` | why the course is built this way: motivation, learning objectives, assessment design, the evidence contract |
 | `docs/syllabus.md` | grading, late policy, AI use, required setup, university policies |
 | `docs/schedule.md` | the week-by-week structure: batches, defenses, the final |

@@ -30,7 +30,7 @@ the two things that could imitate the result.
 **Command**
 
 ```sh
-bpftrace guest/probe-do-wp-page.bt \
+bpftrace /share/probe-do-wp-page.bt \
   -c '/tmp/cow-trigger private /share/evidence/trigger-private.txt'
 ```
 
@@ -146,12 +146,12 @@ hand-in:
 | `repro.sh` | [`repro.sh`](repro.sh) |
 | your raw captures, under `evidence/` | [`evidence/`](evidence/) — five plain text files, named however you like |
 
-(There is also [`../run.sh`](../run.sh), which boots a VM from cold and runs
+(There is also [`../../tools/run.sh`](../../tools/run.sh), which boots a VM from cold and runs
 the whole example unattended. That one is the example's *harness*, not a
 model for your weekly hand-in — yours assumes the VM is already up.)
 
 **Expected** (what a re-run must show; enforced by
-[`../check.sh`](../check.sh), which `repro.sh` calls):
+[`../../tools/check.sh`](../../tools/check.sh), which `repro.sh` calls):
 
 1. Probe `do_wp_page` fires exactly once, under the child PID, at address
    `0x100000000000`, via `handle_mm_fault` — private mapping.
@@ -177,5 +177,5 @@ report that hard-codes `0x1323a` passes once and fails forever after.
   build stops inlining it, probe it directly and the claim gets stronger.
 - **Minor-fault exactness depends on the measurement window.** The count is
   taken across a warmed, lockstepped single write; see
-  [`guest/cow-trigger.c`](../guest/cow-trigger.c). Widen the window and
+  [`triggers/cow-trigger.c`](../../triggers/cow-trigger.c). Widen the window and
   unrelated faults will creep into the delta.

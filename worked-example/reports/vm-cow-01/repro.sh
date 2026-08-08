@@ -33,8 +33,11 @@ set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 
 # In your own repo this is `$HERE/../../../tools/vm` — three levels up out of
-# reports/batch-NN/<question-id>/, and your workspace ships it. This example
-# sits outside a workspace, so it looks next door for one instead.
+# reports/batch-NN/<question-id>/, and your workspace ships it. Here it is
+# one level less deep (no batch-NN), and this workspace's own tools/ holds
+# only what is specific to this investigation — the course tool layer it
+# borrows from agent-starter next door, rather than carrying a second copy
+# that would have to be kept in sync.
 VM="${VM:-}"
 if [ -z "$VM" ]; then
     for cand in "$HERE/../../../agent-starter/tools/vm" "$HERE/../../../reference-agent/tools/vm"; do
@@ -52,11 +55,12 @@ mkdir -p "$EV"
 
 echo "== run: COW trigger under a do_wp_page probe, private and shared =="
 "$VM" up
-# The trigger and probe live outside the report directory — here in the
-# example's guest/, in your workspace's triggers/ and probes/ libraries.
-# A report directory holds the *record* of an investigation, never the
-# instruments: those are reused across weeks and graded as a library.
-"$VM" push "$HERE/../guest/cow-trigger.c" "$HERE/../guest/probe-do-wp-page.bt" /root/
+# The trigger and probe live outside the report directory, in ../../triggers/
+# and ../../probes/ — the same two libraries your workspace ships, reached by
+# the same relative path yours would use. A report directory holds the
+# *record* of an investigation, never the instruments: those are reused
+# across weeks and graded as a library.
+"$VM" push "$HERE/../../triggers/cow-trigger.c" "$HERE/../../probes/probe-do-wp-page.bt" /root/
 "$VM" sh 'gcc -O2 -Wall -Werror -o /root/cow-trigger /root/cow-trigger.c'
 "$VM" sh '{ uname -a; cat /proc/version; bpftrace --version; } > /root/kernel.txt'
 
@@ -79,4 +83,4 @@ echo
 echo "== assert: the evidence says what the report claims =="
 # Reusing the example's checker keeps the assertions in one place; a weekly
 # repro.sh of your own would simply inline these greps.
-"$HERE/../check.sh" "$EV"
+"$HERE/../../tools/check.sh" "$EV"

@@ -18,11 +18,11 @@ prose (claim, evidence entries each with the command, a raw-output excerpt,
 and your interpretation; limitations), your raw capture files in an
 `evidence/` subdirectory, and a `repro.sh` that reproduces your key evidence
 in one shot. **All three sit together in
-[`examples/cow/vm-cow-01/`](../../examples/cow/vm-cow-01/)**, arranged
+[`worked-example/reports/vm-cow-01/`](../../worked-example/reports/vm-cow-01/)**, arranged
 exactly as you must arrange yours — the report in
-[`report.md`](../../examples/cow/vm-cow-01/report.md), the script in
-[`repro.sh`](../../examples/cow/vm-cow-01/repro.sh), the captures in
-[`evidence/`](../../examples/cow/vm-cow-01/evidence/); the table in
+[`report.md`](../../worked-example/reports/vm-cow-01/report.md), the script in
+[`repro.sh`](../../worked-example/reports/vm-cow-01/repro.sh), the captures in
+[`evidence/`](../../worked-example/reports/vm-cow-01/evidence/); the table in
 [`agent-starter/reports/README.md`](../../agent-starter/reports/README.md)
 maps each one to what you commit, and
 [`agent-starter/reports/repro-template.sh`](../../agent-starter/reports/repro-template.sh)

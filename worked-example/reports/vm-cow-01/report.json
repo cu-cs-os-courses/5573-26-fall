@@ -6,7 +6,7 @@
     {
       "kind": "trace",
       "tool": "bpftrace",
-      "command": "bpftrace guest/probe-do-wp-page.bt -c '/tmp/cow-trigger private /share/evidence/trigger-private.txt'",
+      "command": "bpftrace /share/probe-do-wp-page.bt -c '/tmp/cow-trigger private /share/evidence/trigger-private.txt'",
       "output_excerpt": "do_wp_page fired: pid=184 addr=0x100000000000\n\n        do_wp_page+1\n        __handle_mm_fault+2133\n        handle_mm_fault+323\n        do_user_addr_fault+352\n        exc_page_fault+103\n        asm_exc_page_fault+38",
       "interpretation": "The write-protect fault handler fires exactly once, in the child (pid 184), at the mapped page, reached from the page-fault entry path. wp_page_copy has no kallsyms entry in this build (inlined into do_wp_page, its only caller), so the copy itself is proven by the pagemap evidence below, not by this probe."
     },

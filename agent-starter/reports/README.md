@@ -50,33 +50,37 @@ in the offering repo).
 
 ## Models to copy — one complete hand-in, all three parts
 
-`examples/cow/vm-cow-01/` **is a hand-in** — the same file names in the same
-nesting you are required to produce, missing only the `reports/batch-NN/`
-prefix above it, because that question came from no batch. Copy its shape
-before you copy anything else. Read all three parts before your first
-hand-in; the report gets most of the attention and the `repro.sh` is where
-marks are actually lost.
+`worked-example/` **is this workspace, one investigation later** — the same
+four directories you have here, filled in. Its
+`reports/vm-cow-01/` is a hand-in with the exact file names and nesting you
+are required to produce, missing only the `batch-NN/` level, because that
+question came from no batch. Copy its shape before you copy anything else.
+Read all three parts before your first hand-in; the report gets most of the
+attention and the `repro.sh` is where marks are actually lost.
 
 ```
-examples/cow/vm-cow-01/     →     reports/batch-NN/<question-id>/
-├── report.md   report.json        ├── report.md  (or report.json)
-├── repro.sh                       ├── repro.sh
-└── evidence/                      └── evidence/
+worked-example/                       your workspace
+├── tools/                            ├── tools/       vm, ksrc, report-check
+├── triggers/cow-trigger.c            ├── triggers/    yours, growing weekly
+├── probes/probe-do-wp-page.bt        ├── probes/      yours, growing weekly
+└── reports/vm-cow-01/                └── reports/batch-NN/<question-id>/
+    ├── report.md  report.json            ├── report.md (or report.json)
+    ├── repro.sh                          ├── repro.sh
+    └── evidence/                         └── evidence/
 ```
 
 (The example carries both report formats so you can read the same
-investigation either way; you commit the one your week calls for. Its
-trigger and probe sit *outside* the directory, in `examples/cow/guest/` —
-in your workspace those are your `triggers/` and `probes/` libraries. A
-report directory holds the record of an investigation, never the
-instruments.)
+investigation either way; you commit the one your week calls for. Note where
+its trigger and probe are: in `triggers/` and `probes/`, *not* in the report
+directory. A report directory holds the record of an investigation, never
+the instruments — those are reused across weeks and graded as a library.)
 
 | you commit | model | what to take from it |
 |---|---|---|
-| `report.md` (batches 1–3) | `examples/cow/vm-cow-01/report.md` | the §7 fields as prose: claim, evidence entries (command + raw excerpt + interpretation), reproduction, limitations |
-| `report.json` (batches 4–12) | `examples/cow/vm-cow-01/report.json` | the same contract, structured |
-| `repro.sh` (every week) | `examples/cow/vm-cow-01/repro.sh` (worked) · `repro-template.sh` (skeleton to copy) | push trigger+probe, run, pull raw output, then one `pass`/`fail` line per expectation; non-zero exit if any fails |
-| your raw captures, in `evidence/` | `examples/cow/vm-cow-01/evidence/` | plain text straight out of the tools, no hand-editing; name the files whatever you like |
+| `report.md` (batches 1–3) | `worked-example/reports/vm-cow-01/report.md` | the §7 fields as prose: claim, evidence entries (command + raw excerpt + interpretation), reproduction, limitations |
+| `report.json` (batches 4–12) | `worked-example/reports/vm-cow-01/report.json` | the same contract, structured |
+| `repro.sh` (every week) | `worked-example/reports/vm-cow-01/repro.sh` (worked) · `repro-template.sh` (skeleton to copy) | push trigger+probe, run, pull raw output, then one `pass`/`fail` line per expectation; non-zero exit if any fails |
+| your raw captures, in `evidence/` | `worked-example/reports/vm-cow-01/evidence/` | plain text straight out of the tools, no hand-editing; name the files whatever you like |
 
 **Starting point:** `repro-template.sh`, here in this directory. Copy it to
 `reports/batch-NN/<question-id>/repro.sh` and replace the TODOs. It carries

@@ -541,8 +541,8 @@ From batch 4 the agent emits `report.json` in the shape given here, and
 `tools/report-check` enforces its structure mechanically. The JSON is not a
 stricter standard, only a machine-readable one: the same claim, the same
 evidence entries, the same repro assertions. The worked example is written
-both ways from the same run — [prose](../examples/cow/vm-cow-01/report.md),
-[structured](../examples/cow/vm-cow-01/report.json) — and reading them side
+both ways from the same run — [prose](../worked-example/reports/vm-cow-01/report.md),
+[structured](../worked-example/reports/vm-cow-01/report.json) — and reading them side
 by side is the cheapest way to see that the format is not the point.
 
 The structured rendering:

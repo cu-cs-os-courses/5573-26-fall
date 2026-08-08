@@ -1,22 +1,28 @@
 #!/bin/bash
 # Run the COW worked example end-to-end: boot the reference VM headless,
-# execute guest/investigate.sh via the autorun channel, then assert on
-# the evidence it produced (check.sh).
+# execute investigate.sh inside the guest via the autorun channel, then
+# assert on the evidence it produced (check.sh).
 #
-#   examples/cow/run.sh        # needs env/ images: make -C ../../env images
+#   worked-example/tools/run.sh   # needs env/ images: make -C ../env images
 #
 # The work dir (console log + evidence files) is always kept and its path
 # printed — the evidence IS the product of this example.
 set -euo pipefail
-COW_DIR="$(cd "$(dirname "$0")" && pwd)"
-ENV_DIR="$(cd "$COW_DIR/../../env" && pwd)"
+WS="$(cd "$(dirname "$0")/.." && pwd)"      # this workspace's root
+ENV_DIR="$(cd "$WS/../env" && pwd)"
 
 TIMEOUT="${TIMEOUT:-900}"
 WORK="$(mktemp -d "${TMPDIR:-/tmp}/kl-cow.XXXXXX")"
 QEMU_PID=
 trap 'kill "$QEMU_PID" 2>/dev/null || true' EXIT
 
-cp "$COW_DIR"/guest/* "$WORK/"
+# Everything the guest needs, flattened into the 9p share: the trigger and
+# the probe out of this workspace's instrument libraries, plus the guest-side
+# orchestration. They land at /share/<name> — the paths investigate.sh uses
+# and the report's evidence entries record, so reorganizing the host side
+# never rewrites the commands that produced the archived captures.
+cp "$WS/triggers/cow-trigger.c" "$WS/probes/probe-do-wp-page.bt" \
+   "$WS/tools/investigate.sh" "$WORK/"
 cat > "$WORK/autorun.sh" <<'EOF'
 #!/bin/bash
 /share/investigate.sh
@@ -46,5 +52,5 @@ if [ ! -f "$WORK/autorun.log" ]; then
 fi
 cat "$WORK/autorun.log"
 echo
-"$COW_DIR/check.sh" "$WORK/evidence"
+"$WS/tools/check.sh" "$WORK/evidence"
 echo "==> Evidence kept at $WORK/evidence"
