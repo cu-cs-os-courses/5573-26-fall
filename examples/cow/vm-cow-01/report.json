@@ -50,7 +50,7 @@
     }
   ],
   "repro": {
-    "script": "../run.sh",
+    "script": "repro.sh",
     "expected": [
       "probe do_wp_page fires exactly once, under the child PID, at address 0x100000000000, via handle_mm_fault (private)",
       "parent and child PFNs equal before the write; child PFN changes across the write; parent PFN does not (private)",

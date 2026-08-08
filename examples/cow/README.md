@@ -18,14 +18,38 @@ for forked processes? Support every claim with runtime evidence."*
 ./run.sh        # boots the VM headless, runs the investigation, checks evidence (~1 min)
 ```
 
-Expected output: 16 `PASS` lines and `ALL CHECKS PASSED`. The evidence files
-from a real passing run are archived in [`evidence/`](evidence/), and the
-design-doc §7 answer built from them comes in both hand-in formats:
-[`answer/vm-cow-01.md`](answer/vm-cow-01.md) (prose — what batches 1–3 ask
-for) and [`answer/vm-cow-01.json`](answer/vm-cow-01.json) (structured — from
-batch 4 on). Same evidence, same claims; read whichever matches the week you
-are in. Every excerpt in both is quoted from `evidence/`, so you can check
-them against the raw files — and should.
+Expected output: 16 `PASS` lines and `ALL CHECKS PASSED`.
+
+## The hand-in this produced
+
+Everything a submission consists of sits in
+[`vm-cow-01/`](vm-cow-01/) — **that directory is one hand-in, with the
+names and the nesting the collection script requires**
+([`agent-starter/reports/README.md`](../../agent-starter/reports/README.md)).
+Only the `reports/batch-NN/` prefix is missing, because this question came
+from no batch:
+
+```
+examples/cow/
+├── run.sh, check.sh, guest/    scaffolding — NOT part of a hand-in
+│                               (your triggers and probes live in your
+│                               workspace's triggers/ and probes/)
+└── vm-cow-01/          ←  copy this shape into reports/batch-NN/
+    ├── report.md              prose — what batches 1–3 ask for
+    ├── report.json            structured — from batch 4 on
+    ├── repro.sh               required every week
+    └── evidence/              the raw captures, in this subdirectory
+```
+
+You commit **one** report file, whichever matches your week; both are here
+so you can read the same investigation in both renderings. Every excerpt in
+both is quoted from `evidence/` beside them, so you can check them against
+the raw files — and should.
+
+Note what the report files do *not* do: reach outside their own directory
+for their evidence. `report.md` cites `evidence/probe-private.txt`, and
+`report.json` names `"script": "repro.sh"` — both siblings, exactly as
+`tools/report-check` expects to find them next to a report.
 
 ## The investigation, step by step
 
@@ -70,7 +94,7 @@ write can never race the instrumentation.
 > only a real ELF binary — a shell-wrapper script is rejected — hence the
 > trigger writes its own report file instead of relying on redirection.
 
-**5. Run + evidence** (private mapping, from [`evidence/`](evidence/)):
+**5. Run + evidence** (private mapping, from [`vm-cow-01/evidence/`](vm-cow-01/evidence/)):
 probe fires **exactly once**, in the child, at the mapped address, with
 `handle_mm_fault → do_wp_page` on the stack; PFNs identical before the write
 (`0x1323a` in both processes), divergent after (child `0x143ad`, parent still
@@ -87,27 +111,34 @@ child's value. No copy anywhere. This control distinguishes COW from both
 generic fault noise *and* ordinary lazy population.
 
 **7. The answer.** Written twice, to the same design-doc §7 evidence contract:
-[`answer/vm-cow-01.md`](answer/vm-cow-01.md) in prose and
-[`answer/vm-cow-01.json`](answer/vm-cow-01.json) structured. Either way every
+[`vm-cow-01/report.md`](vm-cow-01/report.md) in prose and
+[`vm-cow-01/report.json`](vm-cow-01/report.json) structured. Either way every
 evidence entry carries the command that produced it, a raw-output excerpt,
-and an interpretation; `repro` points back at this directory's scripts with
-the assertion list `check.sh` enforces. The JSON is what `tools/report-check`
+and an interpretation; `repro` names the `repro.sh` beside it, carrying the
+assertion list `check.sh` enforces. The JSON is what `tools/report-check`
 validates and what an agent emits from batch 4 on — the prose is the same
 contract with the punctuation taken out.
 
 ## Files
 
+**The hand-in** — `vm-cow-01/`, the part you copy the shape of:
+
+| File | Role |
+|---|---|
+| `vm-cow-01/report.md` | the answer in prose — the batch 1–3 hand-in format |
+| `vm-cow-01/report.json` | the same answer structured (design-doc §7 schema) — the batch 4+ format |
+| `vm-cow-01/repro.sh` | **the model for the `repro.sh` you hand in every week** — re-run against an already-booted VM and assert; scratch output by default, `REPRO_ARCHIVE=1` to refresh `evidence/` |
+| `vm-cow-01/evidence/` | raw captures from a real passing run — the model for the `evidence/` directory in your own hand-in |
+
+**The scaffolding** — outside the hand-in, because none of it belongs in one:
+
 | File | Role |
 |---|---|
 | `run.sh` | host side: boot VM headless, run investigation via the autorun channel, check evidence |
-| `repro.sh` | **the model for the `repro.sh` you hand in every week** — re-run against an already-booted VM and assert; scratch output by default, `REPRO_ARCHIVE=1` to refresh `evidence/` |
 | `check.sh` | the 16 machine-checkable assertions (replay-gate prototype) |
-| `guest/cow-trigger.c` | deterministic trigger workload (private + shared modes) |
-| `guest/probe-do-wp-page.bt` | bpftrace probe on the wp-fault path |
+| `guest/cow-trigger.c` | deterministic trigger workload (private + shared modes) — in your workspace this would live in `triggers/` |
+| `guest/probe-do-wp-page.bt` | bpftrace probe on the wp-fault path — in your workspace, `probes/` |
 | `guest/investigate.sh` | guest-side orchestration (compile → attach → run → collect) |
-| `evidence/` | raw captures from a real passing run — the model for the `evidence/` directory in your own hand-in |
-| `answer/vm-cow-01.md` | the answer in prose — the batch 1–3 hand-in format |
-| `answer/vm-cow-01.json` | the same answer structured (design-doc §7 schema) — the batch 4+ format |
 
 ## Where this goes next (Q3 preview)
 

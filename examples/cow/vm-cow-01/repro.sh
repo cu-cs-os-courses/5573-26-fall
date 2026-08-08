@@ -3,12 +3,17 @@
 # the evidence, in one shot.
 #
 # THIS FILE IS A MODEL. It is the third of the three things you hand in every
-# week, and the one with no other example in the course material:
+# week, and the one with no other example in the course material.
 #
-#     reports/batch-NN/<question-id>/
-#     ├── report.md      <- ../answer/vm-cow-01.md is the model
-#     ├── repro.sh       <- THIS FILE is the model
-#     └── evidence/      <- ../evidence/ is the model (raw captures, any names)
+# The directory you are standing in IS one hand-in — same names, same
+# nesting as the one you commit; only the reports/batch-NN/ prefix differs,
+# because this question came from no batch:
+#
+#     reports/batch-NN/vm-cow-01/     <- THIS DIRECTORY, moved under yours
+#     ├── report.md                   <- prose, batches 1–3
+#     ├── report.json                 <- structured, batch 4 on (you commit one)
+#     ├── repro.sh                    <- THIS FILE is the model
+#     └── evidence/                   <- raw captures, any names you like
 #
 # The shape to copy, in order:
 #   1. locate the VM tool and pick an output directory
@@ -27,11 +32,12 @@
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 
-# In your own repo this is just tools/vm — your workspace ships it. This
-# example sits outside a workspace, so it looks next door for one.
+# In your own repo this is `$HERE/../../../tools/vm` — three levels up out of
+# reports/batch-NN/<question-id>/, and your workspace ships it. This example
+# sits outside a workspace, so it looks next door for one instead.
 VM="${VM:-}"
 if [ -z "$VM" ]; then
-    for cand in "$HERE/../../agent-starter/tools/vm" "$HERE/../../reference-agent/tools/vm"; do
+    for cand in "$HERE/../../../agent-starter/tools/vm" "$HERE/../../../reference-agent/tools/vm"; do
         [ -x "$cand" ] && { VM="$cand"; break; }
     done
 fi
@@ -46,7 +52,11 @@ mkdir -p "$EV"
 
 echo "== run: COW trigger under a do_wp_page probe, private and shared =="
 "$VM" up
-"$VM" push "$HERE/guest/cow-trigger.c" "$HERE/guest/probe-do-wp-page.bt" /root/
+# The trigger and probe live outside the report directory — here in the
+# example's guest/, in your workspace's triggers/ and probes/ libraries.
+# A report directory holds the *record* of an investigation, never the
+# instruments: those are reused across weeks and graded as a library.
+"$VM" push "$HERE/../guest/cow-trigger.c" "$HERE/../guest/probe-do-wp-page.bt" /root/
 "$VM" sh 'gcc -O2 -Wall -Werror -o /root/cow-trigger /root/cow-trigger.c'
 "$VM" sh '{ uname -a; cat /proc/version; bpftrace --version; } > /root/kernel.txt'
 
@@ -69,4 +79,4 @@ echo
 echo "== assert: the evidence says what the report claims =="
 # Reusing the example's checker keeps the assertions in one place; a weekly
 # repro.sh of your own would simply inline these greps.
-"$HERE/check.sh" "$EV"
+"$HERE/../check.sh" "$EV"

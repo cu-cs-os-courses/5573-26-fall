@@ -1,4 +1,4 @@
-*The same answer as [`vm-cow-01.json`](vm-cow-01.json), written the way
+*The same answer as [`report.json`](report.json) beside it, written the way
 batches 1–3 ask for it: the [§7](../../../docs/course-design.md) fields in
 prose. Nothing here is content the JSON does not carry — it is the same
 evidence contract in the format you hand in before the agent arrives in
@@ -34,7 +34,7 @@ bpftrace guest/probe-do-wp-page.bt \
   -c '/tmp/cow-trigger private /share/evidence/trigger-private.txt'
 ```
 
-**Raw output** (excerpt — full file: [`evidence/probe-private.txt`](../evidence/probe-private.txt))
+**Raw output** (excerpt — full file: [`evidence/probe-private.txt`](evidence/probe-private.txt))
 
 ```
 do_wp_page fired: pid=184 addr=0x100000000000
@@ -69,7 +69,7 @@ carry the claim together because neither can carry it alone.
 # child's single write; source: guest/cow-trigger.c
 ```
 
-**Raw output** (excerpt — full file: [`evidence/trigger-private.txt`](../evidence/trigger-private.txt))
+**Raw output** (excerpt — full file: [`evidence/trigger-private.txt`](evidence/trigger-private.txt))
 
 ```
 parent_pfn_before=0x1323a
@@ -98,7 +98,7 @@ out a storm of unrelated faults; and the parent's sentinel still reads
 /tmp/cow-trigger shared /share/evidence/trigger-shared.txt
 ```
 
-**Raw output** (excerpt — full file: [`evidence/trigger-shared.txt`](../evidence/trigger-shared.txt))
+**Raw output** (excerpt — full file: [`evidence/trigger-shared.txt`](evidence/trigger-shared.txt))
 
 ```
 parent_pfn_before=0x855d
@@ -135,7 +135,7 @@ src-export`, or `tools/ksrc`).
 
 ## Reproduction
 
-**Script:** [`../repro.sh`](../repro.sh) — re-runs the investigation against
+**Script:** [`repro.sh`](repro.sh) — re-runs the investigation against
 a booted VM and asserts on what comes back. **That file is the model for the
 `repro.sh` you hand in**, and this directory is the model for the rest of the
 hand-in:
@@ -143,8 +143,8 @@ hand-in:
 | you commit | model to copy |
 |---|---|
 | `report.md` | this file |
-| `repro.sh` | [`../repro.sh`](../repro.sh) |
-| your raw captures, under `evidence/` | [`../evidence/`](../evidence/) — five plain text files, named however you like |
+| `repro.sh` | [`repro.sh`](repro.sh) |
+| your raw captures, under `evidence/` | [`evidence/`](evidence/) — five plain text files, named however you like |
 
 (There is also [`../run.sh`](../run.sh), which boots a VM from cold and runs
 the whole example unattended. That one is the example's *harness*, not a

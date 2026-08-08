@@ -3,7 +3,7 @@
 #
 # Copy this next to your report, as reports/batch-NN/<question-id>/repro.sh,
 # and replace every TODO. A worked, runnable version of this same skeleton is
-# examples/cow/repro.sh — read that one first.
+# examples/cow/vm-cow-01/repro.sh — read that one first.
 #
 #   ./repro.sh                     re-run, write to a scratch dir, assert
 #   REPRO_ARCHIVE=1 ./repro.sh     also refresh the captures you committed

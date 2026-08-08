@@ -50,16 +50,33 @@ in the offering repo).
 
 ## Models to copy — one complete hand-in, all three parts
 
-`examples/cow/` is the worked example, and every part of a submission has a
-model there. Read all three before your first hand-in; the report gets most
-of the attention and the `repro.sh` is where marks are actually lost.
+`examples/cow/vm-cow-01/` **is a hand-in** — the same file names in the same
+nesting you are required to produce, missing only the `reports/batch-NN/`
+prefix above it, because that question came from no batch. Copy its shape
+before you copy anything else. Read all three parts before your first
+hand-in; the report gets most of the attention and the `repro.sh` is where
+marks are actually lost.
+
+```
+examples/cow/vm-cow-01/     →     reports/batch-NN/<question-id>/
+├── report.md   report.json        ├── report.md  (or report.json)
+├── repro.sh                       ├── repro.sh
+└── evidence/                      └── evidence/
+```
+
+(The example carries both report formats so you can read the same
+investigation either way; you commit the one your week calls for. Its
+trigger and probe sit *outside* the directory, in `examples/cow/guest/` —
+in your workspace those are your `triggers/` and `probes/` libraries. A
+report directory holds the record of an investigation, never the
+instruments.)
 
 | you commit | model | what to take from it |
 |---|---|---|
-| `report.md` (batches 1–3) | `examples/cow/answer/vm-cow-01.md` | the §7 fields as prose: claim, evidence entries (command + raw excerpt + interpretation), reproduction, limitations |
-| `report.json` (batches 4–12) | `examples/cow/answer/vm-cow-01.json` | the same contract, structured |
-| `repro.sh` (every week) | `examples/cow/repro.sh` (worked) · `repro-template.sh` (skeleton to copy) | push trigger+probe, run, pull raw output, then one `pass`/`fail` line per expectation; non-zero exit if any fails |
-| your raw captures, in `evidence/` | `examples/cow/evidence/` | plain text straight out of the tools, no hand-editing; name the files whatever you like |
+| `report.md` (batches 1–3) | `examples/cow/vm-cow-01/report.md` | the §7 fields as prose: claim, evidence entries (command + raw excerpt + interpretation), reproduction, limitations |
+| `report.json` (batches 4–12) | `examples/cow/vm-cow-01/report.json` | the same contract, structured |
+| `repro.sh` (every week) | `examples/cow/vm-cow-01/repro.sh` (worked) · `repro-template.sh` (skeleton to copy) | push trigger+probe, run, pull raw output, then one `pass`/`fail` line per expectation; non-zero exit if any fails |
+| your raw captures, in `evidence/` | `examples/cow/vm-cow-01/evidence/` | plain text straight out of the tools, no hand-editing; name the files whatever you like |
 
 **Starting point:** `repro-template.sh`, here in this directory. Copy it to
 `reports/batch-NN/<question-id>/repro.sh` and replace the TODOs. It carries
