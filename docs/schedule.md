@@ -15,7 +15,8 @@ The Fall 2026 mapping lives in
 The course runs one repeated loop (design-doc §6.1): a four-question batch is
 published one week before it is defended (two questions per session); each
 student is **assigned two of the four** by the instructor and submits a
-per-question report before the session where that question is scheduled; the
+per-question report before the session where that question is scheduled
+(the deadline is noon that day); the
 presenter for each question is drawn at random from its ~5 assigned
 students. There are no lectures and no exams — the loop is the course.
 
@@ -72,7 +73,7 @@ defend the evidence live.*
 
 | Wk | Theme | Monday | Wednesday | Opens / due |
 |---|---|---|---|---|
-| 1 | The course & the environment | • Course pitch — open by asking an LLM a conceptual question live ("so we never grade that")<br>• The weekly cycle, grading, cost disclosure<br>• **Full-loop demo** on a toy question (reference agent, live, with a scripted probe-failure the evidence catches) | • Studio: env bring-up — goal: everyone boots the VM and commits a first ftrace capture before leaving | **[Batch 1](../questions/batches/batch-01.md) opens in the last ~15 min of Monday's class** — the per-student assignments ship then, and one question is walked through as a worked "what counts as evidence" example. Manual observability; doubles as env acceptance; defended W2 (Mon 2 + Wed 2). Realistic working window opens after Wednesday's env studio — students who arrive with the env preinstalled (pre-semester email) can start Monday night |
+| 1 | The course & the environment | • Course pitch — open by asking an LLM a conceptual question live ("so we never grade that")<br>• The weekly cycle, grading, cost disclosure<br>• **Full-loop demo** on a toy question (reference agent, live, with a scripted probe-failure the evidence catches) | • Studio: env bring-up — goal: everyone boots the VM and commits a first ftrace capture before leaving | **[Batch 1](../questions/batches/batch-01.md) opens in the last ~15 min of Monday's class** — one question is walked through as a worked "what counts as evidence" example. Its **per-student assignments are the one exception to the rule below: they ship Wednesday evening**, because the assignment ids are GitHub usernames and those only exist once everyone has registered a repo in the Wednesday studio. That also matches the real working window, which opens after the studio anyway. Manual observability; doubles as env acceptance; defended W2 (Mon 2 + Wed 2). Realistic working window opens after Wednesday's env studio — students who arrive with the env preinstalled (pre-semester email) can start Monday night |
 | 2 | Observability: first contact (defends batch 1) | • Anchor: ftrace/tracepoints<br>• **First defenses** — rounds (batch 1) | • Rounds (batch 1)<br>• Studio | **[Batch 2](../questions/batches/batch-02.md)** (2 questions, and everyone does both — week 3 has a single session because of the Monday holiday) |
 | 3 | Observability: the inside view (defends batch 2) | *Holiday — no class* | • Anchor: kprobes/bpftrace/BTF, gdbstub<br>• Rounds (batch 2) | **[Batch 3](../questions/batches/batch-03.md)** opens Wed (assignments ship Wed — the Monday is the holiday) |
 | 4 | Observability: probes anywhere (defends batch 3); the agent arrives | • Anchor: the tool layer & report schema<br>• **Thick-starter walkthrough** (deferred from W1)<br>• Demo: an agent-driven fork/exec investigation<br>• Rounds (batch 3) | • Rounds (batch 3)<br>• Studio (tool-layer work) | **[Batch 4](../questions/batches/batch-04.md)** (`kernel/`: fork/exec/exit/wait) — first trigger-design questions; agent now necessary |
@@ -102,16 +103,21 @@ dropped), participation 10 %, final report 10 %, final interview 20 %.
   questions defended Monday of week N+1, two Wednesday — so every student
   knows each question's report deadline. Per-student assignments ship when
   the batch opens, not before: they depend on a roster that is still moving
-  through add/drop in weeks 1–2. Mutation kernel images likewise ship as
+  through add/drop in weeks 1–2. **Batch 1 is the exception** — its sheet
+  ships the Wednesday of week 1, after repo registration, because a sheet
+  is addressed by GitHub username and nobody has one on the Monday. Mutation kernel images likewise ship as
   release assets on the Monday their batch opens: the image belongs to its
   question and is no use before it.
 - **Assignment:** the instructor assigns each student two of the four,
   published when the batch opens (design-doc §6.1). A simple rotation script keeps
   every pool at ~5, mixes question types per student, and spreads mutation
   questions so everyone lands one several times over the semester.
-- **Reports:** committed to the student repo before the session in which the
-  question may be drawn (design-doc §5.4). No report on an assigned
-  question → a zero for that report and ineligibility for its draw.
+- **Reports:** committed and pushed to the student repo before **12:00 noon
+  MT** on the day its question is on the docket (design-doc §5.4)
+  — a batch split across Monday and Wednesday therefore has two deadlines.
+  The pull is automated and takes the last commit before that timestamp; no
+  report on an assigned question → a zero for that report and ineligibility
+  for its draw.
 - **The draw:** per question, live in class, within the question's assigned
   pool — weighted lightly against students who have presented recently so
   appearances spread out; over the semester every student lands 4–5

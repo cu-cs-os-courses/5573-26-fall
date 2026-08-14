@@ -1,7 +1,7 @@
 
 # CSCI 5573 — Graduate Operating Systems
 
-**Fall 2026 · University of Colorado Boulder · Mon/Wed 4:40–5:55 PM MT · ECCR 116**
+**Fall 2026 · University of Colorado Boulder · Mon/Wed 4:40–5:55 PM MT · ECCR 116**  
 **Instructor:** Yueqi Chen (yueqi.chen@colorado.edu) · **TA:** none
 
 ---
@@ -111,6 +111,18 @@ model's mistakes. Expect the interview to probe it.
 score near the top on them. The discrimination lives in the defenses and the
 final, which is deliberate: the artifacts are cheap to produce and the
 understanding is not.
+
+**Report deadlines are exact.** A report is due at **12:00 noon MT on the
+day its question is on the docket**, and what counts is the last commit
+pushed to your repository before that moment. The collection is automated
+and reads the clock, not the calendar. Noon rather than class time is
+deliberate: I pull and read the reports between noon and class, which is
+what makes the afternoon's questioning specific to what you actually
+submitted. Your assignment sheet says which two questions are yours and the
+schedule says which session each is defended in, so a batch whose two
+questions are split across Monday and Wednesday gives you two different
+deadlines. Canvas carries the earlier (Monday) date for each batch as a
+single reminder; the per-question docket is what actually governs.
 
 **Late policy:** three late days for the semester, applicable to **reports
 only**. A late report enters the next session's draw pool. Defenses cannot

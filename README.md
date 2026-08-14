@@ -60,9 +60,10 @@ cd my-workspace && git init
 ```
 
 Push it to a **private** GitHub repository (a public one leaks graded work
-— an honor-code problem), add the instructor as a collaborator, and email
-the repo URL so it can be registered for grading — all by the week-1
-Wednesday studio; batch 1 reports are collected from it. Details:
+— an honor-code problem), add the instructor as a collaborator, and submit
+the repo URL through the **Repo registration** assignment on Canvas so it
+can be registered for grading — all by the week-1 Wednesday studio; batch 1
+reports are collected from it. Details:
 [agent-starter/README.md](agent-starter/README.md).
 
 One transparency note: registration lists your repo's URL — and therefore
@@ -81,7 +82,7 @@ before the week-1 studio.
 | `docs/course-design.md` | why the course is built this way: motivation, learning objectives, assessment design, the evidence contract |
 | `docs/syllabus.md` | grading, late policy, AI use, required setup, university policies |
 | `docs/schedule.md` | the week-by-week structure: batches, defenses, the final |
-| `questions/batches/` | all twelve question batches, from week 1; each batch's per-student assignment sheet lands on the Monday that batch opens |
+| `questions/batches/` | all twelve question batches, from week 1; each batch's per-student assignment sheet lands on the Monday that batch opens (batch 1's lands the Wednesday evening of week 1, once everyone has a registered repo) |
 | `students/` | pointers to everyone's private repos, registered as submodules **by the instructor** once the roster settles — nothing for you to do or put here (park your workspace copy elsewhere) |
 
 ## The rhythm (one paragraph)
@@ -90,9 +91,9 @@ Every batch is published up front, but one opens each Monday (week 3
 differs — see the schedule): four questions, of which
 you are assigned two; you investigate
 them with your agent and commit evidence-backed reports to your repo before
-the session where each is scheduled; in class, one student per question is
-drawn from those who reported to present and defend — any evidence may be
-re-run on the spot. Weeks 1–3 are tool-free and hand-answerable. The final
+**noon** on the day each is scheduled; in class, one student per question
+is drawn from those who reported to present and defend — any evidence may
+be re-run on the spot. Weeks 1–3 are tool-free and hand-answerable. The final
 is a 20-minute one-on-one interview in the last three class sessions;
 nothing happens in finals week.
 

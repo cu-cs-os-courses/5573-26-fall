@@ -33,7 +33,7 @@ Themes, batch numbers, and session content are defined in
 
 | Wk | Monday | Wednesday | Calendar notes |
 |---|---|---|---|
-| 1 | Aug 24 | Aug 26 | Batch 1 opens Mon |
+| 1 | Aug 24 | Aug 26 | Batch 1 opens Mon; its assignment sheet ships Wed evening, after repo registration |
 | 2 | Aug 31 | Sep 2 | Defends batch 1 · batch 2 opens Mon |
 | 3 | *Sep 7 — Labor Day, no class* | Sep 9 | Defends batch 2 (Wed only) · batch 3 opens Wed |
 | 4 | Sep 14 | Sep 16 | Defends batch 3 · batch 4 opens Mon — the agent arrives |

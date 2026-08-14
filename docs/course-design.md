@@ -384,9 +384,13 @@ Assessment is one repeated mechanism, not a set of instruments:
    on a mutation question several times across the semester). The student
    investigates their two with their own agent and tools, committing a
    per-question report (§7) before the session in which that question is
-   scheduled. Coverage of the two questions not assigned comes from the
-   stage, not the terminal: watching a peer defend a question you did not
-   run, and questioning them, is the format's built-in breadth.
+   scheduled — the deadline is midday, enforced by an automated pull that
+   runs after it and takes each repo's last commit before that timestamp,
+   leaving the instructor the afternoon to read what was submitted.
+   Coverage of the two questions not assigned comes from the stage, not
+   the terminal:
+   watching a peer defend a question you did not run, and questioning
+   them, is the format's built-in breadth.
 3. **Defend.** In class, for each question on the day's docket, the presenting
    student is **drawn at random from those who submitted a report on it**
    (the instructor may also pick). The student walks the class through their
