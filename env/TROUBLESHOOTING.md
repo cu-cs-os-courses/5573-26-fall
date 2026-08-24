@@ -136,13 +136,33 @@ time only) and deb.debian.org (rootfs packages). Failure modes:
 
 Two VMs must never share `rootfs.ext4` (it is writable and persistent —
 concurrent boots corrupt it). Symptoms: boot hangs, fs errors, port 2222
-taken. Find and stop strays:
+taken.
+
+**A VM belongs to the workspace that booted it.** `tools/vm down` stops only
+that one (it reads `<workspace>/.vm/qemu.pid`), so from any other workspace
+it refuses — and `tools/vm up` refuses too, rather than putting a second VM
+on the same rootfs. Both name the owner, so you can copy the fix:
+
+```
+vm: a course VM is up and it belongs to another workspace: /path/to/WORKSPACE
+    only that workspace can stop it:  /path/to/WORKSPACE/tools/vm down
+```
+
+`make doctor` names the same owner. By hand, the console-log path in the
+qemu command line is the giveaway:
 
 ```sh
 pgrep -fl qemu-system-x86_64     # who is running
-tools/vm down                    # if your workspace started it
-# console VMs: Ctrl-a x in that terminal
+#   ... -serial file:/path/to/WORKSPACE/.vm/console.log
+#                     ^^^^^^^^^^^^^^^^^^ that workspace owns it
 ```
+
+A VM started by `env/run.sh` is `-nographic` and has no `-serial file:` at
+all: no workspace owns it, so exit it with **Ctrl-a x** in its own terminal.
+
+If `.vm/qemu.pid` went missing or stale while the VM is still up, `tools/vm`
+says so and prints the one-line `echo <pid> > .vm/qemu.pid` that adopts it
+back.
 
 If a crash test ever corrupts the **rootfs** anyway (boot log full of
 EXT4-fs errors): `make rootfs` rebuilds just the rootfs image in a couple

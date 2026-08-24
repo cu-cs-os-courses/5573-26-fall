@@ -38,12 +38,45 @@ SSH_BASE=(-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
           -o BatchMode=yes -o ConnectTimeout=3 -o LogLevel=ERROR -i "$STATE/id")
 
 alive() { [ -f "$STATE/qemu.pid" ] && kill -0 "$(cat "$STATE/qemu.pid")" 2>/dev/null; }
-need_up() { alive || { echo "vm: not running (tools/vm up first)" >&2; exit 1; }; }
+
+# Diagnose a course VM that this workspace does not own. Every `vm up` logs
+# the guest console to <workspace>/.vm/console.log, so the qemu command line
+# names its owner; a console VM (env/run.sh) is -nographic and has none.
+# Prints the diagnosis and returns 0 when a foreign VM is up, 1 when none is.
+other_vm() {
+    local p ws
+    for p in $(pgrep -f "qemu-system-x86_64.*$ENV_DIR" 2>/dev/null); do
+        ws="$(ps -o command= -p "$p" 2>/dev/null |
+              sed -n 's|.*-serial file:\(.*\)/\.vm/console\.log.*|\1|p' || true)"
+        if [ "$ws" = "$WS_DIR" ]; then
+            echo "vm: this workspace's VM is up (pid $p) but $STATE/qemu.pid is stale or missing" >&2
+            echo "    adopt it:  echo $p > $STATE/qemu.pid    (or just: kill $p)" >&2
+        elif [ -n "$ws" ]; then
+            echo "vm: a course VM is up and it belongs to another workspace: $ws (pid $p)" >&2
+            echo "    only that workspace can stop it:  $ws/tools/vm down" >&2
+        else
+            echo "vm: a console VM (env/run.sh) is up (pid $p) — no workspace owns it" >&2
+            echo "    exit it with Ctrl-a x in its own terminal" >&2
+        fi
+        return 0
+    done
+    return 1
+}
+
+# Two VMs must never share the rootfs (writable, persistent — concurrent
+# boots corrupt it), so a stray is a refusal here, not a warning.
+need_up() {
+    if alive; then return 0; fi
+    other_vm || echo "vm: not running (tools/vm up first)" >&2
+    exit 1
+}
 gsh() { ssh "${SSH_BASE[@]}" -p "$SSH_FWD_PORT" root@localhost "$@"; }
 
 case "${1:-}" in
 up)
     if alive; then echo "vm: already running (pid $(cat "$STATE/qemu.pid"))"; exit 0; fi
+    # Refuse to boot a second VM onto the same rootfs (see other_vm above).
+    other_vm && { echo "    refusing to boot a second VM onto the same rootfs" >&2; exit 1; }
     mkdir -p "$STATE/share"
     [ -f "$STATE/id" ] || ssh-keygen -q -t ed25519 -N '' -f "$STATE/id"
     cp "$STATE/id.pub" "$STATE/share/id.pub"

@@ -107,13 +107,31 @@ if [ -f "$ENV_DIR/dist/bzImage" ] && have file; then
 fi
 
 echo "== runtime"
-if pgrep -f "qemu-system-x86_64.*$ENV_DIR" >/dev/null 2>&1; then
-    warn "a course VM is already running" "fine if intentional; two VMs cannot share the rootfs — stop strays with tools/vm down or Ctrl-a x ($TS: VM already running)"
+vm_pids="$(pgrep -f "qemu-system-x86_64.*$ENV_DIR" 2>/dev/null)"
+if [ -n "$vm_pids" ]; then
+    # Name the workspace that started it. A `tools/vm up` VM logs the guest
+    # console to <workspace>/.vm/console.log, so its own qemu cmdline says who
+    # owns it -- and only that workspace's `tools/vm down` can stop it (down
+    # reads <workspace>/.vm/qemu.pid). A console VM (env/run.sh) is -nographic,
+    # has no such argument, and belongs to a terminal rather than a workspace.
+    vm_ws=""
+    for p in $vm_pids; do
+        cmd="$(ps -o command= -p "$p" 2>/dev/null)"
+        vm_ws="$(printf '%s' "$cmd" | sed -n 's|.*-serial file:\(.*\)/\.vm/console\.log.*|\1|p')"
+        [ -n "$vm_ws" ] && { vm_pid="$p"; break; }
+    done
+    if [ -n "$vm_ws" ]; then
+        warn "a course VM is already running (workspace: $vm_ws, pid $vm_pid)" \
+             "fine if intentional; two VMs cannot share the rootfs — stop it with '$vm_ws/tools/vm down' (only that workspace can; $TS: VM already running)"
+    else
+        warn "a course VM is already running (console VM, pid $(echo $vm_pids))" \
+             "fine if intentional; two VMs cannot share the rootfs — no workspace owns it, so exit it with Ctrl-a x in its terminal ($TS: VM already running)"
+    fi
 else
     ok "no VM currently running"
 fi
 if have lsof && lsof -nP -iTCP:"$SSH_FWD_PORT" -sTCP:LISTEN >/dev/null 2>&1; then
-    if pgrep -f "qemu-system-x86_64.*$ENV_DIR" >/dev/null 2>&1; then
+    if [ -n "$vm_pids" ]; then
         ok "port $SSH_FWD_PORT held by the running VM"
     else
         bad "port $SSH_FWD_PORT is taken by something else" "find it: lsof -nP -iTCP:$SSH_FWD_PORT   ($TS: Port 2222 in use)"
