@@ -1,6 +1,7 @@
 # Batch 2 — Inside view: following the kernel, filtering at the source
 
-*Released: Monday, week 2. Defended: **Wednesday of week 3** — the Monday
+*On the docket: Monday, week 2 (the questions have been public since before
+week 1; this batch needs no assignment sheet — everyone does both). Defended: **Wednesday of week 3** — the Monday
 holiday removes a session that week, so this batch is two
 questions, **everyone does both**, and both are on Wednesday's docket. The
 long window (nine days) is intentional: these go deeper than batch 1.

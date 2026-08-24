@@ -1,10 +1,11 @@
 # Batch 5 — `mm/`: virtual memory is a set of promises, lazily kept
 
-*Released: Monday, week 5. Defended: week 6 — **Monday: mm-lazy-01,
+*On the docket: Monday, week 5 (assignment sheets ship that day; the
+questions have been public since before week 1). Defended: week 6 — **Monday: mm-lazy-01,
 mm-zeropage-01 · Wednesday: mm-dontneed-01, mm-thp-01**. You are
 assigned two of the four.*
 
-*You watched the COW demo Monday; this batch is the rest of the lie anonymous
+*The COW demo runs Wednesday this week; this batch is the rest of the lie anonymous
 memory tells you. Every question below is about the gap between what `mmap`
 promises and when the kernel actually delivers — and every claim is checkable
 from userspace with `/proc/<pid>/pagemap` (bit 63 = present, bits 0–54 = PFN
@@ -79,7 +80,7 @@ explain why it can be safely shared by every process on the system.
 
 Then break the spell: write one byte to one page. Show that exactly
 that page's PFN diverged, RSS moved by exactly one page, and the write
-went down a path you already know from the COW demo — name it, and
+went down a path the COW demo walks — name it, and
 explain in one paragraph why the zero page is copy-on-write's
 degenerate case.
 

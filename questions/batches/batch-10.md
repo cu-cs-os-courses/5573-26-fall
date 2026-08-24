@@ -1,6 +1,7 @@
 # Batch 10 — `fs/ext4/` + `fs/jbd2/`: the promise machine
 
-*Released: Monday, week 10. Defended: week 11 — **Monday:
+*On the docket: Monday, week 10 (assignment sheets ship that day; the
+questions have been public since before week 1). Defended: week 11 — **Monday:
 ext4-fsync-01, ext4-journal-01 · Wednesday: ext4-crash-01,
 ext4-mutation-01**. You are assigned two of the four.*
 

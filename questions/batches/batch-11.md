@@ -1,6 +1,7 @@
 # Batch 11 — `block/`: where I/O becomes hardware's problem
 
-*Released: Monday, week 11. Defended: week 12 — **Monday: blk-bio-01,
+*On the docket: Monday, week 11 (assignment sheets ship that day; the
+questions have been public since before week 1). Defended: week 12 — **Monday: blk-bio-01,
 blk-size-01 · Wednesday: blk-queue-01, blk-complete-01**. You are
 assigned two of the four. No mutation this week — batch 12 carries
 the last one.*

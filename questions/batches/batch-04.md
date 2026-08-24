@@ -1,7 +1,9 @@
 # Batch 4 — `kernel/`: the process lifecycle (the subsystem tour begins)
 
-*Released: Monday, week 4 — the same session as the thick-starter
-walkthrough. Defended: week 5 — **Monday: proc-forktree-01,
+*On the docket: Monday, week 4 (assignment sheets ship that day; the
+questions have been public since before week 1). The thick-starter
+walkthrough and the agent demo run in **Wednesday's studio** — read the
+questions first, build tooling after. Defended: week 5 — **Monday: proc-forktree-01,
 proc-exec-maps-01 · Wednesday: proc-zombie-wait-01, proc-clone-flags-01**.
 You are assigned two of the four.*
 

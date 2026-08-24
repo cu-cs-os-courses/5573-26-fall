@@ -169,9 +169,10 @@ The course infrastructure:
    classroom demo vehicle, the mutation validator, and the instrument that
    calibrates every question batch (§6.5). Its stripped public form is the
    `agent-starter/` you clone.
-3. **Question pipeline** — per-subsystem claim banks distilled into weekly
-   batches, plus the private mutation images: the course's principal
-   recurring workload, four validated questions per week (§6.1).
+3. **Question pipeline** — per-subsystem claim banks distilled into batches,
+   plus the private mutation images. All twelve batches are written,
+   calibrated, and published before week 1 (§6.1); what recurs during the
+   semester is operating the loop, not producing it.
 4. **Tool layer / starter** (`agent-starter/`): a model-agnostic library of
    VM-facing tools plus a report formatter — thick enough that a student is
    productive on day one with whatever agent product they bring (§5.4).

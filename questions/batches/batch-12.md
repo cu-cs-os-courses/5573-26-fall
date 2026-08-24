@@ -1,6 +1,7 @@
 # Batch 12 — `kernel/locking/` + RCU: what held it all together
 
-*Released: Monday, week 12. Defended: week 13 — **Monday:
+*On the docket: Monday, week 12 (assignment sheets ship that day; the
+questions have been public since before week 1). Defended: week 13 — **Monday:
 lock-contend-01, rcu-gp-01 · Wednesday: lock-invariant-01,
 lock-mutation-01**. You are assigned two of the four. **This is the
 last batch.** Wednesday of week 13 is the final-interview briefing.*

@@ -19,7 +19,7 @@ in W14, empty finals week) fits Fall 2026 with **one deviation**:
   Monday class schedule** — so W16 has a *single* session (its "Monday"),
   and the W16 Wednesday in schedule.md does not exist. Resolution: the
   final interviews split **4 / 3 / 3** across the three last sessions
-  (front-loaded, instead of schedule.md's 3/3/4), leaving ~15 minutes on
+  (front-loaded), leaving ~15 minutes on
   Dec 4 after the last three interviews for the retrospective; repo
   pinning is asynchronous and needs no class time.
 - Finals week is **Dec 7–11**: nothing scheduled, per the design.

@@ -1,6 +1,7 @@
 # Batch 6 — `kernel/sched/`: who runs next, and how you'd prove why
 
-*Released: Monday, week 6. Defended: week 7 — **Monday:
+*On the docket: Monday, week 6 (assignment sheets ship that day; the
+questions have been public since before week 1). Defended: week 7 — **Monday:
 sched-eevdf-pick-01, sched-wakeup-01 · Wednesday: sched-ctxcost-01,
 sched-mutation-01**. You are assigned two of the four.*
 

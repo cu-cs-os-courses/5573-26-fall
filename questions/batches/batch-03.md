@@ -1,7 +1,8 @@
 # Batch 3 — Probes anywhere: dynamic instrumentation and the stopped kernel
 
-*Released: Wednesday, week 3 (the holiday week's single session — same day
-batch 2 is defended). Defended: week 4 — **Monday: obs-kprobe-stacks-01,
+*On the docket: Wednesday, week 3 (the holiday week's single session — same
+day batch 2 is defended; assignment sheets ship that day, the questions have
+been public since before week 1). Defended: week 4 — **Monday: obs-kprobe-stacks-01,
 obs-kprobe-args-01 · Wednesday: obs-kretprobe-hist-01, obs-gdb-current-01**.
 You are assigned two of the four. This is the last manual batch: next week the
 tool layer arrives and the questions start requiring triggers you design.

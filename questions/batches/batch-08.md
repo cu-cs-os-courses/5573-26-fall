@@ -1,6 +1,7 @@
 # Batch 8 — `kernel/irq/` `kernel/time/` `kernel/signal.c`: interrupted, on schedule
 
-*Released: Monday, week 8. Defended: week 9 — **Monday: irq-tick-01,
+*On the docket: Monday, week 8 (assignment sheets ship that day; the
+questions have been public since before week 1). Defended: week 9 — **Monday: irq-tick-01,
 sig-deliver-01 · Wednesday: time-sleep-01, time-mutation-01**. You are
 assigned two of the four.*
 

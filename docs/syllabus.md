@@ -78,7 +78,7 @@ semester — about the price of a textbook.**
 
 - **Recommended tier: a frontier flagship model — Claude Opus 4.6 or
   GPT-5.5 class, or better.** Every question batch is validated to be
-  solvable at that tier before it is released to you. Money does not buy a
+  solvable at that tier before it reaches you. Money does not buy a
   better grade; it buys convenience.
 - A **flat-rate subscription product** (e.g. Claude Code on a paid Claude
   plan) is strongly preferred over pay-per-token API access, because the

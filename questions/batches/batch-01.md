@@ -1,9 +1,13 @@
 # Batch 1 — First contact: observing a running kernel
 
-*Released: Monday, week 1, in the last 15 minutes of class.
+*On the docket: Monday, week 1, in the last 15 minutes of class — the day
+this batch becomes yours to work on. (All twelve batches are in this repo
+already; nothing is unlocked. What still has to arrive is your assignment
+sheet, and for this batch alone it ships Wednesday evening, after repo
+registration.)
 Defended: week 2 — **Monday: obs-ls-trace-01, obs-pagemap-01 · Wednesday:
 obs-sched-switch-01, obs-syscall-count-01**. You are assigned two of the
-four (assignment sheet distributed with this batch). All four are answerable
+four (your sheet arrives Wednesday evening — see above). All four are answerable
 by hand in the reference VM — no agent tooling required. **Manual does not
 mean LLM-free**: LLM help is welcome here as everywhere in this course
 ([course-design.md §10](../../docs/course-design.md)) — use it to

@@ -1,6 +1,7 @@
 # Batch 9 — `fs/` + `mm/filemap.c`: what a file costs
 
-*Released: Monday, week 9. Defended: week 10 — **Monday:
+*On the docket: Monday, week 9 (assignment sheets ship that day; the
+questions have been public since before week 1). Defended: week 10 — **Monday:
 vfs-lookup-01, vfs-readpath-01 · Wednesday: vfs-readahead-01,
 vfs-writeback-01**. You are assigned two of the four. No mutation this
 week — batch 10 carries the next one.*

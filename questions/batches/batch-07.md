@@ -1,6 +1,7 @@
 # Batch 7 — `arch/x86/entry/`: how execution enters the kernel
 
-*Released: Monday, week 7. Defended: week 8 — **Monday:
+*On the docket: Monday, week 7 (assignment sheets ship that day; the
+questions have been public since before week 1). Defended: week 8 — **Monday:
 entry-path-01, entry-vdso-01 · Wednesday: entry-dispatch-01,
 entry-tracecost-01**. You are assigned two of the four. No mutation
 this week — batch 8 carries the next one.*
