@@ -3,6 +3,25 @@
 Everything batch 1 needs is already in the VM. This is a short tour of the
 two you will actually use; the questions tell you which one they want.
 
+## 0. First: share your repo into the VM
+
+Everything you capture happens *inside* the guest, and the guest's disk is
+not your repo. Boot with your workspace shared and the problem disappears:
+
+    SHARE=./my-workspace env/run.sh
+
+That directory appears in the guest at **`/share`**, read-write. It is the
+same directory, not a copy — a file you write to `/share` inside the VM is
+already on your host, inside your repo, ready to `git add`. Do this before
+you capture anything; a trace left in the guest's `/tmp` is gone at the
+next reboot.
+
+    # in the guest
+    trace-cmd report -i t.dat > /share/reports/batch-01/<qid>/evidence/trace.txt
+
+    # on the host — it is already there
+    git add reports/batch-01/<qid>/evidence/trace.txt
+
 ## 1. tracefs — the kernel's own tracer
 
 It is a filesystem. Everything below is reading and writing files.
