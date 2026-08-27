@@ -1,0 +1,15 @@
+[submodule "students/blakecragen"]
+	path = students/blakecragen
+	url = https://github.com/blakecragen/5573-kernel-workspace
+[submodule "students/jiaruihub"]
+	path = students/jiaruihub
+	url = https://github.com/jiaruihub/5573-my-workspace
+[submodule "students/JJ17de"]
+	path = students/JJ17de
+	url = https://github.com/JJ17de/5573-workspace
+[submodule "students/Alexpaq27"]
+	path = students/Alexpaq27
+	url = https://github.com/Alexpaq27/Alex_ADV_OS
+[submodule "students/tashaffin"]
+	path = students/tashaffin
+	url = https://github.com/tashaffin/5573
