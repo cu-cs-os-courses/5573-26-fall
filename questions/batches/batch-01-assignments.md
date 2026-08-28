@@ -6,6 +6,7 @@ Your two questions for this batch (schedule §3: report committed before the ses
 |---|---|---|
 | Alexpaq27 | `obs-pagemap-01` | `obs-syscall-count-01` |
 | JJ17de | `obs-ls-trace-01` | `obs-sched-switch-01` |
+| VENKATA898 | `obs-pagemap-01` | `obs-syscall-count-01` |
 | blakecragen | `obs-ls-trace-01` | `obs-sched-switch-01` |
 | jiaruihub | `obs-ls-trace-01` | `obs-sched-switch-01` |
 | tashaffin | `obs-pagemap-01` | `obs-syscall-count-01` |
@@ -13,6 +14,6 @@ Your two questions for this batch (schedule §3: report committed before the ses
 Pools:
 
 - `obs-ls-trace-01` (Mon): JJ17de, blakecragen, jiaruihub
-- `obs-pagemap-01` (Mon): Alexpaq27, tashaffin
+- `obs-pagemap-01` (Mon): Alexpaq27, VENKATA898, tashaffin
 - `obs-sched-switch-01` (Wed): JJ17de, blakecragen, jiaruihub
-- `obs-syscall-count-01` (Wed): Alexpaq27, tashaffin
+- `obs-syscall-count-01` (Wed): Alexpaq27, VENKATA898, tashaffin
