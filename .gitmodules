@@ -13,3 +13,6 @@
 [submodule "students/tashaffin"]
 	path = students/tashaffin
 	url = https://github.com/tashaffin/5573
+[submodule "students/VENKATA898"]
+	path = students/VENKATA898
+	url = https://github.com/VENKATA898/csci5573-fallworkspace
