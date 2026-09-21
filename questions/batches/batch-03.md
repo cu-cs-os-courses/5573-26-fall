@@ -85,9 +85,11 @@ credit.
 for the tracepoint alternative.
 
 **At the defense, expect:** Why did `str(arg1)` come back empty before you
-fixed it — what hardware feature is the kernel honoring? Your probe fires
-per *call*: how would you count files opened *successfully*? (That is a
-return-value question — your Wednesday classmates have one of those.)
+fixed it — and what, *exactly*, rejected that read on this VM? (The textbook
+answer names a CPU feature. Check `/proc/cpuinfo` before you give it.) Your
+probe fires per *call*: how would you count files opened *successfully*?
+(That is a return-value question — your Wednesday classmates have one of
+those.)
 
 ---
 

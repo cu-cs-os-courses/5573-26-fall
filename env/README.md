@@ -71,6 +71,24 @@ where TCG cost shows. This is fine — the course grades kernel *behavior*,
 which is identical under TCG, and builds happen in the (Rosetta-accelerated)
 container, not the VM. On x86_64 hosts QEMU uses KVM/HVF automatically.
 
+## What the guest CPU does *not* have
+
+`run.sh` passes no `-cpu`, so the guest gets QEMU's default **`qemu64`** model
+(`model name: QEMU Virtual CPU version 2.5+`). That model advertises neither
+**SMAP** nor **SMEP**, and the kernel sets `CR4.SMAP` only when the CPU says it
+has the feature (`arch/x86/kernel/cpu/common.c:374`) — so on this VM both are
+**off**. The check is one line in the guest:
+
+```sh
+grep -oE '\bsmap\b|\bsmep\b' /proc/cpuinfo   # no output on this VM
+```
+
+This matters whenever a report explains *why* a kernel-side probe read of a
+user pointer fails (batch 3's planted footgun): on this VM the read is rejected
+by the kernel's own address-space check, not by hardware. Adding
+`-cpu qemu64,+smap,+smep` would turn both on — don't, without re-checking the
+batch-3 material that cites their absence.
+
 ## Beyond the pinned kernel (after the course)
 
 The 6.6.87 pin exists for grading reproducibility, not as a limitation of the
