@@ -1,9 +1,9 @@
 # Batch 5 — `mm/`: virtual memory is a set of promises, lazily kept
 
 *On the docket: Monday, week 5 (assignment sheets ship that day; the
-questions have been public since before week 1). Defended: week 6 — **Monday: mm-lazy-01,
+questions have been public since before week 1). Defended: week 7 — **Monday: mm-lazy-01,
 mm-zeropage-01 · Wednesday: mm-dontneed-01, mm-thp-01**. You are
-assigned two of the four.*
+assigned two of the four. (Shifted one week — no class Mon Sep 28; real dates in `docs/calendar-2026-fall.md`.)*
 
 *The COW demo runs Wednesday this week; this batch is the rest of the lie anonymous
 memory tells you. Every question below is about the gap between what `mmap`

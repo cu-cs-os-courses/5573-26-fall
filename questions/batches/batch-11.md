@@ -1,10 +1,10 @@
 # Batch 11 — `block/`: where I/O becomes hardware's problem
 
-*On the docket: Monday, week 11 (assignment sheets ship that day; the
-questions have been public since before week 1). Defended: week 12 — **Monday: blk-bio-01,
+*On the docket: Monday, week 12 (assignment sheets ship that day; the
+questions have been public since before week 1). Defended: week 13 — **Monday: blk-bio-01,
 blk-size-01 · Wednesday: blk-queue-01, blk-complete-01**. You are
 assigned two of the four. No mutation this week — batch 12 carries
-the last one.*
+the last one. (Shifted one week — no class Mon Sep 28; real dates in `docs/calendar-2026-fall.md`.)*
 
 *Env update shipped with this batch (pull the offering repo): the scratch disk
 can now be **throttled** — `SCRATCH_IOPS=` (request rate), `SCRATCH_BPS=`

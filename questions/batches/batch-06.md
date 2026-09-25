@@ -1,9 +1,9 @@
 # Batch 6 — `kernel/sched/`: who runs next, and how you'd prove why
 
-*On the docket: Monday, week 6 (assignment sheets ship that day; the
-questions have been public since before week 1). Defended: week 7 — **Monday:
+*On the docket: Monday, week 7 (assignment sheets ship that day; the
+questions have been public since before week 1). Defended: week 8 — **Monday:
 sched-eevdf-pick-01, sched-wakeup-01 · Wednesday: sched-ctxcost-01,
-sched-mutation-01**. You are assigned two of the four.*
+sched-mutation-01**. You are assigned two of the four. (Shifted one week — no class Mon Sep 28; real dates in `docs/calendar-2026-fall.md`.)*
 
 *This batch carries the course's **first mutation question**
 ([course-design.md §6.3](../../docs/course-design.md)). The drill, once, in

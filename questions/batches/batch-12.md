@@ -1,10 +1,14 @@
 # Batch 12 — `kernel/locking/` + RCU: what held it all together
 
-*On the docket: Monday, week 12 (assignment sheets ship that day; the
-questions have been public since before week 1). Defended: week 13 — **Monday:
-lock-contend-01, rcu-gp-01 · Wednesday: lock-invariant-01,
-lock-mutation-01**. You are assigned two of the four. **This is the
-last batch.** Wednesday of week 13 is the final-interview briefing.*
+*On the docket: Monday, week 13 (assignment sheets ship that day; the
+questions have been public since before week 1). Defended: **Monday of
+week 15 (Nov 30), after fall break — all four reports are due at noon
+that day.** Only **lock-invariant-01 and lock-mutation-01** are defended
+in class (one 25-minute round each); lock-contend-01 and rcu-gp-01 are
+graded as reports only. You are assigned two of the four. **This is the
+last batch.** Wednesday of week 13 is the final-interview briefing.
+(Shifted one week — no class Mon Sep 28; real dates in
+`docs/calendar-2026-fall.md`.)*
 
 *This batch carries the course's **last mutation question** —
 `bzImage-2026f-05`, release asset `batch-12`, exactly one private
@@ -20,14 +24,14 @@ strong as how hard you looked.*
 anything (`/proc/config.gz`): the debug oracles this subsystem is
 famous for — `PROVE_LOCKING` (lockdep), `LOCK_STAT`, `KCSAN` — are
 **not compiled into this kernel**. Working out what that removes from
-your toolbox, and what it does *not* remove, is part of Wednesday's
+your toolbox, and what it does *not* remove, is part of the lock-invariant-01
 question. Reports: `reports/batch-12/<question-id>/`,
 [course-design.md §7](../../docs/course-design.md) schema,
 `repro.sh`. Budget ~3–4 focused hours per question.*
 
 ---
 
-## lock-contend-01 — Design a traffic jam, then measure it *(Q1, Monday)*
+## lock-contend-01 — Design a traffic jam, then measure it *(Q1, report only)*
 
 Uncontended locks are invisible: the fast path is an atomic operation
 with nothing to probe. Your job is to make a real kernel lock hurt,
@@ -72,7 +76,7 @@ Which of your numbers would change if the file were opened O_DIRECT
 
 ---
 
-## rcu-gp-01 — Timing a promise about the past *(Q1, Monday)*
+## rcu-gp-01 — Timing a promise about the past *(Q1, report only)*
 
 RCU's grace period is the strangest object in this course: a wait for
 an event that has no single cause. Make it observable. Produce: (a)
@@ -117,7 +121,7 @@ your latency number as the argument.
 
 ---
 
-## lock-invariant-01 — Proving a negative *(Q2, Wednesday)*
+## lock-invariant-01 — Proving a negative *(Q2, defended)*
 
 Correct synchronization produces **no** evidence. This question is
 about building the only kind of test that can speak about it: a
@@ -163,7 +167,7 @@ design the experiment that would find it, and say what it costs.
 
 ---
 
-## lock-mutation-01 — The last mutant *(Q3, Wednesday)*
+## lock-mutation-01 — The last mutant *(Q3, defended)*
 
 The image `bzImage-2026f-05` differs from the pinned kernel by exactly
 one private modification in the synchronization story. Characterize

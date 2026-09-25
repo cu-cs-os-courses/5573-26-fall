@@ -1,10 +1,10 @@
 # Batch 9 — `fs/` + `mm/filemap.c`: what a file costs
 
-*On the docket: Monday, week 9 (assignment sheets ship that day; the
-questions have been public since before week 1). Defended: week 10 — **Monday:
+*On the docket: Monday, week 10 (assignment sheets ship that day; the
+questions have been public since before week 1). Defended: week 11 — **Monday:
 vfs-lookup-01, vfs-readpath-01 · Wednesday: vfs-readahead-01,
 vfs-writeback-01**. You are assigned two of the four. No mutation this
-week — batch 10 carries the next one.*
+week — batch 10 carries the next one. (Shifted one week — no class Mon Sep 28; real dates in `docs/calendar-2026-fall.md`.)*
 
 *Two standing tools for this batch: the `filemap:` tracepoints
 (`mm_filemap_add_to_page_cache` / `_delete_from_page_cache` — the page-cache

@@ -1,9 +1,9 @@
 # Batch 10 — `fs/ext4/` + `fs/jbd2/`: the promise machine
 
-*On the docket: Monday, week 10 (assignment sheets ship that day; the
-questions have been public since before week 1). Defended: week 11 — **Monday:
+*On the docket: Monday, week 11 (assignment sheets ship that day; the
+questions have been public since before week 1). Defended: week 12 — **Monday:
 ext4-fsync-01, ext4-journal-01 · Wednesday: ext4-crash-01,
-ext4-mutation-01**. You are assigned two of the four.*
+ext4-mutation-01**. You are assigned two of the four. (Shifted one week — no class Mon Sep 28; real dates in `docs/calendar-2026-fall.md`.)*
 
 *This batch carries the course's **third mutation question** —
 `bzImage-2026f-04`, release asset `batch-10`, exactly one private

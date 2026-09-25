@@ -44,12 +44,15 @@ explanations.
 |---|---|
 | First class | **Mon Aug 24** |
 | Meetings | Monday & Wednesday, **4:40–5:55 PM MT**, **ECCR 116** |
-| No class | **Mon Sep 7** (Labor Day) · **Nov 23–27** (fall break) |
-| Last teaching week | week of **Nov 16** (batch 12 defenses) |
-| Final interviews | **Nov 30, Dec 2, Dec 4** — in our regular class slots |
+| No class | **Mon Sep 7** (Labor Day) · **Mon Sep 28** (instructor at a conference) · **Nov 23–27** (fall break) |
+| Last batch defense | **Mon Nov 30** (batch 12) |
+| Final interviews | **Dec 2, Dec 4** — in our regular class slots |
 | Finals week (Dec 7–11) | **nothing scheduled** |
 
 Note that **Fri Dec 4 runs a Monday schedule** and is the last session.
+Because of the Sep 28 cancellation, every batch from batch 5 on is
+defended one week later than `schedule.md`'s week numbers say; the
+calendar file has the real dates.
 The week-by-week structure is in [`docs/schedule.md`](schedule.md); the
 exact date mapping is in [`docs/calendar-2026-fall.md`](calendar-2026-fall.md).
 

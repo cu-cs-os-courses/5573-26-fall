@@ -1,9 +1,9 @@
 # Batch 8 — `kernel/irq/` `kernel/time/` `kernel/signal.c`: interrupted, on schedule
 
-*On the docket: Monday, week 8 (assignment sheets ship that day; the
-questions have been public since before week 1). Defended: week 9 — **Monday: irq-tick-01,
+*On the docket: Monday, week 9 (assignment sheets ship that day; the
+questions have been public since before week 1). Defended: week 10 — **Monday: irq-tick-01,
 sig-deliver-01 · Wednesday: time-sleep-01, time-mutation-01**. You are
-assigned two of the four.*
+assigned two of the four. (Shifted one week — no class Mon Sep 28; real dates in `docs/calendar-2026-fall.md`.)*
 
 *This batch carries the course's **second mutation question**. The
 drill is batch 6's — short form: `bzImage-2026f-03` ships as release

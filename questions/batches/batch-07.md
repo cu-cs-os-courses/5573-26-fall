@@ -1,10 +1,10 @@
 # Batch 7 — `arch/x86/entry/`: how execution enters the kernel
 
-*On the docket: Monday, week 7 (assignment sheets ship that day; the
-questions have been public since before week 1). Defended: week 8 — **Monday:
+*On the docket: Monday, week 8 (assignment sheets ship that day; the
+questions have been public since before week 1). Defended: week 9 — **Monday:
 entry-path-01, entry-vdso-01 · Wednesday: entry-dispatch-01,
 entry-tracecost-01**. You are assigned two of the four. No mutation
-this week — batch 8 carries the next one.*
+this week — batch 8 carries the next one. (Shifted one week — no class Mon Sep 28; real dates in `docs/calendar-2026-fall.md`.)*
 
 *Every trace you have taken since batch 1 ended its kernel stacks in
 the same two frames: `do_syscall_64` and
